@@ -35,7 +35,7 @@ Dokumentasi ini berfungsi sebagai knowledge base pribadi yang dapat diakses kapa
 
 1. Clone repository ini:
 ```bash
-git clone https://github.com/username/topekox-docs.git
+git clone https://github.com/topekox/topekox-docs.git
 cd topekox-docs
 ```
 
