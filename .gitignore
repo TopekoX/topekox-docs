@@ -1,0 +1,182 @@
+# === MkDocs Build Output ===
+site/
+dist/
+
+# === Python Virtual Environment ===
+venv/
+env/
+ENV/
+.venv
+.env.local
+.env.*.local
+
+# === Python Dependencies & Cache ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# === Poetry & Dependency Management ===
+poetry.lock
+Pipfile.lock
+requirements-dev.txt
+
+# === IDE & Editor Files ===
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+.vim/
+*.swp
+*.swo
+*~
+.swp
+.*.swp
+
+# Emacs
+*~
+\#*\#
+.\#*
+.emacs.d/
+auto-save-list/
+
+# Nano
+.nano_history
+
+# General Editor
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+
+# === IDE Settings ===
+.editorconfig
+
+# === OS Files ===
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+
+# === Environment & Configuration ===
+.env
+.env.local
+.env.*.local
+.env.example
+.secrets
+secrets/
+
+# === Logs & Temporary Files ===
+*.log
+logs/
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Database Files ===
+*.db
+*.sqlite
+*.sqlite3
+*.postgres
+
+# === Backup Files ===
+*.backup
+*.bak
+*.orig
+*.backup.*
+
+# === OS Specific ===
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# === Node Modules (jika menggunakan npm untuk build automation) ===
+node_modules/
+npm-debug.log
+package-lock.json
+yarn.lock
+
+# === Local Development ===
+.local/
+local/
+temp/
+tmp/
+
+# === VSCode Extensions & Settings ===
+.vscode/extensions/
+
+# === Compiled Files ===
+*.class
+*.o
+*.a
+*.dylib
+*.so
+
+# === System Files ===
+.localized
+.fseventsd
+
+# === Git Related ===
+.gitkeep
+.gitattributes
+
+# === Documentation Build Cache ===
+.mkdocs_cache/
+.cache/
+.pytest_cache/
+
+# === Specific to topekox-docs (optional) ===
+# Add any project-specific files to ignore
+# Example:
+# *.draft.md
+# _drafts/
+# archive/old_docs/
