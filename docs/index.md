@@ -1,4 +1,4 @@
-# Selamat Datang
+# Home
 
 **Topekox Docs** adalah repository dokumentasi yang berisi kumpulan catatan belajar, dokumentasi, eksperimen, dan kode yang saya buat selama mempelajari berbagai bidang teknologi dan pemrograman.
 

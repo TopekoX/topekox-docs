@@ -179,14 +179,17 @@ def hello_world():
 \`\`\`
 
 ### Tips & Notes
-!!! note
+!!! note "Catatan"
     Ini adalah catatan penting
 
-!!! warning
+!!! warning "Peringatan"
     Ini adalah warning
 
-!!! tip
+!!! tip "Tips"
     Ini adalah tips berguna
+
+!!! danger "Terjadi Kesalahan"
+    Proses instalasi gagal! Periksa kembali koneksi Anda.
 ```
 
 ## 🔧 Customization

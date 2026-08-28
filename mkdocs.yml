@@ -1,1 +1,20 @@
 site_name: Topekox Docs
+
+theme:
+  name: mkdocs
+
+markdown_extensions:
+  - tables
+  - pymdownx.tilde
+  - admonition
+
+# nav:
+#   - Home: index.md
+#   - English:
+#     - Beginner:
+#       - Leasson 1: english/beginner/leasson-1.md
+#       - Leasson 2: english/beginner/leasson-2.md
+
+# Custom CSS
+extra_css:
+  - stylesheets/extra.css
