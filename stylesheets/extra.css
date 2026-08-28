@@ -1,0 +1,23 @@
+/* Membuat tabel pas dengan ukuran kata di dalamnya */
+article table, .md-typeset table, table {
+    border-collapse: collapse !important;
+    display: table !important;
+    width: max-content !important; /* Mengubah tabel agar mengikuti panjang kata */
+    max-width: 100% !important;    /* Mencegah tabel meluber keluar layar jika kata terlalu panjang */
+    border: 1px solid #777777 !important; 
+    margin-bottom: 1rem;
+}
+
+/* Garis dalam sel tabel */
+article table th, article table td, 
+.md-typeset table th, .md-typeset table td,
+table th, table td {
+    border: 1px solid #777777 !important; 
+    padding: 8px 12px !important;
+    white-space: nowrap !important; /* Mencegah teks otomatis turun ke bawah (opsional) */
+}
+
+/* Warna latar belakang judul tabel */
+article table th, .md-typeset th, table th {
+    background-color: #eaeaea !important; 
+}
