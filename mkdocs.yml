@@ -1,19 +1,51 @@
 site_name: Topekox Docs
 
 theme:
-  name: mkdocs
+  name: material
+  font: false
+  features:
+    - navigation.sections
+    - navigation.path
+    - navigation.footer
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
 
 markdown_extensions:
   - tables
   - pymdownx.tilde
   - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight
+  - pymdownx.superfences
 
-# nav:
-#   - Home: index.md
-#   - English:
-#     - Beginner:
-#       - Leasson 1: english/beginner/leasson-1.md
-#       - Leasson 2: english/beginner/leasson-2.md
+nav:
+  - Home: index.md
+  - English:
+    - Beginner:
+      - "Lesson 1: Nice to Meet You": english/beginner/leasson-1.md
+      - "Lesson 2: How Are You?": english/beginner/leasson-2.md
+      - "Lesson 3: What Does She Look Like?": english/beginner/leasson-3.md
 
 # Custom CSS
 extra_css:

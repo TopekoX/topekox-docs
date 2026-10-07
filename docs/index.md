@@ -1,15 +1,60 @@
-# Home
+---
+title: Home
+hide:
+  - navigation
+  - toc
+---
+
+<div class="tx-hero" markdown>
+
+# Topekox Docs
 
 **Topekox Docs** adalah repository dokumentasi yang berisi kumpulan catatan belajar, dokumentasi, eksperimen, dan kode yang saya buat selama mempelajari berbagai bidang teknologi dan pemrograman.
 
+[Mulai Belajar](english/beginner/leasson-1.md){ .md-button .md-button--primary }
+[GitHub](https://github.com/TopekoX/topekox-docs){ .md-button }
+
+</div>
+
 Dokumentasi ini berfungsi sebagai knowledge base pribadi yang dapat diakses kapan saja untuk referensi cepat tentang:
 
-- Setup dan konfigurasi project
-- Catatan teknis dan best practices
-- Snippets dan contoh code
-- Troubleshooting dan solutions
-- Architecture decisions dan learnings
+<div class="grid cards" markdown>
 
+-   **Setup dan konfigurasi project**
+
+    Langkah awal dan konfigurasi yang dibutuhkan.
+
+-   **Catatan teknis dan best practices**
+
+    Hal-hal yang dipelajari dan praktik yang baik.
+
+-   **Snippets dan contoh code**
+
+    Potongan kode yang bisa langsung dicoba.
+
+-   **Troubleshooting dan solutions**
+
+    Masalah yang pernah dihadapi beserta solusinya.
+
+-   **Architecture decisions dan learnings**
+
+    Keputusan desain dan pelajaran yang didapat.
+
+</div>
+
+## Mulai dari Sini
+
+<div class="grid cards" markdown>
+
+-   **English — Beginner**
+
+    Materi bahasa Inggris tingkat pemula, dari perkenalan diri sampai mendeskripsikan seseorang.
+
+    1. [Lesson 1: Nice to Meet You](english/beginner/leasson-1.md)
+    2. [Lesson 2: How Are You?](english/beginner/leasson-2.md)
+    3. [Lesson 3: What Does She Look Like?](english/beginner/leasson-3.md)
+
+</div>
 
 ## Tujuan Dokumentasi
 
