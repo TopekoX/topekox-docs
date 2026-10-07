@@ -1,23 +1,151 @@
-/* Membuat tabel pas dengan ukuran kata di dalamnya */
-article table, .md-typeset table, table {
-    border-collapse: collapse !important;
-    display: table !important;
-    width: max-content !important; /* Mengubah tabel agar mengikuti panjang kata */
-    max-width: 100% !important;    /* Mencegah tabel meluber keluar layar jika kata terlalu panjang */
-    border: 1px solid #777777 !important; 
-    margin-bottom: 1rem;
+/* Design tokens. Colors reuse Material variables so light/dark follow the palette. */
+:root {
+  --tx-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --tx-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --tx-radius: 0.4rem;
+  --tx-space: 0.75rem;
 }
 
-/* Garis dalam sel tabel */
-article table th, article table td, 
-.md-typeset table th, .md-typeset table td,
-table th, table td {
-    border: 1px solid #777777 !important; 
-    padding: 8px 12px !important;
-    white-space: nowrap !important; /* Mencegah teks otomatis turun ke bawah (opsional) */
+/* Color tokens live on body: Material sets the scheme variables there, so
+   they must resolve per scheme (on :root they would stay light-only). */
+body,
+input {
+  --tx-border: 1px solid var(--md-default-fg-color--lightest);
+  --tx-surface: var(--md-code-bg-color);
+  --md-text-font-family: var(--tx-font);
+  --md-code-font-family: var(--tx-font-mono);
 }
 
-/* Warna latar belakang judul tabel */
-article table th, .md-typeset th, table th {
-    background-color: #eaeaea !important; 
+/* Typography */
+.md-typeset {
+  line-height: 1.7;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset h1 {
+  margin-bottom: 1.5rem;
+}
+
+/* Surfaces: blockquotes */
+.md-typeset blockquote {
+  padding: 0.1rem var(--tx-space);
+  background: var(--tx-surface);
+  border-left: 0.2rem solid var(--md-primary-fg-color);
+  border-radius: 0 var(--tx-radius) var(--tx-radius) 0;
+  color: var(--md-default-fg-color);
+}
+
+/* Tables: scroll inside the content column instead of overflowing the page */
+.md-typeset table:not([class]) {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border: var(--tx-border);
+  border-radius: var(--tx-radius);
+  font-size: 0.8rem;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  padding: 0.6em 1em;
+  border-bottom: var(--tx-border);
+  white-space: nowrap;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--tx-surface);
+  font-weight: 600;
+}
+
+.md-typeset table:not([class]) tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Code blocks: theme-aware surface and border */
+.md-typeset code,
+.md-typeset pre > code {
+  border-radius: var(--tx-radius);
+}
+
+.md-typeset pre > code {
+  border: var(--tx-border);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.md-typeset :not(pre) > code {
+  padding: 0.1em 0.4em;
+}
+
+/* Admonitions: neutral border, follows Material colors in both schemes */
+.md-typeset .admonition,
+.md-typeset details {
+  border: var(--tx-border);
+  border-radius: var(--tx-radius);
+  box-shadow: none;
+  border-left-width: 0.2rem;
+  font-size: 0.8rem;
+}
+
+/* Links */
+.md-typeset a:not(.headerlink):not(.md-button) {
+  text-underline-offset: 0.15em;
+}
+
+.md-typeset a:not(.headerlink):not(.md-button):hover {
+  text-decoration: underline;
+}
+
+/* Images */
+.md-typeset img {
+  border-radius: var(--tx-radius);
+}
+
+/* Homepage hero */
+.tx-hero {
+  margin: 0 0 2rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: var(--tx-surface);
+  border: var(--tx-border);
+  border-radius: calc(var(--tx-radius) * 2);
+}
+
+.tx-hero h1 {
+  margin: 0 0 1rem;
+  font-size: 2.4em;
+}
+
+.tx-hero p {
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.tx-hero .md-button {
+  margin: 0.4rem 0.2rem 0;
+}
+
+@media (max-width: 44.9375em) {
+  .tx-hero {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Homepage lesson list: Material renders nested ol as a., b., c. */
+.md-typeset .grid.cards ol {
+  list-style-type: decimal;
+}
+
+/* Secondary button: neutral colors keep contrast in both schemes */
+.md-typeset .md-button:not(.md-button--primary) {
+  color: var(--md-default-fg-color);
+  border-color: var(--md-default-fg-color--light);
 }

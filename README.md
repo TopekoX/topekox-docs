@@ -28,7 +28,7 @@ Dokumentasi ini berfungsi sebagai knowledge base pribadi yang dapat diakses kapa
 
 ### Prerequisites
 
-- Python 3.6 atau lebih tinggi
+- Python 3.8 atau lebih tinggi
 - pip (Python package manager)
 
 ### Instalasi
@@ -46,7 +46,7 @@ pip install -r requirements.txt
 
 Atau install MkDocs dan theme secara manual:
 ```bash
-pip install mkdocs mkdocs-material
+pip install "mkdocs<2" mkdocs-material
 ```
 
 ### Menjalankan Documentation Locally
@@ -75,25 +75,10 @@ Output akan di-generate di folder `site/`
 topekox-docs/
 ├── docs/                          # Folder utama dokumentasi
 │   ├── index.md                   # Homepage dokumentasi
-│   ├── getting-started/           # Panduan untuk memulai
-│   │   └── setup.md
-│   ├── projects/                  # Dokumentasi per project
-│   │   ├── project-a.md
-│   │   └── project-b.md
-│   ├── coding/                    # Tips & snippets coding
-│   │   ├── python.md
-│   │   ├── javascript.md
-│   │   └── database.md
-│   ├── tools-setup/               # Setup tools & environment
-│   │   ├── development-env.md
-│   │   ├── docker.md
-│   │   └── git-workflow.md
-│   ├── troubleshooting/           # Solutions untuk common issues
-│   │   └── common-errors.md
-│   ├── resources/                 # Referensi eksternal & links
-│   │   └── links.md
-│   └── assets/                    # Images, diagrams, etc
-│       └── images/
+│   ├── english/
+│   │   └── beginner/              # Materi English Beginner (leasson-1..3.md)
+│   └── stylesheets/
+│       └── extra.css              # Custom styling (design tokens, tabel, homepage)
 ├── mkdocs.yml                     # Konfigurasi MkDocs
 ├── requirements.txt               # Python dependencies
 ├── .gitignore
@@ -102,45 +87,42 @@ topekox-docs/
 
 ## ⚙️ Konfigurasi
 
-File `mkdocs.yml` mengontrol konfigurasi site. Berikut template dasar:
+File `mkdocs.yml` mengontrol konfigurasi site. Konfigurasi saat ini (ringkas):
 
 ```yaml
-site_name: TopekoxDocs
-site_description: Dokumentasi pribadi untuk project coding
-site_author: Your Name
+site_name: Topekox Docs
 
 theme:
   name: material
-  language: id
+  font: false                  # tanpa Google Fonts, memakai system font
   features:
-    - navigation.instant
-    - navigation.tracking
-    - navigation.tabs
-    - search.suggest
-    - search.highlight
+    - navigation.sections
+    - navigation.path
+    - navigation.footer
+    - navigation.top
     - toc.follow
     - content.code.copy
+  palette: ...                 # toggle otomatis / terang / gelap
 
-plugins:
-  - search
-  - minify
+markdown_extensions:
+  - tables
+  - pymdownx.tilde
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight
+  - pymdownx.superfences
 
 nav:
   - Home: index.md
-  - Getting Started: getting-started/setup.md
-  - Projects:
-      - Project A: projects/project-a.md
-      - Project B: projects/project-b.md
-  - Coding:
-      - Python: coding/python.md
-      - JavaScript: coding/javascript.md
-      - Database: coding/database.md
-  - Tools Setup:
-      - Development Environment: tools-setup/development-env.md
-      - Docker: tools-setup/docker.md
-      - Git Workflow: tools-setup/git-workflow.md
-  - Troubleshooting: troubleshooting/common-errors.md
-  - Resources: resources/links.md
+  - English:
+    - Beginner:
+      - "Lesson 1: Nice to Meet You": english/beginner/leasson-1.md
+      - "Lesson 2: How Are You?": english/beginner/leasson-2.md
+      - "Lesson 3: What Does She Look Like?": english/beginner/leasson-3.md
+
+extra_css:
+  - stylesheets/extra.css
 ```
 
 ## 📝 Cara Menggunakan
@@ -196,12 +178,16 @@ def hello_world():
 
 ### Mengubah Theme Color
 
-Edit `mkdocs.yml`:
+Edit `primary` dan `accent` pada setiap entri `theme.palette` di `mkdocs.yml`:
 ```yaml
 theme:
   palette:
-    primary: blue
-    accent: cyan
+    - scheme: default
+      primary: blue
+      accent: cyan
+    - scheme: slate
+      primary: blue
+      accent: cyan
 ```
 
 ### Menambah Extensions
@@ -209,15 +195,9 @@ theme:
 Update `mkdocs.yml` untuk menambah markdown extensions:
 ```yaml
 markdown_extensions:
-  - pymdownx.arithmatex
-  - pymdownx.betterem
   - pymdownx.caret
   - pymdownx.details
-  - pymdownx.highlight
-  - pymdownx.superfences
   - pymdownx.tasklist
-  - tables
-  - toc
 ```
 
 ## 🚀 Deployment
