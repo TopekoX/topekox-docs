@@ -206,6 +206,8 @@ Tolong bantu kami
 
 ## 5 Menghapus Spasi
 
+Menghapus spasi di awal dan akhir string.
+
 Gunakan:
 
 ``` python
@@ -310,7 +312,7 @@ Secara sederhana:
 
 Ini adalah bentuk sederhana dari **tokenization**.
 
-> Nanti kita akan belajar tokenization yang sebenarnya pada Level 2.
+> Nanti kita akan belajar tokenization yang sebenarnya pada Materi yang akan datang.
 
 ------------------------------------------------------------------------
 

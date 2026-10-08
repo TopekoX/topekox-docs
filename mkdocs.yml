@@ -44,6 +44,7 @@ nav:
   - Disaster AI System:
     - NLP:
       - "Python untuk NLP": disaster-ai-system/nlp/01-python-untuk-nlp.md
+      - "Fundamental NLP": disaster-ai-system/nlp/02-fundamentals-nlp.md
   - English:
     - Beginner:
       - "Lesson 1: Nice to Meet You": english/beginner/leasson-1.md
