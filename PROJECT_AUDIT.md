@@ -168,3 +168,9 @@ Notes: Material persists the resolved palette in `localStorage`; automated schem
 -   Removed `repo_url` from `mkdocs.yml` (header repo widget caused the GitHub `releases/latest` 404). Homepage "GitHub" button still links directly to `https://github.com/TopekoX/topekox-docs`.
 -   Re-verified: `mkdocs build --strict` clean; URLs unchanged; 4 pages × 2 widths (320/1440) × 2 schemes loaded with zero console/network errors and no `api.github.com` request.
 -   README configuration/structure examples updated to match the current project; `requirements.txt` kept at 3 pinned packages.
+
+## MathJax Support (2026-10-09)
+
+-   Added `pymdownx.arithmatex` (`generic: true`) + `docs/javascripts/mathjax.js` + MathJax 3 CDN (`unpkg`) via `extra_javascript`. No new Python dependency (`pymdown-extensions` already installed).
+-   Verified via temporary `docs/test-math.md` (built, HTML-inspected, then removed): inline/display/fraction/sum/aligned multi-line/matrix equations all emit `<span class="arithmatex">`/`<div class="arithmatex">`; code blocks, tables, and admonitions on the same page render unaffected.
+-   `mkdocs build --strict` clean; `docs/english/**` untouched.
