@@ -1,4 +1,4 @@
-site_name: Topekox Docs
+site_name: Topekox Belajar
 
 theme:
   name: material
@@ -53,6 +53,7 @@ nav:
       - "Machine Learning untuk NLP": disaster-ai-system/nlp/06-machine-learning-nlp.md
       - "Word Embedding": disaster-ai-system/nlp/07-word-embedding.md
       - "Deep Learning untuk NLP": disaster-ai-system/nlp/08-deep-learning.md
+      - "RNN - LSTM - GRU": disaster-ai-system/nlp/09-RNN-LSTM-GRU.md
   - English:
     - Beginner:
       - "Lesson 1: Nice to Meet You": english/beginner/leasson-1.md
