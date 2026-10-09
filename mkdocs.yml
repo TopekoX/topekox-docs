@@ -1,4 +1,4 @@
-site_name: Topekox Docs
+site_name: Topekox Belajar
 
 theme:
   name: material
@@ -40,9 +40,21 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.details
 
 nav:
   - Home: index.md
+  - Disaster AI System:
+    - Natural Language Processing:
+      - "Python untuk NLP": disaster-ai-system/nlp/01-python-untuk-nlp.md
+      - "Fundamental NLP": disaster-ai-system/nlp/02-fundamentals-nlp.md
+      - "Regex": disaster-ai-system/nlp/03-regex.md
+      - "Text Processing": disaster-ai-system/nlp/04-text-preprocessing.md
+      - "Text Representation": disaster-ai-system/nlp/05-text-representation.md
+      - "Machine Learning untuk NLP": disaster-ai-system/nlp/06-machine-learning-nlp.md
+      - "Word Embedding": disaster-ai-system/nlp/07-word-embedding.md
+      - "Deep Learning untuk NLP": disaster-ai-system/nlp/08-deep-learning.md
+      - "RNN - LSTM - GRU": disaster-ai-system/nlp/09-RNN-LSTM-GRU.md
   - English:
     - Beginner:
       - "Lesson 1: Nice to Meet You": english/beginner/leasson-1.md
