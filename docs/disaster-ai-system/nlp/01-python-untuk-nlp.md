@@ -1,4 +1,4 @@
-# Python untuk NLP
+# Python untuk NLP (Natural Language Processing)
 
 ## 🎯 Tujuan Pembelajaran
 

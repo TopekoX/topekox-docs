@@ -1,4 +1,4 @@
-# Fundamental NLP untuk Penelitian Deteksi Tweet Permintaan Bantuan Darurat
+# Fundamental NLP (Natural Language Processing)
 
 ## Tujuan Pembelajaran
 
@@ -35,7 +35,7 @@ Secara sederhana:
 ```text
 Bahasa Manusia
       ↓
-      NLP
+     NLP
       ↓
 Representasi yang dapat diproses komputer
       ↓
@@ -649,9 +649,9 @@ Contoh:
                 ↓
              Cleaning
                 ↓
-"tolong rumah kami kebanjiran"
+  "tolong rumah kami kebanjiran"
                 ↓
-             Tokenization
+           Tokenization
                 ↓
 ["tolong", "rumah", "kami", "kebanjiran"]
                 ↓
@@ -845,13 +845,13 @@ Word Embedding
       ↓
 Contextual Embedding
       ↓
-Attention
+  Attention
       ↓
-Transformer
+ Transformer
       ↓
-BERT
+    BERT
       ↓
-IndoBERT
+  IndoBERT
 ```
 
 ## 22. Contoh Sederhana Pipeline Penelitian
@@ -1235,35 +1235,35 @@ Fundamental NLP
       ↓
 Text Preprocessing
       ↓
-Bag of Words
+ Bag of Words
       ↓
-TF-IDF
+    TF-IDF
       ↓
 Machine Learning
       ↓
-Evaluation
+  Evaluation
       ↓
 Word Embedding
       ↓
-PyTorch
+   PyTorch
       ↓
-RNN / LSTM
+  RNN / LSTM
       ↓
-Attention
+  Attention
       ↓
-Transformer
+  Transformer
       ↓
-BERT
+    BERT
       ↓
-IndoBERT
+   IndoBERT
       ↓
-Fine-Tuning
+ Fine-Tuning
       ↓
 Eksperimen Penelitian
       ↓
-FastAPI
+   FastAPI
       ↓
-Dashboard
+  Dashboard
 ```
 
 Fundamental NLP adalah fondasi untuk memahami semua tahap tersebut.
