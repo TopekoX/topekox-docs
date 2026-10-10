@@ -1,0 +1,2518 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="01-nlp/01-python-untuk-nlp/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Intro - Topekox Belajar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deteksi-tweet-permintaan-bantuan-darurat-pada-saat-bencana-menggunakan-indobert" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Topekox Belajar" class="md-header__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Topekox Belajar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Intro
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Topekox Belajar" class="md-nav__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Topekox Belajar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disaster AI System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Disaster AI System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#daftar-isi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Daftar Isi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latar-belakang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latar Belakang
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ruang-lingkup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ruang Lingkup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodologi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metodologi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metodologi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#catatan-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Catatan preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arsitektur-sistem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arsitektur Sistem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eksperimen-dan-evaluasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eksperimen dan Evaluasi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teknologi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teknologi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#struktur-direktori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Struktur Direktori
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalasi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menjalankan-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menjalankan API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contoh-penggunaan-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh Penggunaan API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rencana-pengembangan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rencana Pengembangan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etika-dan-batasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Etika dan Batasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sitasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sitasi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lisensi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lisensi
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP Foundation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NLP Foundation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-nlp/01-python-untuk-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-nlp/02-fundamentals-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamental NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-nlp/03-regex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-nlp/04-text-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-nlp/05-text-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Representation & TF-IDF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-nlp/06-machine-learning-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-nlp/07-evaluasi-nlp-klasifikasi-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluasi NLP Klasifikasi Text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-deeplearning/08-word-embedding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Word Embedding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-deeplearning/09-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-deeplearning/10-RNN-LSTM-GRU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNN - LSTM - GRU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03-transformer/11-attention-mechanism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attention Mechanism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03-transformer/12-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03-transformer/13-BERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBert
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IndoBert
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-indobert/14-IndoBERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-indobert/15-fine-tuningIndoBERT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-indobert/16-eksperimen-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eksperimen Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-indobert/17-dataset-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-research/18-data-annotation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Annotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-research/19-imbalanced-dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imbalanced Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-research/20-explainable-AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explainable AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Product
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-product/21-rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-product/22-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-product/23-jadikan-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jadikan Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beginner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Beginner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../english/beginner/leasson-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1: Nice to Meet You
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../english/beginner/leasson-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2: How Are You?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../english/beginner/leasson-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3: What Does She Look Like?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#daftar-isi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Daftar Isi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latar-belakang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latar Belakang
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ruang-lingkup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ruang Lingkup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodologi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metodologi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metodologi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#catatan-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Catatan preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arsitektur-sistem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arsitektur Sistem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eksperimen-dan-evaluasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eksperimen dan Evaluasi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teknologi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teknologi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#struktur-direktori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Struktur Direktori
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalasi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menjalankan-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menjalankan API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contoh-penggunaan-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh Penggunaan API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rencana-pengembangan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rencana Pengembangan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etika-dan-batasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Etika dan Batasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sitasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sitasi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lisensi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lisensi
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Disaster AI System
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="deteksi-tweet-permintaan-bantuan-darurat-pada-saat-bencana-menggunakan-indobert">Deteksi Tweet Permintaan Bantuan Darurat pada Saat Bencana Menggunakan IndoBERT</h1>
+<p>Sistem klasifikasi teks berbahasa Indonesia untuk membantu mengidentifikasi tweet yang mengindikasikan permintaan bantuan darurat saat bencana. Penelitian ini membandingkan pendekatan <em>classical machine learning</em> berbasis TF-IDF dengan model Transformer yang di-<em>fine-tune</em>, yaitu IndoBERT. Model terpilih direncanakan tersedia melalui REST API menggunakan FastAPI dan dapat diintegrasikan ke website informasi bencana.</p>
+<blockquote>
+<p><strong>Status proyek:</strong> Research prototype / dalam pengembangan. Hasil eksperimen, performa model, dan ketersediaan data akan diisi setelah penelitian dilakukan. Sistem ini bukan pengganti layanan resmi tanggap darurat.</p>
+</blockquote>
+<h2 id="daftar-isi">Daftar Isi</h2>
+<ul>
+<li><a href="#latar-belakang">Latar Belakang</a></li>
+<li><a href="#tujuan">Tujuan</a></li>
+<li><a href="#ruang-lingkup">Ruang Lingkup</a></li>
+<li><a href="#metodologi">Metodologi</a></li>
+<li><a href="#arsitektur-sistem">Arsitektur Sistem</a></li>
+<li><a href="#dataset">Dataset</a></li>
+<li><a href="#eksperimen-dan-evaluasi">Eksperimen dan Evaluasi</a></li>
+<li><a href="#teknologi">Teknologi</a></li>
+<li><a href="#struktur-direktori">Struktur Direktori</a></li>
+<li><a href="#instalasi">Instalasi</a></li>
+<li><a href="#menjalankan-api">Menjalankan API</a></li>
+<li><a href="#contoh-penggunaan-api">Contoh Penggunaan API</a></li>
+<li><a href="#rencana-pengembangan">Rencana Pengembangan</a></li>
+<li><a href="#etika-dan-batasan">Etika dan Batasan</a></li>
+<li><a href="#sitasi">Sitasi</a></li>
+<li><a href="#lisensi">Lisensi</a></li>
+</ul>
+<h2 id="latar-belakang">Latar Belakang</h2>
+<p>Media sosial dapat memuat informasi tentang kondisi bencana dan permintaan bantuan dari masyarakat. Namun, unggahan yang relevan bercampur dengan berita, opini, percakapan umum, dan informasi yang tidak menunjukkan kebutuhan bantuan secara langsung. Klasifikasi teks dapat membantu menyaring unggahan yang berpotensi membutuhkan perhatian lebih lanjut.</p>
+<p>Penelitian ini mengkaji penggunaan IndoBERT untuk mengklasifikasikan tweet berbahasa Indonesia ke dalam dua kelas awal:</p>
+<ul>
+<li><strong>Emergency</strong> — teks yang mengindikasikan permintaan bantuan atau kebutuhan darurat terkait bencana.</li>
+<li><strong>Non-Emergency</strong> — teks yang tidak memenuhi kriteria permintaan bantuan darurat berdasarkan pedoman anotasi penelitian.</li>
+</ul>
+<p>Keluaran model merupakan hasil prediksi otomatis dan harus ditinjau manusia sebelum digunakan untuk pengambilan keputusan operasional.</p>
+<h2 id="tujuan">Tujuan</h2>
+<ol>
+<li>Menyusun dataset tweet bencana berbahasa Indonesia dengan pedoman anotasi yang jelas.</li>
+<li>Membangun baseline klasifikasi menggunakan TF-IDF + Logistic Regression dan TF-IDF + SVM.</li>
+<li>Melakukan <em>fine-tuning</em> IndoBERT untuk klasifikasi <code>Emergency</code> dan <code>Non-Emergency</code>.</li>
+<li>Membandingkan model menggunakan metrik yang sesuai, terutama Recall kelas <code>Emergency</code> dan F1-score.</li>
+<li>Menyediakan model terpilih melalui REST API berbasis FastAPI sebagai prototipe integrasi website informasi bencana.</li>
+</ol>
+<h2 id="ruang-lingkup">Ruang Lingkup</h2>
+<ul>
+<li><strong>Bahasa:</strong> Bahasa Indonesia, termasuk variasi bahasa informal media sosial.</li>
+<li><strong>Sumber data:</strong> unggahan Twitter/X terkait bencana yang dikumpulkan secara sah sesuai ketentuan platform dan kebijakan yang berlaku.</li>
+<li><strong>Tugas utama:</strong> klasifikasi biner <code>Emergency</code> vs. <code>Non-Emergency</code>.</li>
+<li><strong>Model pembanding:</strong> TF-IDF + Logistic Regression, TF-IDF + SVM, dan IndoBERT yang di-<em>fine-tune</em>.</li>
+<li><strong>Produk:</strong> REST API dan prototipe dashboard/website informasi bencana.</li>
+<li><strong>Di luar cakupan awal:</strong> pengiriman petugas otomatis, verifikasi lokasi secara pasti, serta klaim bahwa prediksi model merupakan laporan darurat yang telah terverifikasi.</li>
+</ul>
+<p>Klasifikasi jenis bantuan seperti makanan, air, medis, evakuasi, penyelamatan, dan tempat berlindung dapat dipertimbangkan sebagai pengembangan berikutnya, bukan bagian wajib dari klasifikasi biner awal.</p>
+<h2 id="metodologi">Metodologi</h2>
+<p>Alur penelitian yang direncanakan:</p>
+<ol>
+<li><strong>Pengumpulan data</strong> — mengumpulkan tweet terkait satu atau beberapa jenis kejadian bencana sesuai ruang lingkup yang ditetapkan.</li>
+<li><strong>Penyaringan dan deduplikasi</strong> — menghapus duplikasi dan menyaring data yang tidak relevan.</li>
+<li><strong>Anotasi</strong> — memberi label berdasarkan pedoman tertulis; kasus ambigu ditinjau ulang.</li>
+<li><strong>Audit dataset</strong> — memeriksa distribusi kelas, kualitas label, data kosong, dan potensi bias.</li>
+<li><strong>Pembagian dataset</strong> — memisahkan train, validation, dan test sebelum proses yang dapat mempelajari karakteristik data. Data duplikat atau sangat mirip harus dicegah tersebar antar-split.</li>
+<li><strong>Baseline</strong> — melatih TF-IDF + Logistic Regression dan TF-IDF + SVM.</li>
+<li><strong>Fine-tuning IndoBERT</strong> — melakukan tokenisasi dan fine-tuning untuk klasifikasi biner.</li>
+<li><strong>Evaluasi</strong> — membandingkan performa pada test set yang sama dan tidak digunakan untuk pemilihan model.</li>
+<li><strong>Analisis kesalahan</strong> — meninjau false negative, false positive, kasus ambigu, dan performa per kelas.</li>
+<li><strong>Deployment prototipe</strong> — menyediakan model melalui FastAPI dan menyimpan hasil sesuai kebutuhan aplikasi.</li>
+</ol>
+<h3 id="catatan-preprocessing">Catatan preprocessing</h3>
+<p>Preprocessing harus disesuaikan dengan pendekatan model. Untuk TF-IDF, eksperimen dapat mencakup normalisasi teks, tokenisasi, dan pengelolaan kata umum. Untuk IndoBERT, hindari menghapus kata atau mengubah teks secara agresif tanpa eksperimen karena konteks kalimat dapat hilang. Gunakan tokenizer bawaan model IndoBERT yang dipilih.</p>
+<h2 id="arsitektur-sistem">Arsitektur Sistem</h2>
+<div class="highlight"><pre><span></span><code>Tweet terkait bencana
+        |
+        v
+Penyaringan, deduplikasi, dan anotasi
+        |
+        v
+Dataset berlabel
+        |
+        +-------------------------------+
+        |                               |
+        v                               v
+TF-IDF + Logistic Regression       TF-IDF + SVM
+        |                               |
+        +---------------+---------------+
+                        |
+                        v
+               Evaluasi baseline
+                        |
+                        v
+                Fine-tuning IndoBERT
+                        |
+                        v
+              Evaluasi dan pemilihan model
+                        |
+                        v
+                  FastAPI REST API
+                        |
+                        v
+              Website / dashboard prototipe
+</code></pre></div>
+<p>Alur pengembangan model dan alur prediksi produksi merupakan dua proses yang berbeda. Model hanya dipublikasikan ke API setelah artefak, konfigurasi label, dan preprocessing/tokenizer yang sesuai disimpan bersama.</p>
+<h2 id="dataset">Dataset</h2>
+<p>Dataset penelitian belum diasumsikan tersedia atau telah selesai dikumpulkan. Detail berikut harus dicatat setelah proses pengumpulan data.</p>
+<table>
+<thead>
+<tr>
+<th>Informasi</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Platform</td>
+<td>Twitter/X</td>
+</tr>
+<tr>
+<td>Bahasa</td>
+<td>Bahasa Indonesia</td>
+</tr>
+<tr>
+<td>Jenis bencana</td>
+<td>Ditentukan berdasarkan ruang lingkup penelitian</td>
+</tr>
+<tr>
+<td>Unit data</td>
+<td>Teks unggahan/tweet</td>
+</tr>
+<tr>
+<td>Label</td>
+<td><code>Emergency</code>, <code>Non-Emergency</code></td>
+</tr>
+<tr>
+<td>Jumlah data</td>
+<td>Diisi setelah pengumpulan dan kurasi</td>
+</tr>
+<tr>
+<td>Rentang waktu</td>
+<td>Diisi sesuai protokol pengumpulan</td>
+</tr>
+<tr>
+<td>Pedoman anotasi</td>
+<td>Didokumentasikan dan digunakan secara konsisten</td>
+</tr>
+<tr>
+<td>Lisensi/ketentuan penggunaan</td>
+<td>Mengikuti ketentuan sumber dan platform</td>
+</tr>
+</tbody>
+</table>
+<p>Contoh ilustratif (bukan data penelitian aktual):</p>
+<table>
+<thead>
+<tr>
+<th>Teks</th>
+<th>Label ilustratif</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Tolong, keluarga kami terjebak banjir dan membutuhkan evakuasi.”</td>
+<td><code>Emergency</code></td>
+</tr>
+<tr>
+<td>“Banjir terjadi di beberapa wilayah sejak pagi.”</td>
+<td><code>Non-Emergency</code></td>
+</tr>
+</tbody>
+</table>
+<p>Label harus ditentukan berdasarkan pedoman anotasi, bukan hanya keberadaan kata seperti “banjir”, “tolong”, atau “bantuan”. Tweet informatif tentang bencana tidak otomatis merupakan permintaan bantuan darurat.</p>
+<h2 id="eksperimen-dan-evaluasi">Eksperimen dan Evaluasi</h2>
+<p>Model yang direncanakan untuk dibandingkan:</p>
+<ol>
+<li>TF-IDF + Logistic Regression</li>
+<li>TF-IDF + SVM</li>
+<li>IndoBERT <em>fine-tuning</em></li>
+</ol>
+<p>Metrik evaluasi:</p>
+<ul>
+<li><strong>Precision:</strong> proporsi prediksi positif yang benar.</li>
+<li><strong>Recall:</strong> proporsi data positif aktual yang berhasil ditemukan.</li>
+<li><strong>F1-score:</strong> keseimbangan precision dan recall.</li>
+<li><strong>Macro F1:</strong> rata-rata F1 antarkelas dengan bobot kelas setara.</li>
+<li><strong>Confusion matrix:</strong> memperlihatkan TP, TN, FP, dan FN.</li>
+</ul>
+<p>Recall kelas <code>Emergency</code> menjadi metrik penting karena false negative berarti unggahan yang memenuhi kriteria darurat tidak terdeteksi. Namun, precision juga perlu dipantau agar sistem tidak menghasilkan terlalu banyak alarm keliru.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">Accuracy</th>
+<th style="text-align: right;">Precision Emergency</th>
+<th style="text-align: right;">Recall Emergency</th>
+<th style="text-align: right;">Macro F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TF-IDF + Logistic Regression</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+</tr>
+<tr>
+<td>TF-IDF + SVM</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+</tr>
+<tr>
+<td>IndoBERT fine-tuning</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+<td style="text-align: right;">Belum diukur</td>
+</tr>
+</tbody>
+</table>
+<p>Tidak ada hasil performa yang diasumsikan pada README ini. Isi tabel setelah eksperimen selesai. Semua model harus dievaluasi pada test set yang sama, dan test set tidak boleh digunakan untuk tuning hyperparameter atau memilih checkpoint.</p>
+<h2 id="teknologi">Teknologi</h2>
+<p>Teknologi yang direncanakan:</p>
+<ul>
+<li><strong>Python</strong> — bahasa pemrograman.</li>
+<li><strong>Pandas / NumPy</strong> — pengolahan data.</li>
+<li><strong>scikit-learn</strong> — TF-IDF, baseline, dan evaluasi.</li>
+<li><strong>PyTorch</strong> — framework deep learning.</li>
+<li><strong>Hugging Face Transformers</strong> — tokenizer dan model IndoBERT.</li>
+<li><strong>FastAPI</strong> — REST API.</li>
+<li><strong>PostgreSQL</strong> — penyimpanan data/prediksi jika dibutuhkan.</li>
+<li><strong>Frontend web</strong> — dashboard sebagai lapisan presentasi; framework dapat ditetapkan saat implementasi.</li>
+</ul>
+<p>Versi paket dan model IndoBERT yang benar-benar digunakan harus dicatat dalam file dependensi serta dokumentasi eksperimen.</p>
+<h2 id="struktur-direktori">Struktur Direktori</h2>
+<p>Contoh struktur awal yang dapat disesuaikan:</p>
+<div class="highlight"><pre><span></span><code>disaster-emergency-nlp/
+├── README.md
+├── requirements.txt
+├── .env.example
+├── data/
+│   ├── raw/                 # Data mentah; jangan commit data sensitif
+│   ├── processed/
+│   └── README.md            # Sumber, skema, dan aturan akses data
+├── notebooks/
+│   ├── 01_data_exploration.ipynb
+│   ├── 02_preprocessing.ipynb
+│   ├── 03_tfidf_baselines.ipynb
+│   └── 04_indobert_finetuning.ipynb
+├── src/
+│   ├── data/
+│   ├── preprocessing/
+│   ├── models/
+│   ├── evaluation/
+│   └── api/
+│       └── main.py
+├── tests/
+├── artifacts/               # Model lokal; biasanya tidak di-commit
+└── reports/
+    └── experiment_results/
+</code></pre></div>
+<h2 id="instalasi">Instalasi</h2>
+<p>Disarankan menggunakan Python virtual environment. Perintah berikut merupakan contoh setup awal; sesuaikan versi paket dengan lingkungan eksperimen Anda.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</code></pre></div>
+<p>Aktifkan environment:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Windows PowerShell</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Linux/macOS</span>
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</code></pre></div>
+<p>Instal paket dasar:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy<span class="w"> </span>scikit-learn<span class="w"> </span>jupyter
+pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>transformers<span class="w"> </span>datasets<span class="w"> </span>evaluate<span class="w"> </span>accelerate
+pip<span class="w"> </span>install<span class="w"> </span>fastapi<span class="w"> </span><span class="s2">"uvicorn[standard]"</span>
+</code></pre></div>
+<p>Setelah lingkungan stabil, simpan versi dependensi:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</code></pre></div>
+<p>Untuk training IndoBERT, GPU yang kompatibel dapat mempercepat proses, tetapi eksperimen kecil masih dapat dilakukan di CPU dengan waktu komputasi lebih lama. Ikuti petunjuk instalasi PyTorch yang sesuai dengan perangkat keras Anda.</p>
+<h2 id="menjalankan-api">Menjalankan API</h2>
+<p>Setelah modul <code>src/api/main.py</code> dan pemuatan model selesai diimplementasikan, jalankan:</p>
+<div class="highlight"><pre><span></span><code>uvicorn<span class="w"> </span>src.api.main:app<span class="w"> </span>--reload
+</code></pre></div>
+<p>Dokumentasi interaktif FastAPI biasanya tersedia di:</p>
+<div class="highlight"><pre><span></span><code>http://127.0.0.1:8000/docs
+</code></pre></div>
+<p>Perintah tersebut adalah contoh target implementasi; API belum dianggap berjalan sebelum modul dan model benar-benar tersedia.</p>
+<h2 id="contoh-penggunaan-api">Contoh Penggunaan API</h2>
+<p>Rancangan endpoint prediksi: <code>POST /predict</code>.</p>
+<p>Request ilustratif:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tolong bantu kami, rumah sudah terendam banjir."</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Response ilustratif:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emergency"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"confidence"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.94</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Response di atas hanya contoh format, bukan hasil model aktual.</strong> Nilai confidence harus berasal dari inferensi model yang berjalan. Confidence bukan jaminan bahwa laporan benar atau telah diverifikasi. API nyata juga perlu menangani input kosong, batas panjang teks, kesalahan model, dan validasi skema.</p>
+<h2 id="rencana-pengembangan">Rencana Pengembangan</h2>
+<ul>
+<li>[ ] Menetapkan ruang lingkup bencana dan protokol pengumpulan data.</li>
+<li>[ ] Menyusun pedoman anotasi dan contoh kasus ambigu.</li>
+<li>[ ] Mengumpulkan, membersihkan, dan mendokumentasikan dataset.</li>
+<li>[ ] Memeriksa distribusi kelas dan kualitas anotasi.</li>
+<li>[ ] Menetapkan train/validation/test split tanpa kebocoran data.</li>
+<li>[ ] Membangun baseline TF-IDF + Logistic Regression.</li>
+<li>[ ] Membangun baseline TF-IDF + SVM.</li>
+<li>[ ] Melakukan fine-tuning IndoBERT.</li>
+<li>[ ] Mengevaluasi model dengan metrik per kelas.</li>
+<li>[ ] Melakukan analisis kesalahan dan uji robustness.</li>
+<li>[ ] Menyimpan model, tokenizer, konfigurasi, dan hasil eksperimen.</li>
+<li>[ ] Membuat REST API FastAPI.</li>
+<li>[ ] Mengintegrasikan API ke prototipe dashboard.</li>
+<li>[ ] Menulis laporan penelitian dan mendokumentasikan keterbatasan.</li>
+</ul>
+<h2 id="etika-dan-batasan">Etika dan Batasan</h2>
+<ul>
+<li>Gunakan data sesuai ketentuan layanan, peraturan, dan izin yang berlaku.</li>
+<li>Hindari memublikasikan informasi pribadi, identitas akun, nomor telepon, atau lokasi rinci yang dapat membahayakan pengguna.</li>
+<li>Simpan data mentah secara aman dan batasi akses.</li>
+<li>Dokumentasikan sumber data, metode pengambilan, proses anonimisasi, dan batasan penggunaan.</li>
+<li>Prediksi model dapat salah, bias, atau gagal memahami konteks, sarkasme, dan bahasa lokal.</li>
+<li>Sistem ini merupakan alat bantu penyaringan informasi, bukan pengganti verifikasi manusia atau kanal resmi layanan darurat.</li>
+<li>Jangan menyatakan lokasi, urgensi, atau kebutuhan bantuan sebagai fakta terverifikasi hanya berdasarkan prediksi model.</li>
+</ul>
+<h2 id="sitasi">Sitasi</h2>
+<p>Cantumkan sitasi untuk model IndoBERT, library, dataset, dan metode yang benar-benar digunakan. Sebagai referensi awal, periksa publikasi dan dokumentasi resmi IndoBERT serta Hugging Face Transformers. Tambahkan sitasi bibliografis final setelah model dan versi yang dipakai dipastikan.</p>
+<h2 id="lisensi">Lisensi</h2>
+<p>Lisensi proyek belum ditentukan. Sebelum memilih lisensi, pastikan hak penggunaan kode, dataset, dan bobot model pihak ketiga telah diperiksa. Lisensi kode proyek tidak otomatis memberikan hak atas data atau model eksternal.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="01-nlp/01-python-untuk-nlp/" class="md-footer__link md-footer__link--next" aria-label="Next: Python untuk NLP">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Python untuk NLP
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "toc.follow", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

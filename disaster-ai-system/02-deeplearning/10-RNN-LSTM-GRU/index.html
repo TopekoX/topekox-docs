@@ -1,0 +1,3579 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../09-deep-learning/">
+      
+      
+        <link rel="next" href="../../03-transformer/11-attention-mechanism/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>RNN - LSTM - GRU - Topekox Belajar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#materi-rnn-lstm-gru-untuk-nlp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Topekox Belajar" class="md-header__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Topekox Belajar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RNN - LSTM - GRU
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Topekox Belajar" class="md-nav__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Topekox Belajar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disaster AI System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Disaster AI System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP Foundation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NLP Foundation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/01-python-untuk-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/02-fundamentals-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamental NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/03-regex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/04-text-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/05-text-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Representation & TF-IDF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/06-machine-learning-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/07-evaluasi-nlp-klasifikasi-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluasi NLP Klasifikasi Text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-word-embedding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Word Embedding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNN - LSTM - GRU
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNN - LSTM - GRU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-mengapa-model-sequence-dibutuhkan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Mengapa Model Sequence Dibutuhkan?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Mengapa Model Sequence Dibutuhkan?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#istilah-penting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Istilah penting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-gambaran-umum-rnn-lstm-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Gambaran Umum: RNN → LSTM → GRU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-recurrent-neural-network-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Recurrent Neural Network (RNN)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Recurrent Neural Network (RNN)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-apa-itu-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Apa itu RNN?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-rumus-dasar-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Rumus dasar RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-kelebihan-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Kelebihan RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-keterbatasan-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Keterbatasan RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-apa-itu-vanishing-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Apa itu vanishing gradient?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-contoh-kode-rnn-dengan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Contoh Kode RNN dengan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Contoh Kode RNN dengan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-instalasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Instalasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-membuat-rnn-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Membuat RNN sederhana
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-contoh-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-memahami-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Memahami shape
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-long-short-term-memory-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Long Short-Term Memory (LSTM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Long Short-Term Memory (LSTM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mengapa-lstm-dikembangkan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Mengapa LSTM dikembangkan?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-tiga-gate-pada-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Tiga gate pada LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-persamaan-konseptual-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Persamaan konseptual LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-kelebihan-dan-keterbatasan-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Kelebihan dan keterbatasan LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-contoh-kode-lstm-dengan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Contoh Kode LSTM dengan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Contoh Kode LSTM dengan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perbedaan-output-rnn-dan-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perbedaan output RNN dan LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-gated-recurrent-unit-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Gated Recurrent Unit (GRU)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Gated Recurrent Unit (GRU)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-apa-itu-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Apa itu GRU?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-persamaan-konseptual-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Persamaan konseptual GRU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-kelebihan-dan-keterbatasan-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Kelebihan dan keterbatasan GRU
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-contoh-kode-gru-dengan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Contoh Kode GRU dengan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Contoh Kode GRU dengan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-perbandingan-rnn-lstm-dan-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Perbandingan RNN, LSTM, dan GRU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-perbandingan-bentuk-tensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Perbandingan Bentuk Tensor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-contoh-model-klasifikasi-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Contoh Model Klasifikasi Sequence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Contoh Model Klasifikasi Sequence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memahami-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memahami output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-gambaran-training-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Gambaran Training Loop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Gambaran Training Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-output_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-bagaimana-menerapkannya-pada-teks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Bagaimana Menerapkannya pada Teks?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Bagaimana Menerapkannya pada Teks?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hal-yang-perlu-diperhatikan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hal yang perlu diperhatikan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-hubungan-dengan-attention-dan-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Hubungan dengan Attention dan Transformer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-latihan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Latihan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Latihan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-memahami-tensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Memahami tensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-mengubah-hidden-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — Mengubah hidden size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-membandingkan-arsitektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Membandingkan arsitektur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-4-klasifikasi-teks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 4 — Klasifikasi teks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-checklist-penguasaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Checklist Penguasaan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/11-attention-mechanism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attention Mechanism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/12-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/13-BERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBert
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IndoBert
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/14-IndoBERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/15-fine-tuningIndoBERT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/16-eksperimen-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eksperimen Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/17-dataset-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/18-data-annotation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Annotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/19-imbalanced-dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imbalanced Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/20-explainable-AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explainable AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Product
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/21-rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/22-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/23-jadikan-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jadikan Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beginner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Beginner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1: Nice to Meet You
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2: How Are You?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3: What Does She Look Like?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-mengapa-model-sequence-dibutuhkan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Mengapa Model Sequence Dibutuhkan?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Mengapa Model Sequence Dibutuhkan?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#istilah-penting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Istilah penting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-gambaran-umum-rnn-lstm-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Gambaran Umum: RNN → LSTM → GRU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-recurrent-neural-network-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Recurrent Neural Network (RNN)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Recurrent Neural Network (RNN)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-apa-itu-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Apa itu RNN?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-rumus-dasar-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Rumus dasar RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-kelebihan-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Kelebihan RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-keterbatasan-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Keterbatasan RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-apa-itu-vanishing-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Apa itu vanishing gradient?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-contoh-kode-rnn-dengan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Contoh Kode RNN dengan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Contoh Kode RNN dengan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-instalasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Instalasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-membuat-rnn-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Membuat RNN sederhana
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-contoh-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-memahami-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Memahami shape
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-long-short-term-memory-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Long Short-Term Memory (LSTM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Long Short-Term Memory (LSTM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mengapa-lstm-dikembangkan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Mengapa LSTM dikembangkan?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-tiga-gate-pada-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Tiga gate pada LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-persamaan-konseptual-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Persamaan konseptual LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-kelebihan-dan-keterbatasan-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Kelebihan dan keterbatasan LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-contoh-kode-lstm-dengan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Contoh Kode LSTM dengan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Contoh Kode LSTM dengan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perbedaan-output-rnn-dan-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perbedaan output RNN dan LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-gated-recurrent-unit-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Gated Recurrent Unit (GRU)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Gated Recurrent Unit (GRU)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-apa-itu-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Apa itu GRU?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-persamaan-konseptual-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Persamaan konseptual GRU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-kelebihan-dan-keterbatasan-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Kelebihan dan keterbatasan GRU
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-contoh-kode-gru-dengan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Contoh Kode GRU dengan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Contoh Kode GRU dengan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-perbandingan-rnn-lstm-dan-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Perbandingan RNN, LSTM, dan GRU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-perbandingan-bentuk-tensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Perbandingan Bentuk Tensor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-contoh-model-klasifikasi-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Contoh Model Klasifikasi Sequence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Contoh Model Klasifikasi Sequence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memahami-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memahami output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-gambaran-training-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Gambaran Training Loop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Gambaran Training Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-output_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-bagaimana-menerapkannya-pada-teks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Bagaimana Menerapkannya pada Teks?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Bagaimana Menerapkannya pada Teks?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hal-yang-perlu-diperhatikan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hal yang perlu diperhatikan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-hubungan-dengan-attention-dan-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Hubungan dengan Attention dan Transformer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-latihan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Latihan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Latihan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-memahami-tensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Memahami tensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-mengubah-hidden-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — Mengubah hidden size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-membandingkan-arsitektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Membandingkan arsitektur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-4-klasifikasi-teks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 4 — Klasifikasi teks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-checklist-penguasaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Checklist Penguasaan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Disaster AI System
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../08-word-embedding/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Deep Learning
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="materi-rnn-lstm-gru-untuk-nlp">Materi RNN → LSTM → GRU untuk NLP</h1>
+<p>Materi ini mengikuti roadmap belajar NLP dari dasar menuju Transformer dan IndoBERT. Fokusnya adalah memahami bagaimana model memproses urutan teks, mengapa RNN memiliki keterbatasan, bagaimana LSTM dan GRU mengatasinya, serta bagaimana menjalankan contoh kode sederhana.</p>
+<p>Konteks penelitian yang digunakan sebagai ilustrasi adalah klasifikasi teks media sosial terkait permintaan bantuan darurat saat bencana. RNN, LSTM, dan GRU dipelajari sebagai fondasi konseptual sebelum masuk ke Attention, Transformer, dan IndoBERT.</p>
+<h2 id="tujuan-pembelajaran">Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, Anda diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan konsep sequence dalam NLP.</li>
+<li>Memahami cara kerja Recurrent Neural Network (RNN).</li>
+<li>Menjelaskan hidden state dan pemrosesan token secara berurutan.</li>
+<li>Memahami masalah vanishing gradient dan keterbatasan RNN.</li>
+<li>Menjelaskan bagaimana LSTM menggunakan cell state dan gates.</li>
+<li>Menjelaskan cara kerja GRU dan perbedaannya dari LSTM.</li>
+<li>Menjalankan contoh kode PyTorch sederhana dan membaca bentuk output-nya.</li>
+<li>Memilih eksperimen sederhana untuk membandingkan RNN, LSTM, dan GRU.</li>
+</ol>
+<h2 id="1-mengapa-model-sequence-dibutuhkan">1. Mengapa Model Sequence Dibutuhkan?</h2>
+<p>Teks bukan sekadar kumpulan kata. Urutan kata dapat mengubah makna kalimat.</p>
+<p>Contoh:</p>
+<ul>
+<li>“Korban membutuhkan bantuan.”</li>
+<li>“Korban tidak membutuhkan bantuan.”</li>
+</ul>
+<p>Kata <em>tidak</em> mengubah makna kalimat. Model NLP idealnya dapat memanfaatkan hubungan antarkata, termasuk informasi yang muncul lebih awal dalam kalimat.</p>
+<p>Pada pendekatan seperti Bag of Words atau TF-IDF, teks direpresentasikan sebagai fitur numerik. Representasi tersebut berguna untuk baseline machine learning, tetapi tidak secara langsung memodelkan urutan token seperti model sequence.</p>
+<h3 id="istilah-penting">Istilah penting</h3>
+<table>
+<thead>
+<tr>
+<th>Istilah</th>
+<th>Penjelasan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequence</td>
+<td>Urutan elemen yang diproses, misalnya token dalam kalimat.</td>
+</tr>
+<tr>
+<td>Token</td>
+<td>Unit teks, misalnya kata atau subword.</td>
+</tr>
+<tr>
+<td>Time step</td>
+<td>Posisi langkah pemrosesan dalam sequence.</td>
+</tr>
+<tr>
+<td>Embedding</td>
+<td>Vektor numerik yang mewakili token.</td>
+</tr>
+<tr>
+<td>Hidden state</td>
+<td>Representasi internal yang dibawa dari satu time step ke time step berikutnya.</td>
+</tr>
+<tr>
+<td>Cell state</td>
+<td>Memori internal khusus pada LSTM.</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>Mekanisme yang mengatur informasi yang disimpan, dibuang, atau diteruskan.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-gambaran-umum-rnn-lstm-gru">2. Gambaran Umum: RNN → LSTM → GRU</h2>
+<p>Perkembangan sederhananya:</p>
+<div class="highlight"><pre><span></span><code>Token sequence
+      ↓
+     RNN
+      ↓
+Masalah membawa informasi jauh dapat muncul
+      ↓
+     LSTM
+      ↓
+Memori dan pengaturan informasi melalui gates
+      ↓
+      GRU
+      ↓
+Alternatif dengan struktur gate yang lebih ringkas
+</code></pre></div>
+<p>RNN, LSTM, dan GRU sama-sama memproses data berurutan. LSTM dan GRU merupakan jenis recurrent network yang dirancang untuk membantu menangani ketergantungan sequence yang lebih panjang dibandingkan RNN sederhana. Namun, ketiganya tetap memproses sequence secara berurutan, sehingga pelatihan paralelnya lebih terbatas daripada Transformer.</p>
+<h2 id="3-recurrent-neural-network-rnn">3. Recurrent Neural Network (RNN)</h2>
+<h3 id="31-apa-itu-rnn">3.1 Apa itu RNN?</h3>
+<p>Recurrent Neural Network adalah jenis neural network yang membawa informasi dari langkah sebelumnya melalui <em>hidden state</em>. Pada setiap time step, model menerima input saat ini dan hidden state sebelumnya untuk menghitung hidden state baru.</p>
+<p>Contoh kalimat:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu korban banjir"
+</code></pre></div>
+<p>Secara konseptual, pemrosesannya berlangsung seperti berikut:</p>
+<div class="highlight"><pre><span></span><code>Tolong → bantu → korban → banjir
+   h1      h2       h3       h4
+</code></pre></div>
+<p>Setiap hidden state dapat membawa sebagian informasi dari token-token yang telah diproses.</p>
+<h3 id="32-rumus-dasar-rnn">3.2 Rumus dasar RNN</h3>
+<p>Salah satu bentuk sederhana persamaan RNN adalah:</p>
+<div class="arithmatex">\[
+h_t = \tanh(W_x x_t + W_h h_{t-1} + b_h)
+\]</div>
+<p>Keterangan:</p>
+<ul>
+<li><span class="arithmatex">\(x_t\)</span>: input atau embedding pada time step ke-<span class="arithmatex">\(t\)</span>.</li>
+<li><span class="arithmatex">\(h_{t-1}\)</span>: hidden state dari langkah sebelumnya.</li>
+<li><span class="arithmatex">\(W_x\)</span>: bobot untuk input.</li>
+<li><span class="arithmatex">\(W_h\)</span>: bobot recurrent untuk hidden state sebelumnya.</li>
+<li><span class="arithmatex">\(b_h\)</span>: bias.</li>
+<li><span class="arithmatex">\(\tanh\)</span>: fungsi aktivasi.</li>
+<li><span class="arithmatex">\(h_t\)</span>: hidden state yang baru dihitung.</li>
+</ul>
+<p>Untuk klasifikasi sequence, representasi akhir atau gabungan representasi hidden state dapat diteruskan ke layer klasifikasi.</p>
+<h3 id="33-kelebihan-rnn">3.3 Kelebihan RNN</h3>
+<ul>
+<li>Arsitektur relatif sederhana.</li>
+<li>Memperhitungkan urutan data.</li>
+<li>Cocok sebagai model pembelajaran dan baseline sequence sederhana.</li>
+</ul>
+<h3 id="34-keterbatasan-rnn">3.4 Keterbatasan RNN</h3>
+<ul>
+<li>Pemrosesan token berlangsung berurutan.</li>
+<li>Informasi dari token yang jauh sebelumnya dapat sulit dipertahankan.</li>
+<li>Dapat mengalami <em>vanishing gradient</em> atau <em>exploding gradient</em> saat training.</li>
+<li>Kinerja dapat menurun pada ketergantungan jangka panjang.</li>
+</ul>
+<h3 id="35-apa-itu-vanishing-gradient">3.5 Apa itu vanishing gradient?</h3>
+<p>Saat model dilatih menggunakan backpropagation through time (BPTT), gradien mengalir melewati banyak time step. Dalam kondisi tertentu, gradien dapat menjadi sangat kecil ketika melewati banyak operasi berulang. Akibatnya, parameter yang berhubungan dengan bagian awal sequence menerima sinyal pembelajaran yang lemah.</p>
+<p>Dampaknya: model mungkin kesulitan mempelajari hubungan antara token yang berjauhan.</p>
+<p><em>Exploding gradient</em> adalah kondisi kebalikannya, ketika gradien menjadi sangat besar dan training tidak stabil. Teknik seperti gradient clipping dapat membantu mengatasi exploding gradient, tetapi tidak menghilangkan seluruh keterbatasan RNN.</p>
+<h2 id="4-contoh-kode-rnn-dengan-pytorch">4. Contoh Kode RNN dengan PyTorch</h2>
+<p>Contoh berikut menggunakan input numerik buatan agar fokusnya pada bentuk tensor dan alur model, bukan pada proses tokenisasi teks. Model ini belum dilatih untuk menghasilkan prediksi bermakna.</p>
+<h3 id="41-instalasi">4.1 Instalasi</h3>
+<p>Jika PyTorch belum tersedia, instal sesuai petunjuk resmi untuk sistem Anda. Di lingkungan notebook, biasanya dapat dimulai dengan:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>torch
+</code></pre></div>
+<h3 id="42-membuat-rnn-sederhana">4.2 Membuat RNN sederhana</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="c1"># Contoh tensor:</span>
+<span class="c1"># batch_size = 2, sequence_length = 4, input_size = 3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
+    <span class="p">[[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]],</span>
+
+    <span class="p">[[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]]</span>
+<span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="n">rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">RNN</span><span class="p">(</span>
+    <span class="n">input_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">hidden_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">output</span><span class="p">,</span> <span class="n">h_n</span> <span class="o">=</span> <span class="n">rnn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Input shape:"</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Output shape:"</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Final hidden state shape:"</span><span class="p">,</span> <span class="n">h_n</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="43-contoh-output">4.3 Contoh output</h3>
+<div class="highlight"><pre><span></span><code>Input shape: torch.Size([2, 4, 3])
+Output shape: torch.Size([2, 4, 5])
+Final hidden state shape: torch.Size([1, 2, 5])
+</code></pre></div>
+<p>Nilai tensor aktual di <code>output</code> dan <code>h_n</code> bergantung pada parameter model yang diinisialisasi PyTorch. Bentuk tensor di atas menunjukkan struktur dimensinya.</p>
+<h3 id="44-memahami-shape">4.4 Memahami shape</h3>
+<table>
+<thead>
+<tr>
+<th>Tensor</th>
+<th>Shape</th>
+<th>Makna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td><code>(2, 4, 3)</code></td>
+<td>2 contoh, 4 time step, 3 fitur input per time step.</td>
+</tr>
+<tr>
+<td><code>output</code></td>
+<td><code>(2, 4, 5)</code></td>
+<td>Hidden output untuk setiap time step, dengan 5 fitur hidden.</td>
+</tr>
+<tr>
+<td><code>h_n</code></td>
+<td><code>(1, 2, 5)</code></td>
+<td>Hidden state terakhir untuk 1 layer/direction, 2 contoh, dan 5 fitur hidden.</td>
+</tr>
+</tbody>
+</table>
+<p>Dengan <code>batch_first=True</code>, bentuk input RNN adalah <code>(batch, sequence, features)</code>.</p>
+<h2 id="5-long-short-term-memory-lstm">5. Long Short-Term Memory (LSTM)</h2>
+<h3 id="51-mengapa-lstm-dikembangkan">5.1 Mengapa LSTM dikembangkan?</h3>
+<p>LSTM merupakan jenis RNN yang dirancang untuk membantu mempertahankan informasi yang relevan dalam rentang sequence yang lebih panjang. LSTM menambahkan <em>cell state</em> dan mekanisme <em>gating</em> untuk mengatur aliran informasi.</p>
+<p>Gambaran sederhana:</p>
+<div class="highlight"><pre><span></span><code>Input token
+    ↓
+Forget gate ── menentukan informasi lama yang dipertahankan
+    ↓
+Input gate ─── menentukan informasi baru yang disimpan
+    ↓
+Cell state ─── jalur memori
+    ↓
+Output gate ── menentukan informasi yang dikeluarkan
+    ↓
+Hidden state
+</code></pre></div>
+<h3 id="52-tiga-gate-pada-lstm">5.2 Tiga gate pada LSTM</h3>
+<p><strong>Forget gate</strong></p>
+<p>Mengatur bagian cell state sebelumnya yang akan dipertahankan atau dilupakan.</p>
+<p><strong>Input gate</strong></p>
+<p>Mengatur informasi baru yang akan ditambahkan ke cell state.</p>
+<p><strong>Output gate</strong></p>
+<p>Mengatur bagian informasi dari cell state yang digunakan untuk membentuk hidden state saat ini.</p>
+<h3 id="53-persamaan-konseptual-lstm">5.3 Persamaan konseptual LSTM</h3>
+<p>Persamaan berikut merupakan bentuk umum LSTM:</p>
+<div class="arithmatex">\[
+f_t = \sigma(W_f x_t + U_f h_{t-1} + b_f)
+\]</div>
+<div class="arithmatex">\[
+i_t = \sigma(W_i x_t + U_i h_{t-1} + b_i)
+\]</div>
+<div class="arithmatex">\[
+\tilde{c}_t = \tanh(W_c x_t + U_c h_{t-1} + b_c)
+\]</div>
+<div class="arithmatex">\[
+c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t
+\]</div>
+<div class="arithmatex">\[
+o_t = \sigma(W_o x_t + U_o h_{t-1} + b_o)
+\]</div>
+<div class="arithmatex">\[
+h_t = o_t \odot \tanh(c_t)
+\]</div>
+<p>Keterangan:</p>
+<ul>
+<li><span class="arithmatex">\(f_t\)</span>: forget gate.</li>
+<li><span class="arithmatex">\(i_t\)</span>: input gate.</li>
+<li><span class="arithmatex">\(\tilde{c}_t\)</span>: kandidat informasi baru.</li>
+<li><span class="arithmatex">\(c_t\)</span>: cell state.</li>
+<li><span class="arithmatex">\(o_t\)</span>: output gate.</li>
+<li><span class="arithmatex">\(h_t\)</span>: hidden state.</li>
+<li><span class="arithmatex">\(\sigma\)</span>: fungsi sigmoid, yang menghasilkan nilai antara 0 dan 1.</li>
+<li><span class="arithmatex">\(\odot\)</span>: perkalian elemen demi elemen.</li>
+</ul>
+<p>Nilai gate tidak berarti keputusan bahasa yang eksplisit seperti manusia; gate adalah mekanisme numerik yang dipelajari selama training.</p>
+<h3 id="54-kelebihan-dan-keterbatasan-lstm">5.4 Kelebihan dan keterbatasan LSTM</h3>
+<p><strong>Kelebihan:</strong></p>
+<ul>
+<li>Memiliki jalur cell state untuk membawa informasi.</li>
+<li>Gate membantu mengatur informasi yang dipertahankan dan diperbarui.</li>
+<li>Sering lebih efektif daripada RNN sederhana pada sequence yang memiliki ketergantungan lebih panjang.</li>
+</ul>
+<p><strong>Keterbatasan:</strong></p>
+<ul>
+<li>Struktur lebih kompleks daripada RNN sederhana.</li>
+<li>Memiliki lebih banyak parameter daripada GRU dengan ukuran input dan hidden yang sebanding pada implementasi umum.</li>
+<li>Tetap memproses time step secara berurutan.</li>
+<li>Tidak selalu mengungguli GRU atau model Transformer pada setiap dataset.</li>
+</ul>
+<h2 id="6-contoh-kode-lstm-dengan-pytorch">6. Contoh Kode LSTM dengan PyTorch</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span>
+    <span class="n">input_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">hidden_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="n">h_n</span><span class="p">,</span> <span class="n">c_n</span><span class="p">)</span> <span class="o">=</span> <span class="n">lstm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Input shape:"</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Output shape:"</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Final hidden state shape:"</span><span class="p">,</span> <span class="n">h_n</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Final cell state shape:"</span><span class="p">,</span> <span class="n">c_n</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="contoh-output">Contoh output</h3>
+<div class="highlight"><pre><span></span><code>Input shape: torch.Size([2, 4, 3])
+Output shape: torch.Size([2, 4, 5])
+Final hidden state shape: torch.Size([1, 2, 5])
+Final cell state shape: torch.Size([1, 2, 5])
+</code></pre></div>
+<p>Nilai tensor aktual bersifat dinamis, sedangkan shape di atas mengikuti konfigurasi model.</p>
+<h3 id="perbedaan-output-rnn-dan-lstm">Perbedaan output RNN dan LSTM</h3>
+<ul>
+<li><code>output</code>: hidden state untuk setiap time step.</li>
+<li><code>h_n</code>: hidden state terakhir dari setiap layer/direction.</li>
+<li><code>c_n</code>: cell state terakhir dari setiap layer/direction; tersedia pada LSTM, bukan RNN sederhana.</li>
+</ul>
+<h2 id="7-gated-recurrent-unit-gru">7. Gated Recurrent Unit (GRU)</h2>
+<h3 id="71-apa-itu-gru">7.1 Apa itu GRU?</h3>
+<p>GRU adalah arsitektur recurrent yang juga menggunakan gate untuk mengatur informasi. GRU lebih ringkas daripada LSTM dalam implementasi standar karena tidak memiliki cell state terpisah dan menggunakan dua gate utama.</p>
+<p>Dua gate pada GRU:</p>
+<ul>
+<li><strong>Update gate</strong>: mengatur seberapa banyak informasi sebelumnya dipertahankan dibandingkan informasi kandidat yang baru.</li>
+<li><strong>Reset gate</strong>: mengatur bagaimana informasi hidden state sebelumnya digunakan saat menghitung kandidat hidden state baru.</li>
+</ul>
+<p>Secara konseptual:</p>
+<div class="highlight"><pre><span></span><code>Input token + Hidden state sebelumnya
+                  ↓
+             Reset gate
+                  ↓
+           Kandidat hidden state
+                  ↓
+             Update gate
+                  ↓
+             Hidden state baru
+</code></pre></div>
+<h3 id="72-persamaan-konseptual-gru">7.2 Persamaan konseptual GRU</h3>
+<p>Salah satu bentuk persamaan GRU yang umum adalah:</p>
+<div class="arithmatex">\[
+r_t = \sigma(W_r x_t + U_r h_{t-1} + b_r)
+\]</div>
+<div class="arithmatex">\[
+z_t = \sigma(W_z x_t + U_z h_{t-1} + b_z)
+\]</div>
+<div class="arithmatex">\[
+\tilde{h}_t = \tanh(W_h x_t + U_h(r_t \odot h_{t-1}) + b_h)
+\]</div>
+<div class="arithmatex">\[
+h_t = (1-z_t)\odot \tilde{h}_t + z_t \odot h_{t-1}
+\]</div>
+<p>Keterangan:</p>
+<ul>
+<li><span class="arithmatex">\(r_t\)</span>: reset gate.</li>
+<li><span class="arithmatex">\(z_t\)</span>: update gate.</li>
+<li><span class="arithmatex">\(\tilde{h}_t\)</span>: kandidat hidden state.</li>
+<li><span class="arithmatex">\(h_t\)</span>: hidden state baru.</li>
+</ul>
+<p>Catatan: beberapa referensi menggunakan konvensi persamaan atau penamaan gate yang berbeda. Inti konsepnya tetap bahwa GRU mengatur perpaduan informasi sebelumnya dan kandidat informasi baru.</p>
+<h3 id="73-kelebihan-dan-keterbatasan-gru">7.3 Kelebihan dan keterbatasan GRU</h3>
+<p><strong>Kelebihan:</strong></p>
+<ul>
+<li>Arsitektur lebih ringkas daripada LSTM standar.</li>
+<li>Tidak membutuhkan cell state terpisah.</li>
+<li>Dapat memiliki jumlah parameter lebih sedikit dan training lebih cepat pada beberapa kondisi.</li>
+</ul>
+<p><strong>Keterbatasan:</strong></p>
+<ul>
+<li>Tetap memproses sequence secara berurutan.</li>
+<li>Tidak selalu lebih cepat atau lebih akurat pada setiap perangkat dan dataset.</li>
+<li>Pemilihan GRU atau LSTM sebaiknya didasarkan pada eksperimen, bukan asumsi bahwa satu model selalu lebih baik.</li>
+</ul>
+<h2 id="8-contoh-kode-gru-dengan-pytorch">8. Contoh Kode GRU dengan PyTorch</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">gru</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span>
+    <span class="n">input_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">hidden_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">output</span><span class="p">,</span> <span class="n">h_n</span> <span class="o">=</span> <span class="n">gru</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Input shape:"</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Output shape:"</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Final hidden state shape:"</span><span class="p">,</span> <span class="n">h_n</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="contoh-output_1">Contoh output</h3>
+<div class="highlight"><pre><span></span><code>Input shape: torch.Size([2, 4, 3])
+Output shape: torch.Size([2, 4, 5])
+Final hidden state shape: torch.Size([1, 2, 5])
+</code></pre></div>
+<p>GRU menghasilkan <code>output</code> dan <code>h_n</code>, tetapi tidak menghasilkan <code>c_n</code> seperti LSTM.</p>
+<h2 id="9-perbandingan-rnn-lstm-dan-gru">9. Perbandingan RNN, LSTM, dan GRU</h2>
+<table>
+<thead>
+<tr>
+<th>Aspek</th>
+<th>RNN sederhana</th>
+<th>LSTM</th>
+<th>GRU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hidden state</td>
+<td>Ya</td>
+<td>Ya</td>
+<td>Ya</td>
+</tr>
+<tr>
+<td>Cell state terpisah</td>
+<td>Tidak</td>
+<td>Ya</td>
+<td>Tidak</td>
+</tr>
+<tr>
+<td>Mekanisme gate</td>
+<td>Tidak seperti LSTM/GRU</td>
+<td>Forget, input, output</td>
+<td>Reset, update</td>
+</tr>
+<tr>
+<td>Kompleksitas</td>
+<td>Paling sederhana</td>
+<td>Umumnya lebih kompleks</td>
+<td>Umumnya di antara RNN dan LSTM</td>
+</tr>
+<tr>
+<td>Ketergantungan panjang</td>
+<td>Sering kesulitan</td>
+<td>Dirancang untuk membantu</td>
+<td>Dirancang untuk membantu</td>
+</tr>
+<tr>
+<td>Pemrosesan berurutan</td>
+<td>Ya</td>
+<td>Ya</td>
+<td>Ya</td>
+</tr>
+<tr>
+<td>Pilihan terbaik untuk semua tugas?</td>
+<td>Tidak</td>
+<td>Tidak</td>
+<td>Tidak</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-perbandingan-bentuk-tensor">10. Perbandingan Bentuk Tensor</h2>
+<p>Gunakan konfigurasi yang sama untuk ketiga model:</p>
+<ul>
+<li><code>batch_size = 2</code></li>
+<li><code>sequence_length = 4</code></li>
+<li><code>input_size = 3</code></li>
+<li><code>hidden_size = 5</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th><code>output</code></th>
+<th><code>h_n</code></th>
+<th>State tambahan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RNN</td>
+<td><code>(2, 4, 5)</code></td>
+<td><code>(1, 2, 5)</code></td>
+<td>Tidak ada</td>
+</tr>
+<tr>
+<td>LSTM</td>
+<td><code>(2, 4, 5)</code></td>
+<td><code>(1, 2, 5)</code></td>
+<td><code>c_n</code>: <code>(1, 2, 5)</code></td>
+</tr>
+<tr>
+<td>GRU</td>
+<td><code>(2, 4, 5)</code></td>
+<td><code>(1, 2, 5)</code></td>
+<td>Tidak ada</td>
+</tr>
+</tbody>
+</table>
+<p>Dimensi pertama <code>h_n</code> adalah <code>num_layers × num_directions</code>. Pada contoh ini nilainya 1 karena model memakai satu layer dan satu arah.</p>
+<h2 id="11-contoh-model-klasifikasi-sequence">11. Contoh Model Klasifikasi Sequence</h2>
+<p>Contoh berikut menunjukkan bagaimana output recurrent network dapat digunakan untuk klasifikasi biner. Input masih berupa tensor acak, sehingga prediksi belum memiliki makna semantik dan model belum dilatih.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GRUClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gru</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span>
+            <span class="n">input_size</span><span class="o">=</span><span class="n">input_size</span><span class="p">,</span>
+            <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span>
+            <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">h_n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gru</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">final_hidden</span> <span class="o">=</span> <span class="n">h_n</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># (batch_size, hidden_size)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">final_hidden</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">logits</span>
+
+<span class="c1"># 2 contoh, 4 time step, 3 fitur input</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">GRUClassifier</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Logits shape:"</span><span class="p">,</span> <span class="n">logits</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Predictions shape:"</span><span class="p">,</span> <span class="n">predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Predicted classes:"</span><span class="p">,</span> <span class="n">predictions</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</code></pre></div>
+<h3 id="contoh-output_2">Contoh output</h3>
+<div class="highlight"><pre><span></span><code>Logits shape: torch.Size([2, 2])
+Predictions shape: torch.Size([2])
+Predicted classes: [1, 0]
+</code></pre></div>
+<p><strong>Penting:</strong> angka kelas pada contoh dapat berbeda setiap kali dijalankan karena bobot model diinisialisasi secara acak. Ini hanya demonstrasi alur dan shape, bukan hasil model terlatih.</p>
+<h3 id="memahami-output">Memahami output</h3>
+<ul>
+<li><code>logits</code>: skor mentah untuk setiap kelas; belum berupa probabilitas.</li>
+<li><code>predictions</code>: indeks kelas dengan skor tertinggi.</li>
+<li>Untuk mengubah logits menjadi probabilitas, gunakan <code>torch.softmax(logits, dim=1)</code>.</li>
+<li>Untuk training klasifikasi multikelas/biner dengan label integer, <code>nn.CrossEntropyLoss</code> dapat digunakan pada logits tanpa menerapkan softmax terlebih dahulu.</li>
+</ul>
+<h2 id="12-gambaran-training-loop">12. Gambaran Training Loop</h2>
+<p>Model belum belajar hanya dengan dibuat dan dipanggil. Training memerlukan label, fungsi loss, optimizer, dan proses pembaruan parameter.</p>
+<p>Contoh ringkas satu langkah training:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">GRUClassifier</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># label untuk dua contoh</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+<span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Logits shape:"</span><span class="p">,</span> <span class="n">logits</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Loss:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="mi">4</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="contoh-output_3">Contoh output</h3>
+<div class="highlight"><pre><span></span><code>Logits shape: torch.Size([2, 2])
+Loss: (nilai numerik bergantung pada hasil eksekusi)
+</code></pre></div>
+<p>Loss aktual bergantung pada tensor input dan parameter model. Satu langkah ini hanya demonstrasi mekanisme training; model membutuhkan banyak batch dan evaluasi pada data terpisah untuk menjadi model yang berguna.</p>
+<h2 id="13-bagaimana-menerapkannya-pada-teks">13. Bagaimana Menerapkannya pada Teks?</h2>
+<p>Contoh input penelitian:</p>
+<blockquote>
+<p>“Tolong bantu kami, rumah terendam banjir.”</p>
+</blockquote>
+<p>Sebelum teks bisa masuk ke RNN/LSTM/GRU, dibutuhkan beberapa tahap:</p>
+<div class="highlight"><pre><span></span><code>Teks mentah
+   ↓
+Preprocessing yang sesuai
+   ↓
+Tokenization
+   ↓
+Vocabulary / token IDs
+   ↓
+Embedding
+   ↓
+RNN / LSTM / GRU
+   ↓
+Classification layer
+   ↓
+Emergency / Non-Emergency
+</code></pre></div>
+<p>Dalam implementasi nyata, token IDs biasanya diubah menjadi embedding menggunakan <code>nn.Embedding</code> atau embedding yang telah dilatih sebelumnya. Panjang sequence juga perlu ditangani dengan padding dan, bila perlu, masking atau packed sequences.</p>
+<h3 id="hal-yang-perlu-diperhatikan">Hal yang perlu diperhatikan</h3>
+<ul>
+<li>Pisahkan data train, validation, dan test dengan benar.</li>
+<li>Bangun vocabulary hanya dari data training untuk menghindari kebocoran informasi.</li>
+<li>Tangani token di luar vocabulary.</li>
+<li>Tentukan panjang sequence dan strategi padding.</li>
+<li>Bandingkan model dengan baseline yang masuk akal, misalnya TF-IDF + SVM.</li>
+<li>Untuk deteksi bantuan darurat, evaluasi recall kelas Emergency, precision, F1-score, dan confusion matrix; jangan hanya melaporkan accuracy.</li>
+</ul>
+<h2 id="14-hubungan-dengan-attention-dan-transformer">14. Hubungan dengan Attention dan Transformer</h2>
+<p>RNN, LSTM, dan GRU memproses token secara berurutan dan membawa hidden state dari satu langkah ke langkah berikutnya. Mekanisme ini berbeda dari self-attention pada Transformer, yang memungkinkan token membangun representasi dengan memperhatikan token lain dalam sequence melalui attention.</p>
+<div class="highlight"><pre><span></span><code>RNN → LSTM → GRU
+          ↓
+   Pemahaman model sequence
+          ↓
+Attention Mechanism
+          ↓
+Transformer
+          ↓
+BERT
+          ↓
+IndoBERT
+</code></pre></div>
+<p>RNN/LSTM/GRU tetap berguna untuk memahami evolusi model NLP dan sebagai pembanding eksperimental. Namun, untuk target penelitian berbasis IndoBERT, Anda tidak harus membangun sistem RNN/LSTM/GRU produksi terlebih dahulu. Pahami konsep, jalankan contoh, lalu lanjut ke Attention dan Transformer.</p>
+<h2 id="15-latihan">15. Latihan</h2>
+<h3 id="latihan-1-memahami-tensor">Latihan 1 — Memahami tensor</h3>
+<p>Jalankan contoh RNN, LSTM, dan GRU dengan:</p>
+<ul>
+<li><code>batch_size = 3</code></li>
+<li><code>sequence_length = 6</code></li>
+<li><code>input_size = 4</code></li>
+<li><code>hidden_size = 8</code></li>
+</ul>
+<p>Prediksi shape <code>output</code>, <code>h_n</code>, dan <code>c_n</code> sebelum menjalankan kode.</p>
+<h3 id="latihan-2-mengubah-hidden-size">Latihan 2 — Mengubah hidden size</h3>
+<p>Ubah <code>hidden_size</code> dari 5 menjadi 10. Amati dimensi <code>output</code> dan <code>h_n</code>.</p>
+<h3 id="latihan-3-membandingkan-arsitektur">Latihan 3 — Membandingkan arsitektur</h3>
+<p>Buat tabel yang menjelaskan:</p>
+<ol>
+<li>Apakah model mempunyai cell state terpisah?</li>
+<li>Gate apa yang digunakan?</li>
+<li>Apa output yang dihasilkan?</li>
+<li>Apa kelebihan dan keterbatasannya?</li>
+</ol>
+<h3 id="latihan-4-klasifikasi-teks">Latihan 4 — Klasifikasi teks</h3>
+<p>Setelah memahami tensor, buat pipeline sederhana untuk teks berlabel. Gunakan split train/validation/test, embedding, satu model recurrent, loss function, optimizer, dan evaluasi.</p>
+<p>Jangan menggunakan tensor acak sebagai bukti keberhasilan klasifikasi teks. Gunakan data berlabel dan laporkan hasil evaluasi pada data yang tidak dipakai untuk training.</p>
+<h2 id="16-checklist-penguasaan">16. Checklist Penguasaan</h2>
+<ul>
+<li>[ ] Saya dapat menjelaskan sequence, token, embedding, dan hidden state.</li>
+<li>[ ] Saya memahami alur hidden state pada RNN.</li>
+<li>[ ] Saya dapat menjelaskan vanishing gradient secara konseptual.</li>
+<li>[ ] Saya memahami cell state serta forget, input, dan output gate pada LSTM.</li>
+<li>[ ] Saya memahami reset dan update gate pada GRU.</li>
+<li>[ ] Saya dapat membaca shape output RNN, LSTM, dan GRU.</li>
+<li>[ ] Saya memahami perbedaan logits, probabilitas, dan prediksi kelas.</li>
+<li>[ ] Saya memahami bahwa model perlu dilatih dan dievaluasi sebelum digunakan.</li>
+<li>[ ] Saya siap melanjutkan ke Attention Mechanism.</li>
+</ul>
+<h2 id="17-ringkasan">17. Ringkasan</h2>
+<ul>
+<li><strong>RNN</strong> membawa hidden state dari satu time step ke time step berikutnya.</li>
+<li><strong>LSTM</strong> menambahkan cell state dan tiga gate utama untuk mengatur aliran informasi.</li>
+<li><strong>GRU</strong> menggunakan reset gate dan update gate dengan struktur yang lebih ringkas.</li>
+<li>Ketiga model memproses sequence secara berurutan.</li>
+<li>Contoh kode di materi ini terutama memperlihatkan struktur model dan bentuk tensor, bukan performa klasifikasi.</li>
+<li>Setelah konsep RNN → LSTM → GRU dipahami, langkah kurikulum berikutnya adalah <strong>Attention Mechanism → Transformer → BERT → IndoBERT</strong>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../09-deep-learning/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deep Learning untuk NLP">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Deep Learning untuk NLP
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../03-transformer/11-attention-mechanism/" class="md-footer__link md-footer__link--next" aria-label="Next: Attention Mechanism">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Attention Mechanism
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

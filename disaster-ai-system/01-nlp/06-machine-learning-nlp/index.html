@@ -1,0 +1,3431 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../05-text-representation/">
+      
+      
+        <link rel="next" href="../07-evaluasi-nlp-klasifikasi-text/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Machine Learning untuk NLP - Topekox Belajar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#machine-learning-untuk-nlp-natural-language-processing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Topekox Belajar" class="md-header__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Topekox Belajar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Machine Learning untuk NLP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Topekox Belajar" class="md-nav__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Topekox Belajar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disaster AI System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Disaster AI System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP Foundation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NLP Foundation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-python-untuk-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-fundamentals-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamental NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-regex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-text-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-text-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Representation & TF-IDF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-pengantar-machine-learning-untuk-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Pengantar Machine Learning untuk NLP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Pengantar Machine Learning untuk NLP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-contoh-masalah-klasifikasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Contoh masalah klasifikasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-alur-umum-machine-learning-untuk-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Alur umum machine learning untuk NLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dataset-dan-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Dataset dan Label
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Dataset dan Label">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-contoh-membuat-dataset-dengan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Contoh membuat dataset dengan Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-memahami-fitur-dan-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Memahami Fitur dan Target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-membagi-dataset-train-dan-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Membagi Dataset: Train dan Test
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-mengubah-teks-menjadi-angka-dengan-tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Mengubah Teks Menjadi Angka dengan TF-IDF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Mengubah Teks Menjadi Angka dengan TF-IDF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mengapa-teks-harus-diubah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Mengapa teks harus diubah?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-contoh-tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Contoh TF-IDF
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-apa-yang-dipelajari-vectorizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Apa yang dipelajari vectorizer?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-model-pertama-logistic-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Model Pertama: Logistic Regression
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Model Pertama: Logistic Regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-contoh-implementasi-dasar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Contoh implementasi dasar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-cara-membaca-hasil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Cara membaca hasil
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-model-kedua-support-vector-machine-svm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Model Kedua: Support Vector Machine (SVM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Model Kedua: Support Vector Machine (SVM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-implementasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Implementasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-evaluasi-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Evaluasi Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Evaluasi Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-confusion-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Confusion Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Accuracy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Precision
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-recall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Recall
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-f1-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 F1-score
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86-laporan-metrik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 Laporan metrik
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-pipeline-cara-yang-direkomendasikan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Pipeline: Cara yang Direkomendasikan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Pipeline: Cara yang Direkomendasikan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-membuat-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Membuat pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-prediksi-teks-baru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Prediksi teks baru
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-preprocessing-untuk-tf-idf-dan-bert-tidak-selalu-sama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Preprocessing untuk TF-IDF dan BERT Tidak Selalu Sama
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-cross-validation-dan-pemilihan-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Cross-Validation dan Pemilihan Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-menangani-ketidakseimbangan-kelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Menangani Ketidakseimbangan Kelas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-baseline-untuk-penelitian-deteksi-permintaan-bantuan-darurat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Baseline untuk Penelitian Deteksi Permintaan Bantuan Darurat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-latihan-mandiri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Latihan Mandiri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Latihan Mandiri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-pemeriksaan-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Pemeriksaan data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — TF-IDF
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-perbandingan-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Perbandingan model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-4-analisis-kesalahan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 4 — Analisis kesalahan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-5-eksperimen-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 5 — Eksperimen preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-checklist-penguasaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Checklist Penguasaan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-evaluasi-nlp-klasifikasi-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluasi NLP Klasifikasi Text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/08-word-embedding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Word Embedding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/09-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/10-RNN-LSTM-GRU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNN - LSTM - GRU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/11-attention-mechanism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attention Mechanism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/12-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/13-BERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBert
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IndoBert
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/14-IndoBERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/15-fine-tuningIndoBERT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/16-eksperimen-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eksperimen Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/17-dataset-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/18-data-annotation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Annotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/19-imbalanced-dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imbalanced Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/20-explainable-AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explainable AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Product
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/21-rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/22-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/23-jadikan-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jadikan Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beginner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Beginner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1: Nice to Meet You
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2: How Are You?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3: What Does She Look Like?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-pengantar-machine-learning-untuk-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Pengantar Machine Learning untuk NLP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Pengantar Machine Learning untuk NLP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-contoh-masalah-klasifikasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Contoh masalah klasifikasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-alur-umum-machine-learning-untuk-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Alur umum machine learning untuk NLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dataset-dan-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Dataset dan Label
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Dataset dan Label">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-contoh-membuat-dataset-dengan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Contoh membuat dataset dengan Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-memahami-fitur-dan-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Memahami Fitur dan Target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-membagi-dataset-train-dan-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Membagi Dataset: Train dan Test
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-mengubah-teks-menjadi-angka-dengan-tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Mengubah Teks Menjadi Angka dengan TF-IDF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Mengubah Teks Menjadi Angka dengan TF-IDF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mengapa-teks-harus-diubah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Mengapa teks harus diubah?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-contoh-tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Contoh TF-IDF
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-apa-yang-dipelajari-vectorizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Apa yang dipelajari vectorizer?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-model-pertama-logistic-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Model Pertama: Logistic Regression
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Model Pertama: Logistic Regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-contoh-implementasi-dasar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Contoh implementasi dasar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-cara-membaca-hasil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Cara membaca hasil
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-model-kedua-support-vector-machine-svm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Model Kedua: Support Vector Machine (SVM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Model Kedua: Support Vector Machine (SVM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-implementasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Implementasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-evaluasi-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Evaluasi Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Evaluasi Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-confusion-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Confusion Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Accuracy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Precision
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-recall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Recall
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-f1-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 F1-score
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86-laporan-metrik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 Laporan metrik
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-pipeline-cara-yang-direkomendasikan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Pipeline: Cara yang Direkomendasikan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Pipeline: Cara yang Direkomendasikan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-membuat-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Membuat pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-prediksi-teks-baru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Prediksi teks baru
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-preprocessing-untuk-tf-idf-dan-bert-tidak-selalu-sama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Preprocessing untuk TF-IDF dan BERT Tidak Selalu Sama
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-cross-validation-dan-pemilihan-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Cross-Validation dan Pemilihan Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-menangani-ketidakseimbangan-kelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Menangani Ketidakseimbangan Kelas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-baseline-untuk-penelitian-deteksi-permintaan-bantuan-darurat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Baseline untuk Penelitian Deteksi Permintaan Bantuan Darurat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-latihan-mandiri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Latihan Mandiri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Latihan Mandiri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-pemeriksaan-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Pemeriksaan data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — TF-IDF
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-perbandingan-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Perbandingan model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-4-analisis-kesalahan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 4 — Analisis kesalahan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-5-eksperimen-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 5 — Eksperimen preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-checklist-penguasaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Checklist Penguasaan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Disaster AI System
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../01-python-untuk-nlp/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    NLP Foundation
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="machine-learning-untuk-nlp-natural-language-processing">Machine Learning untuk NLP (Natural Language Processing)</h1>
+<h2 id="tujuan-pembelajaran">Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, Anda diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan alur machine learning untuk klasifikasi teks.</li>
+<li>Mengubah teks menjadi fitur numerik menggunakan TF-IDF.</li>
+<li>Membagi dataset menjadi data latih dan data uji.</li>
+<li>Melatih model klasifikasi teks menggunakan Logistic Regression dan Support Vector Machine (SVM).</li>
+<li>Mengevaluasi model menggunakan confusion matrix, precision, recall, dan F1-score.</li>
+<li>Membuat pipeline yang menggabungkan TF-IDF dan model klasifikasi.</li>
+<li>Memahami baseline eksperimen untuk penelitian deteksi tweet permintaan bantuan darurat saat bencana.</li>
+</ol>
+<h2 id="1-pengantar-machine-learning-untuk-nlp">1. Pengantar Machine Learning untuk NLP</h2>
+<p>Natural Language Processing (NLP) adalah bidang yang membuat komputer dapat memproses dan menganalisis bahasa manusia. Teks tidak dapat langsung diproses oleh sebagian besar algoritma machine learning klasik. Teks perlu diubah menjadi representasi numerik terlebih dahulu.</p>
+<p>Contoh tugas NLP yang dapat diselesaikan menggunakan machine learning:</p>
+<ul>
+<li>Klasifikasi spam dan bukan spam.</li>
+<li>Analisis sentimen.</li>
+<li>Klasifikasi topik berita.</li>
+<li>Deteksi ujaran kebencian.</li>
+<li>Klasifikasi tweet permintaan bantuan darurat dan bukan permintaan bantuan darurat.</li>
+</ul>
+<p>Pada materi ini, kita menggunakan <strong>klasifikasi teks (text classification)</strong> sebagai contoh utama.</p>
+<h3 id="11-contoh-masalah-klasifikasi">1.1 Contoh masalah klasifikasi</h3>
+<p>Misalnya, sistem perlu membedakan tweet yang mengindikasikan permintaan bantuan darurat dan tweet yang hanya menyampaikan informasi umum.</p>
+<table>
+<thead>
+<tr>
+<th>Teks</th>
+<th>Label contoh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tolong bantu kami, air banjir masuk ke rumah</td>
+<td>Emergency</td>
+</tr>
+<tr>
+<td>Kami membutuhkan makanan dan air bersih setelah banjir</td>
+<td>Emergency</td>
+</tr>
+<tr>
+<td>Hujan turun sejak pagi di wilayah ini</td>
+<td>Non-Emergency</td>
+</tr>
+<tr>
+<td>Berita tentang banjir disiarkan malam ini</td>
+<td>Non-Emergency</td>
+</tr>
+</tbody>
+</table>
+<p>Contoh di atas hanya ilustrasi. Dalam penelitian nyata, label harus ditetapkan berdasarkan pedoman anotasi yang jelas. Kata seperti <em>banjir</em> tidak otomatis berarti sebuah tweet merupakan permintaan bantuan darurat.</p>
+<h3 id="12-alur-umum-machine-learning-untuk-nlp">1.2 Alur umum machine learning untuk NLP</h3>
+<div class="highlight"><pre><span></span><code>Kumpulan Teks Berlabel
+        |
+        v
+Pemeriksaan dan Persiapan Data
+        |
+        v
+Pembagian Train dan Test
+        |
+        v
+Text Vectorization (misalnya TF-IDF)
+        |
+        v
+Pelatihan Model
+        |
+        v
+Prediksi pada Data Test
+        |
+        v
+Evaluasi
+</code></pre></div>
+<p><strong>Catatan:</strong> untuk menghindari data leakage, vectorizer harus dipelajari hanya dari data latih. Cara yang aman adalah menggunakan <code>Pipeline</code> dari scikit-learn, yang akan dibahas kemudian.</p>
+<h2 id="2-dataset-dan-label">2. Dataset dan Label</h2>
+<p>Dataset klasifikasi teks biasanya memiliki setidaknya dua kolom:</p>
+<ul>
+<li><code>text</code>: teks yang akan diklasifikasikan.</li>
+<li><code>label</code>: kategori target.</li>
+</ul>
+<p>Contoh:</p>
+<table>
+<thead>
+<tr>
+<th>text</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tolong bantu kami, rumah terendam banjir</td>
+<td>Emergency</td>
+</tr>
+<tr>
+<td>Kami kekurangan air bersih di pengungsian</td>
+<td>Emergency</td>
+</tr>
+<tr>
+<td>Hujan deras mengguyur kota sejak pagi</td>
+<td>Non-Emergency</td>
+</tr>
+<tr>
+<td>Pemerintah mengadakan konferensi pers tentang cuaca</td>
+<td>Non-Emergency</td>
+</tr>
+</tbody>
+</table>
+<p>Untuk model biner, label dapat dikodekan sebagai <code>1</code> dan <code>0</code>, tetapi arti setiap angka harus didokumentasikan secara konsisten.</p>
+<h3 id="21-contoh-membuat-dataset-dengan-python">2.1 Contoh membuat dataset dengan Python</h3>
+<p>Kode berikut membuat dataset kecil untuk latihan. Dataset ini <strong>sengaja dibuat sederhana dan sintetis</strong>, bukan dataset penelitian atau bukti performa model di dunia nyata.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"text"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Tolong bantu kami rumah terendam banjir"</span><span class="p">,</span>
+        <span class="s2">"Kami membutuhkan makanan di pengungsian"</span><span class="p">,</span>
+        <span class="s2">"Mohon kirim air bersih ke desa kami"</span><span class="p">,</span>
+        <span class="s2">"Ada warga terjebak dan butuh evakuasi"</span><span class="p">,</span>
+        <span class="s2">"Hujan turun sejak pagi di kota"</span><span class="p">,</span>
+        <span class="s2">"Berita banjir disiarkan malam ini"</span><span class="p">,</span>
+        <span class="s2">"Cuaca hari ini cukup cerah"</span><span class="p">,</span>
+        <span class="s2">"Pemerintah mengadakan rapat kebencanaan"</span><span class="p">,</span>
+        <span class="s2">"Kami kehabisan makanan setelah banjir"</span><span class="p">,</span>
+        <span class="s2">"Jalan menuju desa tertutup longsor"</span>
+    <span class="p">],</span>
+    <span class="s2">"label"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Emergency"</span><span class="p">,</span>
+        <span class="s2">"Emergency"</span><span class="p">,</span>
+        <span class="s2">"Emergency"</span><span class="p">,</span>
+        <span class="s2">"Emergency"</span><span class="p">,</span>
+        <span class="s2">"Non-Emergency"</span><span class="p">,</span>
+        <span class="s2">"Non-Emergency"</span><span class="p">,</span>
+        <span class="s2">"Non-Emergency"</span><span class="p">,</span>
+        <span class="s2">"Non-Emergency"</span><span class="p">,</span>
+        <span class="s2">"Emergency"</span><span class="p">,</span>
+        <span class="s2">"Non-Emergency"</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">nJumlah data:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">nDistribusi label:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</code></pre></div>
+<p>Contoh output:</p>
+<div class="highlight"><pre><span></span><code>                                          text          label
+0  Tolong bantu kami rumah terendam banjir      Emergency
+1  Kami membutuhkan makanan di pengungsian      Emergency
+2  Mohon kirim air bersih ke desa kami          Emergency
+3  Ada warga terjebak dan butuh evakuasi        Emergency
+4  Hujan turun sejak pagi di kota               Non-Emergency
+
+Jumlah data: 10
+
+Distribusi label:
+Emergency        5
+Non-Emergency    5
+Name: count, dtype: int64
+</code></pre></div>
+<p>Output tampilan dapat sedikit berbeda tergantung versi pandas.</p>
+<h2 id="3-memahami-fitur-dan-target">3. Memahami Fitur dan Target</h2>
+<p>Dalam machine learning:</p>
+<ul>
+<li><strong>X (fitur)</strong> adalah masukan yang digunakan model untuk membuat prediksi.</li>
+<li><strong>y (target)</strong> adalah label yang ingin diprediksi.</li>
+</ul>
+<p>Untuk dataset teks:</p>
+<div class="highlight"><pre><span></span><code><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Contoh X:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">nContoh y:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Contoh X:
+Tolong bantu kami rumah terendam banjir
+
+Contoh y:
+Emergency
+</code></pre></div>
+<p>Pada tahap ini, <code>X</code> masih berupa teks. Model machine learning klasik membutuhkan fitur numerik, sehingga teks akan diubah menjadi vektor.</p>
+<h2 id="4-membagi-dataset-train-dan-test">4. Membagi Dataset: Train dan Test</h2>
+<ul>
+<li><strong>Training set</strong> digunakan untuk mempelajari pola.</li>
+<li><strong>Test set</strong> digunakan untuk mengevaluasi model pada data yang tidak digunakan selama pelatihan.</li>
+</ul>
+<p>Contoh pembagian 80% data latih dan 20% data uji:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah data latih:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah data uji:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">nDistribusi label data latih:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">nDistribusi label data uji:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</code></pre></div>
+<p>Karena contoh dataset hanya memiliki 10 baris, hasilnya adalah:</p>
+<div class="highlight"><pre><span></span><code>Jumlah data latih: 8
+Jumlah data uji: 2
+
+Distribusi label data latih:
+Emergency        4
+Non-Emergency    4
+Name: count, dtype: int64
+
+Distribusi label data uji:
+Emergency        1
+Non-Emergency    1
+Name: count, dtype: int64
+</code></pre></div>
+<p><code>stratify=y</code> berusaha mempertahankan proporsi label pada setiap bagian. Pada dataset penelitian, gunakan data yang cukup dan pertimbangkan pemisahan berdasarkan waktu, sumber, atau peristiwa bila diperlukan agar evaluasi lebih realistis.</p>
+<p><strong>Penting:</strong> jangan menggunakan data test untuk memilih model, mengatur hyperparameter, atau menentukan preprocessing. Untuk pemilihan model, gunakan data validasi atau cross-validation pada data latih.</p>
+<h2 id="5-mengubah-teks-menjadi-angka-dengan-tf-idf">5. Mengubah Teks Menjadi Angka dengan TF-IDF</h2>
+<h3 id="51-mengapa-teks-harus-diubah">5.1 Mengapa teks harus diubah?</h3>
+<p>Algoritma seperti Logistic Regression dan SVM bekerja dengan fitur numerik. TF-IDF mengubah dokumen menjadi vektor berdasarkan bobot kata.</p>
+<p>TF-IDF merupakan singkatan dari:</p>
+<ul>
+<li><strong>TF (Term Frequency):</strong> ukuran frekuensi suatu istilah dalam dokumen.</li>
+<li><strong>IDF (Inverse Document Frequency):</strong> ukuran seberapa jarang istilah muncul di seluruh dokumen.</li>
+<li><strong>TF-IDF:</strong> menggabungkan kedua ukuran tersebut untuk memberi bobot pada istilah.</li>
+</ul>
+<p>Secara intuitif, kata yang muncul pada banyak dokumen dapat memiliki bobot pembeda yang lebih kecil daripada kata yang lebih khas pada sebagian dokumen.</p>
+<h3 id="52-contoh-tf-idf">5.2 Contoh TF-IDF</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">contoh_teks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"butuh bantuan banjir"</span><span class="p">,</span>
+    <span class="s2">"bantuan air bersih"</span><span class="p">,</span>
+    <span class="s2">"cuaca cerah hari ini"</span>
+<span class="p">]</span>
+
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X_tfidf</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">contoh_teks</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vocabulary:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">nBentuk matriks TF-IDF:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_tfidf</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">nMatriks TF-IDF:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<p>Contoh output:</p>
+<div class="highlight"><pre><span></span><code>Vocabulary:
+['air' 'bantuan' 'banjir' 'bersih' 'butuh' 'cerah' 'cuaca' 'hari' 'ini']
+
+Bentuk matriks TF-IDF:
+(3, 9)
+
+Matriks TF-IDF:
+[[0.    0.469 0.619 0.    0.619 0.    0.    0.    0.   ]
+ [0.577 0.577 0.    0.577 0.    0.    0.    0.    0.   ]
+ [0.    0.    0.    0.    0.    0.577 0.577 0.577 0.577]]
+</code></pre></div>
+<p><strong>Catatan:</strong> nilai TF-IDF bisa berbeda jika parameter atau versi library berbeda. Perhatikan bahwa matriks memiliki 3 baris (dokumen) dan 9 kolom (fitur kata). Dalam penggunaan sebenarnya, matriks TF-IDF biasanya berupa sparse matrix karena sebagian besar nilainya nol.</p>
+<h3 id="53-apa-yang-dipelajari-vectorizer">5.3 Apa yang dipelajari vectorizer?</h3>
+<p><code>fit()</code> mempelajari vocabulary dan statistik yang diperlukan dari data. <code>transform()</code> menggunakan hasil pembelajaran tersebut untuk mengubah teks menjadi vektor.</p>
+<ul>
+<li><code>fit_transform(X_train)</code>: pelajari vocabulary dari data latih dan ubah data latih.</li>
+<li><code>transform(X_test)</code>: gunakan vocabulary yang sudah dipelajari untuk mengubah data uji.</li>
+<li>Hindari <code>fit_transform()</code> pada seluruh dataset sebelum train-test split karena dapat menyebabkan <strong>data leakage</strong>.</li>
+</ul>
+<h2 id="6-model-pertama-logistic-regression">6. Model Pertama: Logistic Regression</h2>
+<p>Walaupun namanya mengandung kata <em>regression</em>, Logistic Regression sering digunakan untuk klasifikasi.</p>
+<p>Model mempelajari hubungan antara fitur teks dan label, lalu menghasilkan skor atau probabilitas kelas (bergantung pada konfigurasi).</p>
+<h3 id="61-contoh-implementasi-dasar">6.1 Contoh implementasi dasar</h3>
+<p>Contoh berikut sengaja ditulis untuk memperlihatkan langkah TF-IDF dan model secara terpisah. Dalam proyek nyata, lebih aman menggunakan <code>Pipeline</code> pada bagian 9.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X_train_tfidf</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_tfidf</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediksi:"</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Label aktual:"</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Accuracy:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<p>Contoh output yang mungkin muncul pada dataset sintetis ini:</p>
+<div class="highlight"><pre><span></span><code>Prediksi: ['Emergency', 'Non-Emergency']
+Label aktual: ['Emergency', 'Non-Emergency']
+Accuracy: 1.0
+</code></pre></div>
+<p>Output prediksi dan accuracy dapat berubah jika dataset atau versi library berubah. Karena data contoh sangat kecil dan dibuat secara sederhana, hasil 1.0 <strong>tidak menunjukkan bahwa model sudah bagus untuk tweet nyata</strong>.</p>
+<h3 id="62-cara-membaca-hasil">6.2 Cara membaca hasil</h3>
+<p>Jika accuracy adalah <code>1.0</code>, artinya model memprediksi dengan benar seluruh contoh pada test set yang sangat kecil ini. Jika test set hanya berisi dua data, satu prediksi yang salah saja akan mengubah accuracy secara drastis.</p>
+<p>Karena itu, jangan menilai model hanya dari satu angka atau dataset kecil.</p>
+<h2 id="7-model-kedua-support-vector-machine-svm">7. Model Kedua: Support Vector Machine (SVM)</h2>
+<p>SVM mencari batas pemisah yang membedakan kelas dalam ruang fitur. Untuk klasifikasi teks dengan TF-IDF, <code>LinearSVC</code> sering menjadi baseline yang kuat dan efisien.</p>
+<h3 id="71-implementasi">7.1 Implementasi</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span>
+
+<span class="n">svm_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"tfidf"</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">svm_pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">svm_pred</span> <span class="o">=</span> <span class="n">svm_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span>
+    <span class="n">svm_pred</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"Emergency"</span><span class="p">,</span> <span class="s2">"Non-Emergency"</span><span class="p">],</span>
+    <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">))</span>
+</code></pre></div>
+<p>Contoh format output:</p>
+<div class="highlight"><pre><span></span><code>               precision    recall  f1-score   support
+
+    Emergency       1.00      1.00      1.00         1
+Non-Emergency       1.00      1.00      1.00         1
+
+     accuracy                           1.00         2
+    macro avg       1.00      1.00      1.00         2
+ weighted avg       1.00      1.00      1.00         2
+</code></pre></div>
+<p>Ini adalah contoh format output; angka sebenarnya mengikuti prediksi model yang dijalankan. Dengan satu contoh per kelas pada test set, precision, recall, dan F1-score sangat tidak stabil.</p>
+<h2 id="8-evaluasi-model">8. Evaluasi Model</h2>
+<h3 id="81-confusion-matrix">8.1 Confusion Matrix</h3>
+<p>Confusion matrix menunjukkan jumlah prediksi benar dan salah untuk setiap kelas.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Emergency"</span><span class="p">,</span> <span class="s2">"Non-Emergency"</span><span class="p">]</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">svm_pred</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span>
+    <span class="n">confusion_matrix</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span>
+    <span class="n">display_labels</span><span class="o">=</span><span class="n">labels</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>Jika kedua prediksi benar, output matriksnya:</p>
+<div class="highlight"><pre><span></span><code>[[1 0]
+ [0 1]]
+</code></pre></div>
+<p>Urutan baris dan kolom mengikuti <code>labels</code> yang ditentukan. Baris mewakili label aktual dan kolom mewakili prediksi.</p>
+<h3 id="82-accuracy">8.2 Accuracy</h3>
+<p>Accuracy adalah proporsi seluruh prediksi yang benar.</p>
+<div class="arithmatex">\[
+Accuracy = \frac{TP + TN}{TP + TN + FP + FN}
+\]</div>
+<p>Accuracy berguna, tetapi dapat menyesatkan jika kelas tidak seimbang.</p>
+<h3 id="83-precision">8.3 Precision</h3>
+<p>Precision menjawab:</p>
+<blockquote>
+<p>Dari semua data yang diprediksi sebagai Emergency, berapa banyak yang benar-benar Emergency?</p>
+</blockquote>
+<div class="arithmatex">\[
+Precision = \frac{TP}{TP + FP}
+\]</div>
+<h3 id="84-recall">8.4 Recall</h3>
+<p>Recall menjawab:</p>
+<blockquote>
+<p>Dari semua data yang sebenarnya Emergency, berapa banyak yang berhasil ditemukan model?</p>
+</blockquote>
+<div class="arithmatex">\[
+Recall = \frac{TP}{TP + FN}
+\]</div>
+<p>Untuk sistem penyaringan permintaan bantuan darurat, <strong>recall kelas Emergency perlu diperhatikan</strong>, sebab false negative berarti laporan yang berpotensi darurat tidak terdeteksi. Namun, precision juga tetap penting agar sistem tidak membanjiri petugas dengan terlalu banyak peringatan keliru.</p>
+<h3 id="85-f1-score">8.5 F1-score</h3>
+<p>F1-score merupakan rata-rata harmonik precision dan recall.</p>
+<div class="arithmatex">\[
+F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}
+\]</div>
+<h3 id="86-laporan-metrik">8.6 Laporan metrik</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">accuracy_score</span><span class="p">,</span>
+    <span class="n">precision_score</span><span class="p">,</span>
+    <span class="n">recall_score</span><span class="p">,</span>
+    <span class="n">f1_score</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Accuracy:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">svm_pred</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">"Emergency precision:"</span><span class="p">,</span>
+    <span class="nb">round</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span>
+        <span class="n">y_test</span><span class="p">,</span> <span class="n">svm_pred</span><span class="p">,</span>
+        <span class="n">pos_label</span><span class="o">=</span><span class="s2">"Emergency"</span><span class="p">,</span>
+        <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">"Emergency recall:"</span><span class="p">,</span>
+    <span class="nb">round</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span>
+        <span class="n">y_test</span><span class="p">,</span> <span class="n">svm_pred</span><span class="p">,</span>
+        <span class="n">pos_label</span><span class="o">=</span><span class="s2">"Emergency"</span><span class="p">,</span>
+        <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">"Emergency F1:"</span><span class="p">,</span>
+    <span class="nb">round</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span>
+        <span class="n">y_test</span><span class="p">,</span> <span class="n">svm_pred</span><span class="p">,</span>
+        <span class="n">pos_label</span><span class="o">=</span><span class="s2">"Emergency"</span><span class="p">,</span>
+        <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Contoh output jika seluruh prediksi benar:</p>
+<div class="highlight"><pre><span></span><code>Accuracy: 1.0
+Emergency precision: 1.0
+Emergency recall: 1.0
+Emergency F1: 1.0
+</code></pre></div>
+<p>Sekali lagi, hasil ini hanya ilustrasi pada dataset latihan yang sangat kecil.</p>
+<h2 id="9-pipeline-cara-yang-direkomendasikan">9. Pipeline: Cara yang Direkomendasikan</h2>
+<p><code>Pipeline</code> menyatukan vectorizer dan model. Keuntungannya:</p>
+<ol>
+<li>TF-IDF dipelajari hanya dari data yang diberikan kepada <code>fit()</code>.</li>
+<li>Transformasi yang sama diterapkan saat prediksi.</li>
+<li>Kode lebih ringkas dan mengurangi risiko data leakage.</li>
+<li>Pipeline mudah digunakan bersama cross-validation dan pencarian hyperparameter.</li>
+</ol>
+<h3 id="91-membuat-pipeline">9.1 Membuat pipeline</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">lr_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"tfidf"</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span>
+    <span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">lr_pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">prediksi</span> <span class="o">=</span> <span class="n">lr_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediksi:"</span><span class="p">,</span> <span class="n">prediksi</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</code></pre></div>
+<p>Contoh output:</p>
+<div class="highlight"><pre><span></span><code>Prediksi: ['Emergency', 'Non-Emergency']
+</code></pre></div>
+<p>Prediksi aktual dapat berbeda. <code>ngram_range=(1, 2)</code> berarti vectorizer menggunakan unigram (satu kata) dan bigram (dua kata berurutan). Bigram dapat menangkap frasa seperti “air bersih” atau “butuh bantuan”.</p>
+<h3 id="92-prediksi-teks-baru">9.2 Prediksi teks baru</h3>
+<div class="highlight"><pre><span></span><code><span class="n">teks_baru</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Tolong kirim bantuan, warga terjebak banjir"</span><span class="p">,</span>
+    <span class="s2">"Cuaca cerah dan matahari bersinar"</span>
+<span class="p">]</span>
+
+<span class="n">hasil</span> <span class="o">=</span> <span class="n">lr_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">teks_baru</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">teks</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">teks_baru</span><span class="p">,</span> <span class="n">hasil</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Teks: </span><span class="si">{</span><span class="n">teks</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prediksi: </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</code></pre></div>
+<p>Contoh output:</p>
+<div class="highlight"><pre><span></span><code>Teks: Tolong kirim bantuan, warga terjebak banjir
+Prediksi: Emergency
+
+Teks: Cuaca cerah dan matahari bersinar
+Prediksi: Non-Emergency
+</code></pre></div>
+<p>Output tersebut hanya ilustrasi; model yang dilatih pada dataset kecil belum layak digunakan untuk keputusan operasional.</p>
+<h2 id="10-preprocessing-untuk-tf-idf-dan-bert-tidak-selalu-sama">10. Preprocessing untuk TF-IDF dan BERT Tidak Selalu Sama</h2>
+<p>Untuk TF-IDF, normalisasi seperti lowercase, penghapusan URL, atau normalisasi slang dapat membantu—tetapi harus diuji, bukan diasumsikan selalu lebih baik.</p>
+<p>Untuk BERT/IndoBERT, hindari melakukan pembersihan agresif secara otomatis. Penghapusan tanda baca, emoji, negasi, kata berulang, atau kata-kata informal bisa menghilangkan sinyal penting. Umumnya, gunakan tokenizer bawaan model dan pertahankan teks sedekat mungkin dengan bentuk aslinya, kecuali eksperimen menunjukkan manfaat preprocessing tambahan.</p>
+<p>Prinsip yang disarankan:</p>
+<ul>
+<li>Simpan teks asli.</li>
+<li>Buat preprocessing sebagai langkah yang terdokumentasi.</li>
+<li>Bandingkan hasil dengan dan tanpa langkah tertentu.</li>
+<li>Jangan menghapus kata negasi seperti “tidak” tanpa alasan yang kuat.</li>
+<li>Jangan melakukan stemming untuk IndoBERT secara otomatis.</li>
+</ul>
+<h2 id="11-cross-validation-dan-pemilihan-model">11. Cross-Validation dan Pemilihan Model</h2>
+<p>Satu pembagian train-test dapat menghasilkan estimasi yang tidak stabil, khususnya jika dataset kecil. Cross-validation membagi data latih menjadi beberapa lipatan untuk menilai model pada beberapa pembagian.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">StratifiedKFold</span><span class="p">,</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span>
+
+<span class="n">cv_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"tfidf"</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span>
+    <span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span>
+    <span class="n">cv_pipeline</span><span class="p">,</span>
+    <span class="n">X_train</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">"f1_macro"</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Skor setiap fold:"</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Rata-rata macro F1:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Penting:</strong> contoh dataset 10 baris pada materi ini terlalu kecil untuk 5-fold cross-validation yang andal. Kode tersebut menunjukkan pola penggunaan; untuk menjalankannya, gunakan dataset yang lebih besar dengan jumlah contoh yang memadai pada setiap kelas. Jangan menganggap skor dari dataset mini sebagai hasil penelitian.</p>
+<p>Dalam penelitian, pilih metrik sesuai tujuan. Macro F1 memberi bobot yang sama pada setiap kelas dan berguna ketika performa kelas minoritas penting.</p>
+<h2 id="12-menangani-ketidakseimbangan-kelas">12. Menangani Ketidakseimbangan Kelas</h2>
+<p>Dataset bencana mungkin memiliki jauh lebih banyak tweet informasi umum daripada permintaan bantuan darurat, atau sebaliknya bergantung pada cara pengumpulan data.</p>
+<p>Contoh distribusi:</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th style="text-align: right;">Jumlah</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Emergency</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+<tr>
+<td>Non-Emergency</td>
+<td style="text-align: right;">9.000</td>
+</tr>
+</tbody>
+</table>
+<p>Model yang selalu menebak <code>Non-Emergency</code> dapat terlihat memiliki accuracy tinggi, tetapi gagal mendeteksi kelas yang penting.</p>
+<p>Langkah yang bisa diuji:</p>
+<ul>
+<li>Periksa distribusi label.</li>
+<li>Laporkan precision, recall, F1 per kelas, dan macro F1.</li>
+<li>Coba <code>class_weight="balanced"</code> pada model yang mendukungnya.</li>
+<li>Evaluasi threshold jika model menghasilkan probabilitas atau skor yang sesuai.</li>
+<li>Lakukan oversampling atau undersampling hanya pada data latih, bukan sebelum pemisahan data.</li>
+<li>Pastikan data test tetap mewakili kondisi penggunaan yang ingin dievaluasi.</li>
+</ul>
+<p>Contoh SVM dengan class weight:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span>
+
+<span class="n">balanced_svm</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"tfidf"</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span>
+    <span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">class_weight</span><span class="o">=</span><span class="s2">"balanced"</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">balanced_svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div>
+<p><code>class_weight="balanced"</code> menyesuaikan bobot kelas berdasarkan frekuensi label dalam data latih. Penggunaan ini tidak otomatis menjamin hasil lebih baik; ukur efeknya dengan evaluasi yang sesuai.</p>
+<h2 id="13-baseline-untuk-penelitian-deteksi-permintaan-bantuan-darurat">13. Baseline untuk Penelitian Deteksi Permintaan Bantuan Darurat</h2>
+<p>Sebelum mengklaim IndoBERT lebih baik, buat baseline yang dapat direproduksi.</p>
+<p>Rancangan eksperimen awal:</p>
+<table>
+<thead>
+<tr>
+<th>Eksperimen</th>
+<th>Representasi</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TF-IDF unigram</td>
+<td>Logistic Regression</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TF-IDF unigram + bigram</td>
+<td>Linear SVM</td>
+</tr>
+<tr>
+<td>3</td>
+<td>TF-IDF unigram + bigram</td>
+<td>Logistic Regression</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Tokenizer IndoBERT</td>
+<td>Fine-tuning IndoBERT</td>
+</tr>
+</tbody>
+</table>
+<p>Gunakan pemisahan data yang sama dan adil jika memungkinkan. Tetapkan test set sebelum memilih model dan jangan menggunakannya untuk tuning. Untuk data media sosial, pertimbangkan duplikasi tweet, retweet, kebocoran antar-sumber, dan pemisahan berdasarkan waktu atau kejadian bencana jika relevan.</p>
+<p>Laporkan sekurang-kurangnya:</p>
+<ul>
+<li>Jumlah data dan distribusi kelas.</li>
+<li>Cara pengumpulan data dan pedoman anotasi.</li>
+<li>Strategi train/validation/test split.</li>
+<li>Parameter preprocessing dan model.</li>
+<li>Precision, recall, F1 per kelas, macro F1, dan confusion matrix.</li>
+<li>Keterbatasan data dan risiko kesalahan klasifikasi.</li>
+</ul>
+<p>Jangan menganggap peningkatan metrik otomatis merupakan novelty penelitian. Kontribusi juga dapat berasal dari kualitas dataset, pedoman anotasi, desain evaluasi, analisis kesalahan, atau manfaat sistem dalam konteks kebencanaan.</p>
+<h2 id="14-latihan-mandiri">14. Latihan Mandiri</h2>
+<p>Kerjakan latihan berikut secara berurutan.</p>
+<h3 id="latihan-1-pemeriksaan-data">Latihan 1 — Pemeriksaan data</h3>
+<ol>
+<li>Tampilkan 10 baris pertama dataset.</li>
+<li>Hitung jumlah data.</li>
+<li>Hitung distribusi setiap label.</li>
+<li>Periksa apakah ada teks kosong atau duplikat.</li>
+</ol>
+<h3 id="latihan-2-tf-idf">Latihan 2 — TF-IDF</h3>
+<ol>
+<li>Buat <code>TfidfVectorizer</code>.</li>
+<li>Fit hanya pada <code>X_train</code>.</li>
+<li>Tampilkan 10 fitur pertama.</li>
+<li>Periksa bentuk matriks hasil transformasi.</li>
+</ol>
+<h3 id="latihan-3-perbandingan-model">Latihan 3 — Perbandingan model</h3>
+<p>Bandingkan Logistic Regression dan Linear SVM menggunakan pipeline. Catat hasil accuracy, precision, recall, dan F1-score.</p>
+<h3 id="latihan-4-analisis-kesalahan">Latihan 4 — Analisis kesalahan</h3>
+<p>Temukan contoh false positive dan false negative. Periksa apakah kesalahan berkaitan dengan kata ambigu, konteks, negasi, atau kualitas label.</p>
+<h3 id="latihan-5-eksperimen-preprocessing">Latihan 5 — Eksperimen preprocessing</h3>
+<p>Bandingkan hasil model dengan beberapa kondisi:</p>
+<ul>
+<li>Teks asli dengan lowercase yang dilakukan vectorizer.</li>
+<li>Pembersihan URL dan mention.</li>
+<li>Normalisasi istilah informal yang memiliki kamus terdokumentasi.</li>
+</ul>
+<p>Gunakan pembagian data yang sama dan jangan memilih konfigurasi berdasarkan test set.</p>
+<h2 id="15-checklist-penguasaan">15. Checklist Penguasaan</h2>
+<p>Gunakan checklist ini sebelum melanjutkan ke materi IndoBERT.</p>
+<ul>
+<li>[ ] Saya memahami perbedaan fitur <code>X</code> dan target <code>y</code>.</li>
+<li>[ ] Saya dapat membagi data menjadi train dan test.</li>
+<li>[ ] Saya memahami konsep TF-IDF dan sparse matrix.</li>
+<li>[ ] Saya dapat melatih Logistic Regression untuk klasifikasi teks.</li>
+<li>[ ] Saya dapat melatih Linear SVM untuk klasifikasi teks.</li>
+<li>[ ] Saya dapat menggunakan <code>Pipeline</code>.</li>
+<li>[ ] Saya dapat membaca confusion matrix.</li>
+<li>[ ] Saya memahami precision, recall, dan F1-score.</li>
+<li>[ ] Saya memahami data leakage dan alasan vectorizer hanya di-fit pada data latih.</li>
+<li>[ ] Saya dapat menjelaskan mengapa dataset mini tidak cukup untuk menarik kesimpulan penelitian.</li>
+<li>[ ] Saya dapat membuat baseline yang akan dibandingkan dengan IndoBERT.</li>
+</ul>
+<p>Jika sebagian besar checklist sudah terpenuhi, langkah berikutnya adalah mempelajari <strong>Word Embedding dan dasar Deep Learning</strong>, lalu Attention, Transformer, BERT, dan fine-tuning IndoBERT.</p>
+<h2 id="16-ringkasan">16. Ringkasan</h2>
+<p>Alur dasar machine learning untuk NLP adalah:</p>
+<div class="highlight"><pre><span></span><code>Teks Berlabel
+    ↓
+Pemisahan Data
+    ↓
+TF-IDF
+    ↓
+Model Klasifikasi
+    ↓
+Prediksi
+    ↓
+Evaluasi
+</code></pre></div>
+<p>Hal terpenting untuk diingat:</p>
+<ol>
+<li>Teks perlu direpresentasikan secara numerik untuk model ML klasik.</li>
+<li>TF-IDF + Logistic Regression atau Linear SVM adalah baseline yang layak dicoba.</li>
+<li>Gunakan pipeline untuk mengurangi risiko data leakage.</li>
+<li>Evaluasi jangan hanya berfokus pada accuracy; perhatikan recall kelas Emergency dan macro F1.</li>
+<li>Dataset sintetis pada materi ini hanya untuk belajar sintaks, bukan untuk membuktikan kemampuan model di dunia nyata.</li>
+<li>Baseline yang kuat membuat perbandingan dengan IndoBERT lebih bermakna.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../05-text-representation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Text Representation &amp; TF-IDF">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Text Representation & TF-IDF
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../07-evaluasi-nlp-klasifikasi-text/" class="md-footer__link md-footer__link--next" aria-label="Next: Evaluasi NLP Klasifikasi Text">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Evaluasi NLP Klasifikasi Text
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

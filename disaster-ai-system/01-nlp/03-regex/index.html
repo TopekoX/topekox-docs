@@ -1,0 +1,4458 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../02-fundamentals-nlp/">
+      
+      
+        <link rel="next" href="../04-text-preprocessing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Regex - Topekox Belajar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#regular-expression-regex-untuk-penelitian-nlp-berbasis-media-sosial" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Topekox Belajar" class="md-header__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Topekox Belajar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Regex
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Topekox Belajar" class="md-nav__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Topekox Belajar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disaster AI System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Disaster AI System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP Foundation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NLP Foundation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-python-untuk-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-fundamentals-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamental NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#posisi-regex-dalam-pipeline-penelitian-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Posisi Regex dalam Pipeline Penelitian NLP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Posisi Regex dalam Pipeline Penelitian NLP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-data-mentah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh data mentah
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contoh-hasil-preprocessing-konservatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh hasil preprocessing konservatif
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persiapan-lingkungan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persiapan Lingkungan Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamental-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamental Regex
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fundamental Regex">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#literal-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literal Characters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metacharacters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metacharacters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#character-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Character Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quantifiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anchors-dan-word-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anchors dan Word Boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternation-groups-dan-capturing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternation, Groups, dan Capturing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternation, Groups, dan Capturing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capturing-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capturing Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#greedy-dan-lazy-matching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Greedy dan Lazy Matching
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lookahead-dan-lookbehind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lookahead dan Lookbehind
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lookahead dan Lookbehind">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#positive-lookahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Positive Lookahead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negative-lookahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Negative Lookahead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookbehind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lookbehind
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fungsi-regex-penting-dalam-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fungsi Regex Penting dalam Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fungsi Regex Penting dalam Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#research" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.search()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rematch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.match()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refullmatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.fullmatch()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refindall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.findall()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refinditer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.finditer()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.sub()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resplit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.split()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recompile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.compile()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flags-yang-sering-digunakan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flags yang Sering Digunakan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#penggunaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penggunaan ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#penerapan-regex-untuk-data-media-sosial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penerapan Regex untuk Data Media Sosial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Penerapan Regex untuk Data Media Sosial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#menghapus-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menghapus URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengekstraksi-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengekstraksi URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengekstraksi-hashtag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengekstraksi Hashtag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengekstraksi-mention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengekstraksi Mention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengurangi-tanda-baca-berulang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengurangi Tanda Baca Berulang
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merapikan-whitespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merapikan Whitespace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menghapus-karakter-kontrol-tertentu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menghapus Karakter Kontrol Tertentu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#merancang-fungsi-preprocessing-yang-transparan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merancang Fungsi Preprocessing yang Transparan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regex-untuk-kata-kunci-bencana-dan-permintaan-bantuan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regex untuk Kata Kunci Bencana dan Permintaan Bantuan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Regex untuk Kata Kunci Bencana dan Permintaan Bantuan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#membedakan-kata-kunci-dan-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Membedakan kata kunci dan label
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risiko-metodologis-dalam-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risiko Metodologis dalam Penelitian
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Risiko Metodologis dalam Penelitian">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kehilangan-informasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kehilangan informasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data leakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bias-kata-kunci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bias kata kunci
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#privasi-dan-etika" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privasi dan etika
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproducibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pengujian-unit-untuk-aturan-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pengujian Unit untuk Aturan Regex
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mengukur-kualitas-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengukur Kualitas Preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kesalahan-umum-dan-cara-menghindarinya" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan Umum dan Cara Menghindarinya
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latihan-praktik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan Praktik
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Latihan Praktik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-ekstraksi-angka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Ekstraksi angka
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-pencarian-kata-utuh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — Pencarian kata utuh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-ekstraksi-hashtag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Ekstraksi hashtag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-4-normalisasi-whitespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 4 — Normalisasi whitespace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-5-cleaning-konservatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 5 — Cleaning konservatif
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-6-penyaring-kata-kunci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 6 — Penyaring kata kunci
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-7-evaluasi-aturan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 7 — Evaluasi aturan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kunci-jawaban-latihan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kunci Jawaban Latihan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kunci Jawaban Latihan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 7
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-eksperimen-perbandingan-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Template Eksperimen Perbandingan Preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-sebelum-regex-digunakan-dalam-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist Sebelum Regex Digunakan dalam Penelitian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referensi-dokumentasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referensi Dokumentasi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#penutup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penutup
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-text-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-text-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Representation & TF-IDF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-machine-learning-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-evaluasi-nlp-klasifikasi-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluasi NLP Klasifikasi Text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/08-word-embedding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Word Embedding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/09-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/10-RNN-LSTM-GRU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNN - LSTM - GRU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/11-attention-mechanism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attention Mechanism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/12-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/13-BERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBert
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IndoBert
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/14-IndoBERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/15-fine-tuningIndoBERT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/16-eksperimen-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eksperimen Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/17-dataset-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/18-data-annotation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Annotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/19-imbalanced-dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imbalanced Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/20-explainable-AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explainable AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Product
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/21-rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/22-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/23-jadikan-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jadikan Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beginner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Beginner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1: Nice to Meet You
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2: How Are You?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3: What Does She Look Like?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#posisi-regex-dalam-pipeline-penelitian-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Posisi Regex dalam Pipeline Penelitian NLP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Posisi Regex dalam Pipeline Penelitian NLP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contoh-data-mentah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh data mentah
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contoh-hasil-preprocessing-konservatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh hasil preprocessing konservatif
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persiapan-lingkungan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persiapan Lingkungan Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamental-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamental Regex
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fundamental Regex">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#literal-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literal Characters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metacharacters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metacharacters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#character-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Character Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quantifiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anchors-dan-word-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anchors dan Word Boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternation-groups-dan-capturing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternation, Groups, dan Capturing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternation, Groups, dan Capturing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capturing-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capturing Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#greedy-dan-lazy-matching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Greedy dan Lazy Matching
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lookahead-dan-lookbehind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lookahead dan Lookbehind
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lookahead dan Lookbehind">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#positive-lookahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Positive Lookahead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negative-lookahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Negative Lookahead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookbehind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lookbehind
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fungsi-regex-penting-dalam-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fungsi Regex Penting dalam Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fungsi Regex Penting dalam Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#research" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.search()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rematch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.match()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refullmatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.fullmatch()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refindall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.findall()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refinditer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.finditer()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.sub()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resplit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.split()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recompile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re.compile()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flags-yang-sering-digunakan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flags yang Sering Digunakan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#penggunaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penggunaan ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#penerapan-regex-untuk-data-media-sosial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penerapan Regex untuk Data Media Sosial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Penerapan Regex untuk Data Media Sosial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#menghapus-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menghapus URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengekstraksi-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengekstraksi URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengekstraksi-hashtag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengekstraksi Hashtag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengekstraksi-mention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengekstraksi Mention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengurangi-tanda-baca-berulang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengurangi Tanda Baca Berulang
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merapikan-whitespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merapikan Whitespace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menghapus-karakter-kontrol-tertentu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menghapus Karakter Kontrol Tertentu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#merancang-fungsi-preprocessing-yang-transparan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merancang Fungsi Preprocessing yang Transparan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regex-untuk-kata-kunci-bencana-dan-permintaan-bantuan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regex untuk Kata Kunci Bencana dan Permintaan Bantuan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Regex untuk Kata Kunci Bencana dan Permintaan Bantuan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#membedakan-kata-kunci-dan-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Membedakan kata kunci dan label
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risiko-metodologis-dalam-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risiko Metodologis dalam Penelitian
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Risiko Metodologis dalam Penelitian">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kehilangan-informasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kehilangan informasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data leakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bias-kata-kunci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bias kata kunci
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#privasi-dan-etika" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privasi dan etika
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproducibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pengujian-unit-untuk-aturan-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pengujian Unit untuk Aturan Regex
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mengukur-kualitas-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengukur Kualitas Preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kesalahan-umum-dan-cara-menghindarinya" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan Umum dan Cara Menghindarinya
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latihan-praktik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan Praktik
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Latihan Praktik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-ekstraksi-angka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Ekstraksi angka
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-pencarian-kata-utuh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — Pencarian kata utuh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-ekstraksi-hashtag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Ekstraksi hashtag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-4-normalisasi-whitespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 4 — Normalisasi whitespace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-5-cleaning-konservatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 5 — Cleaning konservatif
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-6-penyaring-kata-kunci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 6 — Penyaring kata kunci
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-7-evaluasi-aturan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 7 — Evaluasi aturan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kunci-jawaban-latihan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kunci Jawaban Latihan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kunci Jawaban Latihan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jawaban-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jawaban 7
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-eksperimen-perbandingan-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Template Eksperimen Perbandingan Preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-sebelum-regex-digunakan-dalam-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist Sebelum Regex Digunakan dalam Penelitian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referensi-dokumentasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referensi Dokumentasi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#penutup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penutup
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Disaster AI System
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../01-python-untuk-nlp/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    NLP Foundation
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="regular-expression-regex-untuk-penelitian-nlp-berbasis-media-sosial">Regular Expression (Regex) untuk Penelitian NLP Berbasis Media Sosial</h1>
+<p>Regular Expression (Regex) adalah bahasa pola untuk mencari,
+mencocokkan, mengekstraksi, memvalidasi, atau mengganti bagian teks
+berdasarkan aturan tertentu. Dalam penelitian Natural Language
+Processing (NLP), Regex sering digunakan pada tahap <em>text preprocessing</em>
+dan ekstraksi informasi sebelum teks diproses oleh metode statistik,
+machine learning, atau deep learning.</p>
+<p>Materi ini dirancang untuk mendukung penelitian NLP berbasis teks media
+sosial, khususnya pengolahan unggahan terkait bencana atau permintaan
+bantuan darurat. Contoh menggunakan Python dan modul bawaan <code>re</code>,
+sehingga dapat dipraktikkan di Jupyter Notebook, Google Colab, atau VS
+Code.</p>
+<p>Regex bukan alat untuk memahami makna bahasa secara menyeluruh. Regex
+cocok untuk pola eksplisit, seperti URL, mention, hashtag, nomor dengan
+format tertentu, pengulangan tanda baca, atau kata kunci yang telah
+ditentukan. Untuk memahami konteks, urgensi, sentimen, atau maksud
+unggahan, Regex sebaiknya dikombinasikan dengan anotasi data dan model
+NLP.</p>
+<h2 id="tujuan-pembelajaran">Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, peneliti diharapkan mampu:</p>
+<ol>
+<li>Memahami sintaks dan cara kerja Regex.</li>
+<li>Menulis pola untuk menemukan kata, angka, simbol, dan pola teks.</li>
+<li>Menggunakan Regex melalui fungsi Python <code>re</code>.</li>
+<li>Membersihkan teks media sosial dengan aturan yang transparan dan
+    dapat direproduksi.</li>
+<li>Mengekstraksi fitur eksplisit seperti URL, hashtag, mention, dan
+    pola nomor.</li>
+<li>Menyusun pipeline preprocessing yang dapat diuji.</li>
+<li>Menilai risiko hilangnya informasi akibat pembersihan teks.</li>
+<li>Mendokumentasikan aturan Regex agar eksperimen dapat direplikasi.</li>
+</ol>
+<h2 id="posisi-regex-dalam-pipeline-penelitian-nlp">Posisi Regex dalam Pipeline Penelitian NLP</h2>
+<p>Pipeline penelitian yang umum:</p>
+<ol>
+<li>Pengumpulan data sesuai ketentuan platform, etika penelitian, dan
+    kebijakan privasi.</li>
+<li>Penyimpanan data mentah secara aman.</li>
+<li>Pemeriksaan kualitas dan penghapusan duplikasi berdasarkan aturan
+    yang ditetapkan.</li>
+<li>Eksplorasi data awal (<em>Exploratory Data Analysis</em>).</li>
+<li>Preprocessing menggunakan aturan terdokumentasi, termasuk Regex bila
+    relevan.</li>
+<li>Anotasi label dengan prosedur yang dapat dipertanggungjawabkan.</li>
+<li>Pembagian data train, validation, dan test tanpa kebocoran data.</li>
+<li>Ekstraksi fitur atau tokenisasi sesuai model.</li>
+<li>Pelatihan dan evaluasi model.</li>
+<li>Analisis kesalahan serta pelaporan keterbatasan.</li>
+</ol>
+<p>Urutan beberapa langkah dapat berbeda menurut desain penelitian. Simpan
+teks mentah dan teks hasil preprocessing secara terpisah agar keputusan
+pembersihan dapat diaudit.</p>
+<h3 id="contoh-data-mentah">Contoh data mentah</h3>
+<div class="highlight"><pre><span></span><code>URGENT!!! Banjir di Desa Contoh 😥 air naik cepat.
+Mohon bantuan evakuasi keluarga! #Banjir
+Info: https://contoh.id/laporan @relawan
+</code></pre></div>
+<h3 id="contoh-hasil-preprocessing-konservatif">Contoh hasil preprocessing konservatif</h3>
+<div class="highlight"><pre><span></span><code>URGENT! Banjir di Desa Contoh 😥 air naik cepat.
+Mohon bantuan evakuasi keluarga! #Banjir
+Info: @relawan
+</code></pre></div>
+<p>Ini hanya ilustrasi. URL dihapus karena dianggap tidak diperlukan untuk
+konfigurasi model tertentu, sedangkan hashtag, emoji, dan kata <code>URGENT</code>
+dipertahankan karena mungkin mengandung sinyal penting. Keputusan harus
+diuji, bukan dianggap selalu benar.</p>
+<h2 id="persiapan-lingkungan-python">Persiapan Lingkungan Python</h2>
+<p>Modul <code>re</code> merupakan modul bawaan Python.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"Saya belajar NLP pada tahun 2026."</span>
+<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"nlp"</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span> <span class="k">if</span> <span class="n">match</span> <span class="k">else</span> <span class="s2">"Tidak ditemukan"</span><span class="p">)</span>
+</code></pre></div>
+<p>Gunakan <em>raw string</em> seperti <code>r"\d+"</code> ketika menulis pola Regex di
+Python. Raw string membantu menghindari kebingungan antara escape
+sequence Python dan Regex.</p>
+<h2 id="fundamental-regex">Fundamental Regex</h2>
+<h3 id="literal-characters">Literal Characters</h3>
+<p>Literal adalah karakter yang dicocokkan secara langsung.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"Laporan banjir diterima."</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"banjir"</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['banjir']
+</code></pre></div>
+<p>Pencocokan secara default membedakan huruf besar dan kecil. Gunakan
+<code>re.IGNORECASE</code> jika kapitalisasi tidak penting.</p>
+<h3 id="metacharacters">Metacharacters</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Simbol</th>
+<th style="text-align: left;">Fungsi</th>
+<th style="text-align: left;">Contoh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>.</code></td>
+<td style="text-align: left;">Satu karakter apa pun selain newline secara default</td>
+<td style="text-align: left;"><code>b.n</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>^</code></td>
+<td style="text-align: left;">Awal string; dengan mode multiline dapat berarti awal baris</td>
+<td style="text-align: left;"><code>^Mohon</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;">Akhir string; dengan mode multiline dapat berarti akhir baris</td>
+<td style="text-align: left;"><code>darurat$</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*</code></td>
+<td style="text-align: left;">Nol kali atau lebih</td>
+<td style="text-align: left;"><code>ab*</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>+</code></td>
+<td style="text-align: left;">Satu kali atau lebih</td>
+<td style="text-align: left;"><code>ab+</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>?</code></td>
+<td style="text-align: left;">Nol atau satu kali; juga dapat membuat quantifier bersifat lazy</td>
+<td style="text-align: left;"><code>colou?r</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[]</code></td>
+<td style="text-align: left;">Salah satu karakter di dalam kelas</td>
+<td style="text-align: left;"><code>[abc]</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>()</code></td>
+<td style="text-align: left;">Grup pencocokan</td>
+<td style="text-align: left;"><code>(banjir|gempa)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>|</code></td>
+<td style="text-align: left;">Alternatif</td>
+<td style="text-align: left;"><code>banjir|gempa</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\</code></td>
+<td style="text-align: left;">Escape atau pembentuk kelas khusus</td>
+<td style="text-align: left;"><code>\.</code></td>
+</tr>
+</tbody>
+</table>
+<p>Untuk mencari titik literal, gunakan <code>\.</code> karena <code>.</code> tanpa escape
+memiliki makna khusus.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Berkas laporan.txt dan laporanxt"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"laporan\.txt"</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="character-classes">Character Classes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Pola</th>
+<th style="text-align: left;">Makna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>[abc]</code></td>
+<td style="text-align: left;">Salah satu dari <code>a</code>, <code>b</code>, atau <code>c</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[a-z]</code></td>
+<td style="text-align: left;">Huruf kecil ASCII dari <code>a</code> sampai <code>z</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[A-Z]</code></td>
+<td style="text-align: left;">Huruf besar ASCII dari <code>A</code> sampai <code>Z</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[0-9]</code></td>
+<td style="text-align: left;">Satu digit ASCII</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>[^0-9]</code></td>
+<td style="text-align: left;">Satu karakter yang bukan digit ASCII</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\d</code></td>
+<td style="text-align: left;">Digit menurut perilaku Unicode Python</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\w</code></td>
+<td style="text-align: left;">Karakter kata, umumnya huruf, digit, dan underscore</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\s</code></td>
+<td style="text-align: left;">Karakter whitespace</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\D</code></td>
+<td style="text-align: left;">Bukan digit</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\W</code></td>
+<td style="text-align: left;">Bukan karakter kata</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\S</code></td>
+<td style="text-align: left;">Bukan whitespace</td>
+</tr>
+</tbody>
+</table>
+<p>Rentang <code>[a-z]</code> tidak mencakup semua huruf beraksen atau seluruh
+karakter Unicode. Hindari asumsi bahwa rentang ASCII mewakili semua
+huruf.</p>
+<h3 id="quantifiers">Quantifiers</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Pola</th>
+<th style="text-align: left;">Makna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>a*</code></td>
+<td style="text-align: left;">Nol atau lebih huruf <code>a</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>a+</code></td>
+<td style="text-align: left;">Satu atau lebih huruf <code>a</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>a?</code></td>
+<td style="text-align: left;">Nol atau satu huruf <code>a</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>a{3}</code></td>
+<td style="text-align: left;">Tepat tiga huruf <code>a</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>a{2,5}</code></td>
+<td style="text-align: left;">Dua sampai lima huruf <code>a</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>a{2,}</code></td>
+<td style="text-align: left;">Dua atau lebih huruf <code>a</code></td>
+</tr>
+</tbody>
+</table>
+<p>Contoh mencari kelompok digit:</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Ada 3 korban, 12 rumah, dan 105 paket bantuan."</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\d+"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['3', '12', '105']
+</code></pre></div>
+<p>Regex menemukan rangkaian digit, tetapi tidak mengetahui apakah angka
+berarti jumlah korban, rumah, usia, tahun, atau nomor laporan.
+Interpretasi membutuhkan konteks.</p>
+<h3 id="anchors-dan-word-boundaries">Anchors dan Word Boundaries</h3>
+<p>Anchor mencocokkan posisi, bukan karakter biasa.</p>
+<div class="highlight"><pre><span></span><code><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Banjir melanda desa."</span><span class="p">,</span>
+    <span class="s2">"Laporan: banjir melanda desa."</span><span class="p">,</span>
+    <span class="s2">"banjir perlu ditangani"</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^banjir"</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>True
+False
+True
+</code></pre></div>
+<p><code>\b</code> mencocokkan batas kata menurut definisi karakter kata Regex.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"banjir, banjiran, dan antisipasi banjir"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\bbanjir\b"</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['banjir', 'banjir']
+</code></pre></div>
+<p>Batas kata Regex tidak selalu sama dengan batas kata linguistik. Uji
+pola dengan contoh nyata dari korpus penelitian.</p>
+<h2 id="alternation-groups-dan-capturing">Alternation, Groups, dan Capturing</h2>
+<h3 id="alternation">Alternation</h3>
+<p>Alternation menggunakan <code>|</code> untuk memilih salah satu pola.</p>
+<div class="highlight"><pre><span></span><code><span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"\b(banjir|gempa|longsor)\b"</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"Gempa memicu longsor, sementara wilayah lain mengalami banjir."</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['Gempa', 'longsor', 'banjir']
+</code></pre></div>
+<p>Karena pola memiliki capturing group, <code>findall()</code> mengembalikan isi
+grup. Jika tidak membutuhkan isi grup secara terpisah, gunakan grup
+non-capturing <code>(?:...)</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"\b(?:banjir|gempa|longsor)\b"</span>
+</code></pre></div>
+<p>Daftar kata kunci sebaiknya disusun berdasarkan kajian literatur,
+karakteristik data, dan validasi manusia. Daftar kata kunci bukan
+detektor bencana yang lengkap.</p>
+<h3 id="capturing-groups">Capturing Groups</h3>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Kode laporan: EVT-2026-0042"</span>
+<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(EVT)-(\d</span><span class="si">{4}</span><span class="s2">)-(\d+)"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># seluruh pola</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># EVT</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># 2026</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 0042</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>EVT-2026-0042
+EVT
+2026
+0042
+</code></pre></div>
+<p>Grup bernama (berlabel) dapat membuat ekstraksi lebih mudah dibaca.</p>
+<div class="highlight"><pre><span></span><code><span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"(?P&lt;prefix&gt;[A-Z]+)-(?P&lt;year&gt;\d</span><span class="si">{4}</span><span class="s2">)-(?P&lt;number&gt;\d+)"</span>
+<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s2">"EVT-2026-0042"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">groupdict</span><span class="p">())</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>{'prefix': 'EVT', 'year': '2026', 'number': '0042'}
+</code></pre></div>
+<p>Contoh tersebut hanya sesuai jika kode laporan memang mengikuti format
+yang ditentukan.</p>
+<h2 id="greedy-dan-lazy-matching">Greedy dan Lazy Matching</h2>
+<p>Quantifier seperti <code>*</code> dan <code>+</code> secara default bersifat greedy: pola
+mencoba mengambil bagian sepanjang mungkin selama masih menghasilkan
+kecocokan.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"&lt;post&gt;banjir&lt;/post&gt;&lt;post&gt;gempa&lt;/post&gt;"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"&lt;post&gt;.*&lt;/post&gt;"</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"&lt;post&gt;.*?&lt;/post&gt;"</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['&lt;post&gt;banjir&lt;/post&gt;&lt;post&gt;gempa&lt;/post&gt;']
+['&lt;post&gt;banjir&lt;/post&gt;', '&lt;post&gt;gempa&lt;/post&gt;']
+</code></pre></div>
+<p>Pola pertama dapat mencocokkan dari tag pembuka pertama hingga tag
+penutup terakhir. Pola kedua memakai <code>.*?</code> agar mencocokkan sesingkat
+mungkin.</p>
+<p>Untuk HTML, XML, atau JSON kompleks, gunakan parser khusus daripada
+Regex sebagai satu-satunya alat.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Karakter <code>?</code> (tanda tanya) dalam Regular Expression (Regex) memiliki beberapa fungsi tergantung bagaimana dan di mana ia digunakan.</p>
+</div>
+<h2 id="lookahead-dan-lookbehind">Lookahead dan Lookbehind</h2>
+<p>Lookaround memeriksa konteks di sekitar pola tanpa memasukkan konteks
+tersebut ke hasil kecocokan.</p>
+<h3 id="positive-lookahead">Positive Lookahead</h3>
+<p><em>Lookahead Positive</em> <code>(?=...)</code> memeriksa apakah teks di depan cocok dengan pola tanpa memasukkannya ke hasil pencocokan.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"ID-123 ID-456 ID-AB7"</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"ID-(?=\d</span><span class="si">{3}</span><span class="s2">\b)\w+"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['ID-123', 'ID-456']
+</code></pre></div>
+<h3 id="negative-lookahead">Negative Lookahead</h3>
+<p><em>Lookahead Negative</em> <code>(?!...)</code> memeriksa agar teks di depan tidak diikuti oleh pola tertentu. 
+Misalnya ingin mencari kata "banjir", tetapi menolak jika kata tersebut diikuti oleh kata "bandang".</p>
+<div class="highlight"><pre><span></span><code><span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"\bbanjir\b(?! bandang)"</span>
+</code></pre></div>
+<p>Pola tersebut mengecualikan kecocokan <code>banjir</code> yang langsung diikuti
+teks <code>bandang</code>. Contoh ini ilustratif; pengecualian dapat menghapus
+konteks penting sehingga harus divalidasi.</p>
+<h3 id="lookbehind">Lookbehind</h3>
+<p><em>Lookbehind</em> <code>(?&lt;=...)</code> atau <code>(?&lt;!...)</code> memeriksa konteks karakter yang ada di sebelah kiri/sebelum pola.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Korban: 12 orang; Rumah: 5 unit"</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"(?&lt;=Korban: )\d+"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+</code></pre></div>
+<p>Lookbehind pada Python <code>re</code> memiliki batasan tertentu, termasuk
+persyaratan panjang pola yang tetap. Untuk pola rumit, pilih desain
+ekstraksi yang mudah diuji.</p>
+<h2 id="fungsi-regex-penting-dalam-python">Fungsi Regex Penting dalam Python</h2>
+<h3 id="research"><code>re.search()</code></h3>
+<p>Mencari kecocokan pertama di mana pun dalam string.</p>
+<div class="highlight"><pre><span></span><code><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"banjir"</span><span class="p">,</span> <span class="s2">"Wilayah ini terdampak banjir"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="rematch"><code>re.match()</code></h3>
+<p>Memeriksa kecocokan mulai dari awal string.</p>
+<div class="highlight"><pre><span></span><code><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Wilayah"</span><span class="p">,</span> <span class="s2">"Wilayah ini terdampak banjir"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="refullmatch"><code>re.fullmatch()</code></h3>
+<p>Memastikan seluruh string cocok dengan pola. Berguna untuk validasi
+format, bukan untuk memastikan kebenaran semantik.</p>
+<div class="highlight"><pre><span></span><code><span class="n">code</span> <span class="o">=</span> <span class="s2">"EVT-2026-0042"</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">"EVT-\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{4}</span><span class="s2">"</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">valid</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>True
+</code></pre></div>
+<h3 id="refindall"><code>re.findall()</code></h3>
+<p>Mengembalikan semua kecocokan. Bentuk hasil bergantung pada jumlah
+capturing group.</p>
+<div class="highlight"><pre><span></span><code><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"#\w+"</span><span class="p">,</span> <span class="s2">"Banjir #Siaga #Bantuan"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="refinditer"><code>re.finditer()</code></h3>
+<p>Mengembalikan iterator objek kecocokan beserta posisi karakter.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Banjir di desa. Gempa di kota."</span>
+<span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\b(banjir|gempa)\b"</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(),</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span> <span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">())</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Banjir 0 6
+Gempa 16 21
+</code></pre></div>
+<h3 id="resub"><code>re.sub()</code></h3>
+<p>Mengganti bagian yang cocok.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Butuh bantuan!!!!"</span>
+<span class="n">clean</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"!{2,}"</span><span class="p">,</span> <span class="s2">"!"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Butuh bantuan!
+</code></pre></div>
+<h3 id="resplit"><code>re.split()</code></h3>
+<p>Memisahkan string berdasarkan pola.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"banjir, gempa; longsor"</span>
+<span class="n">parts</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[,;]\s*"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['banjir', 'gempa', 'longsor']
+</code></pre></div>
+<h3 id="recompile"><code>re.compile()</code></h3>
+<p>Menyimpan pola untuk digunakan berulang kali.</p>
+<div class="highlight"><pre><span></span><code><span class="n">keyword_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">"\b(?:banjir|gempa|longsor)\b"</span><span class="p">,</span>
+    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"Ada banjir"</span><span class="p">,</span> <span class="s2">"Terjadi gempa"</span><span class="p">,</span> <span class="s2">"Cuaca cerah"</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">keyword_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>True
+True
+False
+</code></pre></div>
+<h2 id="flags-yang-sering-digunakan">Flags yang Sering Digunakan</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Flag</th>
+<th style="text-align: left;">Fungsi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>re.IGNORECASE</code> atau <code>re.I</code></td>
+<td style="text-align: left;">Mengabaikan perbedaan huruf besar dan kecil</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>re.MULTILINE</code> atau <code>re.M</code></td>
+<td style="text-align: left;">Membuat <code>^</code> dan <code>$</code> bekerja pada awal/akhir setiap baris</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>re.DOTALL</code> atau <code>re.S</code></td>
+<td style="text-align: left;">Membuat <code>.</code> juga cocok dengan newline</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>re.VERBOSE</code> atau <code>re.X</code></td>
+<td style="text-align: left;">Memungkinkan pola multi-baris dengan komentar dan spasi yang diabaikan di sebagian besar bagian pola</td>
+</tr>
+</tbody>
+</table>
+<p>Contoh pola verbose:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    \b</span>
+<span class="sd">    (?:banjir|gempa|longsor)</span>
+<span class="sd">    \b</span>
+<span class="sd">    """</span><span class="p">,</span>
+    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Gunakan <code>re.VERBOSE</code> untuk pola panjang agar lebih mudah dibaca dan
+ditinjau peneliti lain.</p>
+<h2 id="penggunaan">Penggunaan <code>?</code></h2>
+<p>Berikut adalah tabel ringkasan penggunaan karakter <strong><code>?</code></strong> dalam Regular Expression (Regex):</p>
+<table>
+<thead>
+<tr>
+<th>Sintaks / Penggunaan</th>
+<th>Jenis / Kategori</th>
+<th>Deskripsi / Cara Kerja</th>
+<th>Contoh Pola</th>
+<th>Contoh Cocok (<em>Match</em>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>a?</code></strong></td>
+<td>Quantifier (<em>Optional</em>)</td>
+<td>Mencocokkan karakter atau grup sebanyak <strong>0 atau 1 kali</strong> (sifatnya opsional).</td>
+<td><code>https?://</code></td>
+<td><code>"http://"</code> dan <code>"https://"</code></td>
+</tr>
+<tr>
+<td><strong><code>*?</code></strong> atau <strong><code>+?</code></strong></td>
+<td>Non-Greedy / <em>Lazy</em></td>
+<td>Memaksa quantifier (<code>*</code> atau <code>+</code>) mengambil teks <strong>sesingkat mungkin</strong>.</td>
+<td><code>&lt;post&gt;.*?&lt;/post&gt;</code></td>
+<td><code>&lt;post&gt;banjir&lt;/post&gt;</code> (berhenti di tag pertama)</td>
+</tr>
+<tr>
+<td><strong><code>(?:...)</code></strong></td>
+<td>Non-Capturing Group</td>
+<td>Mengelompokkan pola <strong>tanpa menyimpan</strong> hasilnya ke memori/grup tangkapan.</td>
+<td><code>\b(?:banjir|gempa)\b</code></td>
+<td>Mengelompokkan kata tanpa membuat <em>capture group</em>.</td>
+</tr>
+<tr>
+<td><strong><code>(?P&lt;nama&gt;...)</code></strong></td>
+<td>Named Capturing Group</td>
+<td>Memberi <strong>nama identifikasi</strong> pada grup tangkapan agar mudah dipanggil.</td>
+<td><code>(?P&lt;year&gt;\d{4})</code></td>
+<td>Mengambil <code>2026</code> dengan kunci <code>'year'</code>.</td>
+</tr>
+<tr>
+<td><strong><code>(?=...)</code></strong></td>
+<td>Positive Lookahead</td>
+<td>Memeriksa apakah teks di depan <strong>sesuai</strong> pola, tanpa memasukkannya ke hasil pencocokan.</td>
+<td><code>ID-(?=\d{3})</code></td>
+<td><code>ID-</code> pada <code>"ID-123"</code> (hanya mengambil <code>'ID-'</code>).</td>
+</tr>
+<tr>
+<td><strong><code>(?!...)</code></strong></td>
+<td>Negative Lookahead</td>
+<td>Memeriksa agar teks di depan <strong>TIDAK diikuti</strong> oleh pola tertentu.</td>
+<td><code>\bbanjir\b(?! bandang)</code></td>
+<td><code>"banjir"</code> pada <code>"banjir lokal"</code> (menolak <code>"banjir bandang"</code>).</td>
+</tr>
+<tr>
+<td><strong><code>(?&lt;=...)</code></strong></td>
+<td>Positive Lookbehind</td>
+<td>Memeriksa apakah teks di sebelah kiri/sebelumnya <strong>sesuai</strong> pola.</td>
+<td><code>(?&lt;=Korban: )\d+</code></td>
+<td><code>12</code> pada <code>"Korban: 12 orang"</code> (hanya mengambil angka).</td>
+</tr>
+<tr>
+<td><strong><code>(?&lt;!...)</code></strong></td>
+<td>Negative Lookbehind</td>
+<td>Memeriksa agar teks di sebelah kiri/sebelumnya <strong>TIDAK diikuti</strong> pola tertentu.</td>
+<td><code>(?&lt;!\w)#[A-Za-z0-9_]+</code></td>
+<td><code>#Banjir</code> (memastikan <code>#</code> tidak menempel di huruf lain).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="penerapan-regex-untuk-data-media-sosial">Penerapan Regex untuk Data Media Sosial</h2>
+<h3 id="menghapus-url">Menghapus URL</h3>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Laporan tersedia di https://contoh.id/laporan dan http://contoh.id"</span>
+<span class="n">url_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"https?://\S+"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">url_pattern</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Laporan tersedia di  dan 
+</code></pre></div>
+<p>Pola sederhana ini belum menangani seluruh kemungkinan URL. URL dapat
+memiliki tanda baca di bagian akhir, karakter Unicode, atau format tanpa
+skema <code>http</code>. Tentukan aturan sesuai kebutuhan dataset dan simpan URL
+asli jika diperlukan untuk audit.</p>
+<h3 id="mengekstraksi-url">Mengekstraksi URL</h3>
+<div class="highlight"><pre><span></span><code><span class="n">urls</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"https?://\S+"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<p>Ekstraksi URL tidak berarti peneliti harus membuka atau mengunjungi
+tautan tersebut. Ikuti aturan keamanan, etika, dan kebijakan pengumpulan
+data.</p>
+<h3 id="mengekstraksi-hashtag">Mengekstraksi Hashtag</h3>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Waspada #Banjir dan #InfoBencana2026"</span>
+<span class="n">hashtags</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(?&lt;!\w)#[A-Za-z0-9_]+"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hashtags</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['#Banjir', '#InfoBencana2026']
+</code></pre></div>
+<p>Pola ini terutama mengakomodasi huruf ASCII, angka, dan underscore.
+Untuk hashtag berkarakter Unicode, sesuaikan implementasi dan uji pada
+data nyata. Hashtag dapat menjadi fitur penting, jadi jangan
+menghapusnya sebelum menentukan tujuan analisis.</p>
+<h3 id="mengekstraksi-mention">Mengekstraksi Mention</h3>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Mohon bantuan @relawan_palu dan @petugas"</span>
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(?&lt;!\w)@[\w]+"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mentions</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['@relawan_palu', '@petugas']
+</code></pre></div>
+<p>Mention dapat mengandung informasi identitas. Pertimbangkan anonimisasi,
+minimisasi data, dan aturan platform sebelum menyimpan atau
+memublikasikannya.</p>
+<h3 id="mengurangi-tanda-baca-berulang">Mengurangi Tanda Baca Berulang</h3>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Tolong bantu!!! Air naik cepat????"</span>
+<span class="n">clean</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([!?.,])\1+"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Tolong bantu! Air naik cepat?
+</code></pre></div>
+<p>Jangan langsung menghapus semua tanda baca. Banyaknya tanda seru atau
+tanda tanya mungkin menjadi sinyal intensitas bahasa. Uji apakah
+normalisasi tersebut memengaruhi hasil model.</p>
+<h3 id="merapikan-whitespace">Merapikan Whitespace</h3>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"  Mohon   bantuan</span><span class="se">\n\n</span><span class="s2">untuk warga.  "</span>
+<span class="n">clean</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Mohon bantuan untuk warga.
+</code></pre></div>
+<h3 id="menghapus-karakter-kontrol-tertentu">Menghapus Karakter Kontrol Tertentu</h3>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Mohon bantuan</span><span class="se">\t</span><span class="s2">untuk warga</span><span class="se">\n</span><span class="s2">terdampak."</span>
+<span class="n">clean</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[\t\r\n]+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Mohon bantuan untuk warga terdampak.
+</code></pre></div>
+<p>Jangan menghapus seluruh karakter non-ASCII tanpa alasan. Cara tersebut
+berisiko menghilangkan emoji, huruf non-Latin, atau informasi bermakna.</p>
+<h2 id="merancang-fungsi-preprocessing-yang-transparan">Merancang Fungsi Preprocessing yang Transparan</h2>
+<p>Fungsi preprocessing harus mudah dibaca, diuji, dan disesuaikan. Contoh
+berikut konservatif: menghapus URL, merapikan whitespace, dan mengurangi
+tanda baca berulang. Fungsi ini tidak menghapus hashtag, mention, angka,
+emoji, atau kata kunci.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="n">URL_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"https?://\S+"</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="n">REPEATED_PUNCTUATION</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([!?.,])\1+"</span><span class="p">)</span>
+<span class="n">WHITESPACE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s+"</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Membersihkan beberapa pola eksplisit dari teks."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">""</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="n">URL_PATTERN</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">REPEATED_PUNCTUATION</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\1"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">WHITESPACE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"URGENT!!! Banjir di desa 😥"</span><span class="p">,</span>
+    <span class="s2">"Mohon bantuan https://contoh.id/laporan"</span><span class="p">,</span>
+    <span class="kc">None</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">clean_text</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>URGENT! Banjir di desa 😥
+Mohon bantuan
+</code></pre></div>
+<p>Sebelum menggunakan fungsi dalam penelitian, dokumentasikan alasan
+setiap aturan, periksa hasil pada sampel, dan bandingkan dengan teks
+mentah. Jika teks kosong atau nilai hilang perlu dibedakan dari string
+kosong, tangani missing value pada tahap terpisah.</p>
+<h2 id="regex-untuk-kata-kunci-bencana-dan-permintaan-bantuan">Regex untuk Kata Kunci Bencana dan Permintaan Bantuan</h2>
+<p>Regex dapat menjadi penyaring awal untuk menemukan unggahan yang
+mengandung kata kunci. Contoh berikut bukan model klasifikasi dan tidak
+dapat memastikan apakah unggahan benar-benar melaporkan kejadian nyata
+atau meminta pertolongan.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="n">disaster_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">"\b(?:banjir|gempa|longsor|tsunami|kebakaran)\b"</span><span class="p">,</span>
+    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span>
+<span class="p">)</span>
+
+<span class="n">help_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">"\b(?:butuh bantuan|mohon bantuan|tolong|evakuasi|butuh obat)\b"</span><span class="p">,</span>
+    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_rule_features</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">""</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"mentions_disaster_keyword"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">disaster_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">text</span><span class="p">)),</span>
+        <span class="s2">"mentions_help_keyword"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">help_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">text</span><span class="p">)),</span>
+    <span class="p">}</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Mohon bantuan evakuasi untuk warga terdampak banjir."</span><span class="p">,</span>
+    <span class="s2">"Artikel lama membahas sejarah banjir."</span><span class="p">,</span>
+    <span class="s2">"Hari ini cuaca cerah."</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">extract_rule_features</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Mohon bantuan evakuasi untuk warga terdampak banjir. {'mentions_disaster_keyword': True, 'mentions_help_keyword': True}
+Artikel lama membahas sejarah banjir. {'mentions_disaster_keyword': True, 'mentions_help_keyword': False}
+Hari ini cuaca cerah. {'mentions_disaster_keyword': False, 'mentions_help_keyword': False}
+</code></pre></div>
+<p>Fitur berbasis aturan dapat digunakan untuk eksplorasi, penyaringan
+data, atau baseline. Namun, kata <code>tolong</code> dapat muncul dalam konteks
+non-darurat, sedangkan laporan darurat mungkin tidak memakai kata kunci
+yang ada. Evaluasi aturan terhadap sampel berlabel manusia dan ukur
+precision, recall, serta F1-score jika aturan digunakan sebagai sistem
+deteksi.</p>
+<h3 id="membedakan-kata-kunci-dan-label">Membedakan kata kunci dan label</h3>
+<p>Kehadiran kata <code>banjir</code> bukan bukti bahwa unggahan merupakan laporan
+bencana yang valid. Demikian pula, kata <code>bantuan</code> tidak otomatis berarti
+kebutuhan darurat. Pisahkan:</p>
+<ul>
+<li><strong>Aturan pencarian:</strong> membantu menemukan kandidat data.</li>
+<li><strong>Label referensi:</strong> ditentukan melalui prosedur anotasi yang jelas.</li>
+<li><strong>Prediksi model:</strong> keluaran sistem yang harus dievaluasi.</li>
+<li><strong>Keputusan operasional:</strong> membutuhkan validasi, konteks, dan prosedur
+  manusia jika menyangkut bantuan nyata.</li>
+</ul>
+<p>Jangan menggunakan Regex sebagai satu-satunya dasar untuk
+memprioritaskan atau menolak permintaan bantuan darurat.</p>
+<h2 id="risiko-metodologis-dalam-penelitian">Risiko Metodologis dalam Penelitian</h2>
+<h3 id="kehilangan-informasi">Kehilangan informasi</h3>
+<p>Menghapus emoji, hashtag, mention, tanda baca, angka, atau kata tertentu
+dapat menghilangkan sinyal berguna. Bandingkan beberapa konfigurasi
+preprocessing:</p>
+<ol>
+<li>Teks mentah dengan normalisasi whitespace saja.</li>
+<li>Teks tanpa URL.</li>
+<li>Teks dengan normalisasi tanda baca.</li>
+<li>Aturan tambahan yang didukung analisis data.</li>
+</ol>
+<p>Bandingkan hasil pada pembagian data yang sama dan hindari mengubah
+preprocessing berdasarkan informasi dari test set.</p>
+<h3 id="data-leakage">Data leakage</h3>
+<p>Jangan menentukan aturan, kosakata, atau ambang keputusan dengan
+memanfaatkan label test set. Jika aturan dikembangkan berdasarkan
+anotasi, lakukan pengembangan pada data train atau validation, kemudian
+evaluasi pada test set yang terpisah.</p>
+<h3 id="bias-kata-kunci">Bias kata kunci</h3>
+<p>Daftar kata kunci yang terlalu sempit dapat melewatkan variasi bahasa,
+singkatan, dialek, salah ketik, dan istilah lokal. Daftar terlalu luas
+dapat meningkatkan false positive. Susun daftar dengan kajian literatur,
+pemeriksaan data, dan masukan anotator.</p>
+<h3 id="privasi-dan-etika">Privasi dan etika</h3>
+<p>Data media sosial dapat berisi nama, nomor telepon, lokasi, atau
+informasi sensitif. Minimalkan data yang dikumpulkan, lindungi data
+mentah, batasi akses, dan anonimisasi informasi pribadi bila diperlukan.
+Jangan memublikasikan contoh yang dapat mengidentifikasi orang tanpa
+dasar yang sesuai.</p>
+<h3 id="reproducibility">Reproducibility</h3>
+<p>Catat versi Python, aturan Regex, flags, urutan preprocessing, tanggal
+perubahan, dan contoh input-output. Simpan versi teks mentah agar hasil
+pembersihan dapat ditinjau ulang.</p>
+<h2 id="pengujian-unit-untuk-aturan-regex">Pengujian Unit untuk Aturan Regex</h2>
+<p>Regex yang tampak benar pada satu contoh bisa gagal pada variasi lain.
+Buat pengujian otomatis untuk perilaku yang diharapkan.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_clean_text</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">clean_text</span><span class="p">(</span><span class="s2">"Banjir!!!"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"Banjir!"</span>
+    <span class="k">assert</span> <span class="n">clean_text</span><span class="p">(</span><span class="s2">"  Mohon   bantuan  "</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"Mohon bantuan"</span>
+    <span class="k">assert</span> <span class="n">clean_text</span><span class="p">(</span><span class="s2">"Info https://contoh.id"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"Info"</span>
+    <span class="k">assert</span> <span class="n">clean_text</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span> <span class="o">==</span> <span class="s2">""</span>
+
+<span class="n">test_clean_text</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Semua pengujian dasar berhasil."</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Semua pengujian dasar berhasil.
+</code></pre></div>
+<p>Tambahkan kasus yang mencerminkan data sebenarnya, termasuk string
+kosong, nilai hilang, emoji, tanda baca di akhir URL, hashtag, mention,
+salah ketik, dan bahasa campuran. Periksa juga kasus yang seharusnya
+tidak berubah.</p>
+<h2 id="mengukur-kualitas-preprocessing">Mengukur Kualitas Preprocessing</h2>
+<p>Preprocessing tidak cukup dinilai dari seberapa bersih teks terlihat.
+Untuk penelitian machine learning, ukur dampaknya terhadap tujuan akhir.</p>
+<p>Aspek yang dapat diperiksa:</p>
+<ul>
+<li>Persentase teks kosong setelah preprocessing.</li>
+<li>Jumlah karakter atau token sebelum dan sesudah pembersihan.</li>
+<li>Proporsi URL, hashtag, mention, emoji, dan angka yang terhapus.</li>
+<li>Contoh false positive dan false negative pada aturan penyaringan.</li>
+<li>Performa model pada konfigurasi preprocessing berbeda.</li>
+<li>Stabilitas hasil pada data dari sumber atau periode berbeda.</li>
+</ul>
+<p>Jika Regex digunakan sebagai penyaring kandidat, buat sampel evaluasi
+berlabel dan hitung:</p>
+<ul>
+<li><strong>Precision:</strong> proporsi kandidat yang benar-benar relevan.</li>
+<li><strong>Recall:</strong> proporsi seluruh data relevan yang berhasil ditemukan.</li>
+<li><strong>F1-score:</strong> rata-rata harmonik precision dan recall.</li>
+</ul>
+<p>Recall penting jika tujuan penyaringan adalah mengurangi risiko
+melewatkan laporan relevan. Metrik dan ambang yang tepat tetap
+bergantung pada tujuan penelitian dan konsekuensi kesalahan.</p>
+<h2 id="kesalahan-umum-dan-cara-menghindarinya">Kesalahan Umum dan Cara Menghindarinya</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Kesalahan</th>
+<th style="text-align: left;">Dampak</th>
+<th style="text-align: left;">Perbaikan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Menggunakan <code>.</code> tanpa escape untuk mencari titik</td>
+<td style="text-align: left;">Cocok dengan karakter lain</td>
+<td style="text-align: left;">Gunakan <code>\.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Lupa raw string</td>
+<td style="text-align: left;">Escape Python dan Regex membingungkan</td>
+<td style="text-align: left;">Tulis pola sebagai <code>r"..."</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Menggunakan <code>match()</code> untuk pencarian di tengah teks</td>
+<td style="text-align: left;">Kecocokan tidak ditemukan jika bukan di awal</td>
+<td style="text-align: left;">Gunakan <code>search()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Menghapus seluruh tanda baca</td>
+<td style="text-align: left;">Sinyal ekspresif dapat hilang</td>
+<td style="text-align: left;">Terapkan aturan selektif</td>
+</tr>
+<tr>
+<td style="text-align: left;">Menghapus semua karakter non-ASCII</td>
+<td style="text-align: left;">Emoji dan karakter bahasa lain hilang</td>
+<td style="text-align: left;">Tentukan aturan berbasis tujuan</td>
+</tr>
+<tr>
+<td style="text-align: left;">Menganggap kata kunci sama dengan label</td>
+<td style="text-align: left;">Salah klasifikasi</td>
+<td style="text-align: left;">Validasi dengan anotasi manusia</td>
+</tr>
+<tr>
+<td style="text-align: left;">Memakai Regex untuk mem-parsing HTML kompleks</td>
+<td style="text-align: left;">Pola rapuh</td>
+<td style="text-align: left;">Gunakan parser khusus</td>
+</tr>
+<tr>
+<td style="text-align: left;">Tidak menguji variasi data</td>
+<td style="text-align: left;">Kesalahan tidak terdeteksi</td>
+<td style="text-align: left;">Buat unit test dan kasus tepi</td>
+</tr>
+<tr>
+<td style="text-align: left;">Mengubah aturan setelah melihat hasil test</td>
+<td style="text-align: left;">Risiko data leakage</td>
+<td style="text-align: left;">Kunci aturan sebelum evaluasi final</td>
+</tr>
+</tbody>
+</table>
+<h2 id="latihan-praktik">Latihan Praktik</h2>
+<p>Coba selesaikan tanpa melihat kunci jawaban.</p>
+<h3 id="latihan-1-ekstraksi-angka">Latihan 1 — Ekstraksi angka</h3>
+<p>Dari teks <code>"Ada 12 rumah rusak dan 3 jembatan terdampak"</code>, ekstrak
+seluruh rangkaian digit.</p>
+<h3 id="latihan-2-pencarian-kata-utuh">Latihan 2 — Pencarian kata utuh</h3>
+<p>Cari kata <code>gempa</code> sebagai kata utuh dalam
+<code>"gempa, pascagempa, dan dampak gempa"</code>.</p>
+<h3 id="latihan-3-ekstraksi-hashtag">Latihan 3 — Ekstraksi hashtag</h3>
+<p>Ekstrak hashtag dari <code>"Pantau #InfoBencana dan #BantuanWarga"</code>.</p>
+<h3 id="latihan-4-normalisasi-whitespace">Latihan 4 — Normalisasi whitespace</h3>
+<p>Ubah <code>"Mohon   bantuan\nuntuk warga"</code> menjadi satu baris dengan satu
+spasi antar kata.</p>
+<h3 id="latihan-5-cleaning-konservatif">Latihan 5 — Cleaning konservatif</h3>
+<p>Buat fungsi yang menghapus URL dan merapikan whitespace, tetapi
+mempertahankan emoji dan hashtag.</p>
+<h3 id="latihan-6-penyaring-kata-kunci">Latihan 6 — Penyaring kata kunci</h3>
+<p>Buat Regex untuk mendeteksi salah satu kata <code>banjir</code>, <code>gempa</code>, atau
+<code>longsor</code>, tanpa membedakan huruf besar dan kecil. Jelaskan mengapa
+hasilnya belum cukup untuk menetapkan label bencana.</p>
+<h3 id="latihan-7-evaluasi-aturan">Latihan 7 — Evaluasi aturan</h3>
+<p>Buat 20 contoh teks, beri label relevan/tidak relevan secara manual,
+jalankan aturan Regex, lalu hitung precision dan recall. Analisis contoh
+yang salah.</p>
+<h2 id="kunci-jawaban-latihan">Kunci Jawaban Latihan</h2>
+<h3 id="jawaban-1">Jawaban 1</h3>
+<div class="highlight"><pre><span></span><code><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\d+"</span><span class="p">,</span> <span class="s2">"Ada 12 rumah rusak dan 3 jembatan terdampak"</span><span class="p">)</span>
+<span class="c1"># ['12', '3']</span>
+</code></pre></div>
+<h3 id="jawaban-2">Jawaban 2</h3>
+<div class="highlight"><pre><span></span><code><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\bgempa\b"</span><span class="p">,</span> <span class="s2">"gempa, pascagempa, dan dampak gempa"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="c1"># ['gempa', 'gempa']</span>
+</code></pre></div>
+<h3 id="jawaban-3">Jawaban 3</h3>
+<div class="highlight"><pre><span></span><code><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(?&lt;!\w)#[A-Za-z0-9_]+"</span><span class="p">,</span> <span class="s2">"Pantau #InfoBencana dan #BantuanWarga"</span><span class="p">)</span>
+<span class="c1"># ['#InfoBencana', '#BantuanWarga']</span>
+</code></pre></div>
+<p>Pola ini menggunakan karakter ASCII. Jika korpus memiliki hashtag
+Unicode, sesuaikan dan uji implementasinya.</p>
+<h3 id="jawaban-4">Jawaban 4</h3>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Mohon   bantuan</span><span class="se">\n</span><span class="s2">untuk warga"</span>
+<span class="n">clean</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="c1"># 'Mohon bantuan untuk warga'</span>
+</code></pre></div>
+<h3 id="jawaban-5">Jawaban 5</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">clean_social_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">""</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"https?://\S+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">text</span>
+</code></pre></div>
+<h3 id="jawaban-6">Jawaban 6</h3>
+<div class="highlight"><pre><span></span><code><span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">"\b(?:banjir|gempa|longsor)\b"</span><span class="p">,</span>
+    <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Aturan hanya mengidentifikasi kemunculan kata tertentu. Aturan tidak
+memahami apakah teks berupa berita lama, kutipan, penyangkalan, diskusi
+akademik, atau laporan kejadian yang sedang berlangsung.</p>
+<h3 id="jawaban-7">Jawaban 7</h3>
+<p>Tidak ada satu nilai precision atau recall yang dapat diberikan tanpa
+data dan label hasil latihan. Hitung nilai berdasarkan prediksi aturan
+terhadap label referensi, lalu dokumentasikan prosedur anotasi.</p>
+<h2 id="template-eksperimen-perbandingan-preprocessing">Template Eksperimen Perbandingan Preprocessing</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Eksperimen</th>
+<th style="text-align: left;">Aturan preprocessing</th>
+<th style="text-align: left;">Hipotesis</th>
+<th style="text-align: left;">Metrik evaluasi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">Whitespace saja</td>
+<td style="text-align: left;">Menjadi baseline konservatif</td>
+<td style="text-align: left;">F1, precision, recall</td>
+</tr>
+<tr>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">A + penghapusan URL</td>
+<td style="text-align: left;">URL mungkin tidak membantu klasifikasi teks</td>
+<td style="text-align: left;">F1, precision, recall</td>
+</tr>
+<tr>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">B + normalisasi tanda baca berulang</td>
+<td style="text-align: left;">Mengurangi variasi format</td>
+<td style="text-align: left;">F1, precision, recall</td>
+</tr>
+<tr>
+<td style="text-align: left;">D</td>
+<td style="text-align: left;">Aturan tambahan berdasarkan analisis data</td>
+<td style="text-align: left;">Aturan tambahan memberi manfaat</td>
+<td style="text-align: left;">F1, precision, recall</td>
+</tr>
+</tbody>
+</table>
+<p>Gunakan pembagian train/validation/test dan konfigurasi model yang
+konsisten. Jika memungkinkan, laporkan variasi hasil dari beberapa seed
+atau validasi silang yang sesuai dengan struktur data. Untuk data
+berbasis waktu, pertimbangkan pemisahan temporal agar evaluasi
+menyerupai penggunaan pada data masa depan.</p>
+<h2 id="checklist-sebelum-regex-digunakan-dalam-penelitian">Checklist Sebelum Regex Digunakan dalam Penelitian</h2>
+<ul>
+<li>[ ] Tujuan setiap aturan dijelaskan.</li>
+<li>[ ] Teks mentah dipertahankan secara aman.</li>
+<li>[ ] Urutan preprocessing terdokumentasi.</li>
+<li>[ ] Pola diuji pada contoh positif dan negatif.</li>
+<li>[ ] Kasus tepi sudah diperiksa.</li>
+<li>[ ] Hashtag, emoji, angka, dan tanda baca tidak dihapus tanpa alasan.</li>
+<li>[ ] Data pribadi ditangani secara etis dan aman.</li>
+<li>[ ] Tidak ada informasi test set yang digunakan untuk menyusun aturan.</li>
+<li>[ ] Hasil preprocessing diperiksa manual pada sampel.</li>
+<li>[ ] Dampak preprocessing terhadap performa model dievaluasi.</li>
+<li>[ ] Kode dan versi aturan disimpan untuk reproduksibilitas.</li>
+</ul>
+<h2 id="referensi-dokumentasi">Referensi Dokumentasi</h2>
+<ol>
+<li><a href="https://docs.python.org/3/howto/regex.html">Python Software Foundation</a>. <em>Regular Expression HOWTO</em>.</li>
+<li><a href="https://docs.python.org/3/library/re.html">Python Software Foundation</a>. <em><code>re</code> — Regular expression operations</em>.</li>
+<li><a href="https://regex101.com/">Regex101</a>. <em>Online regular expression tester</em>.</li>
+</ol>
+<p>Dokumentasi resmi Python merupakan rujukan utama untuk sintaks dan
+perilaku modul <code>re</code>. Periksa dokumentasi sesuai versi Python yang
+digunakan dalam eksperimen.</p>
+<h2 id="penutup">Penutup</h2>
+<p>Regex efektif untuk aturan tekstual yang eksplisit, ekstraksi pola, dan
+sebagian tahap preprocessing. Dalam penelitian NLP berbasis media
+sosial, kualitas penerapan Regex ditentukan oleh alasan metodologis,
+pengujian pada data nyata, dokumentasi, serta evaluasi dampaknya
+terhadap model.</p>
+<p>Untuk penelitian terkait bencana atau permintaan bantuan darurat,
+gunakan Regex sebagai komponen pendukung—misalnya ekstraksi fitur atau
+penyaringan awal—bukan satu-satunya penentu urgensi. Keputusan yang
+berdampak pada keselamatan manusia memerlukan validasi yang memadai,
+konteks, dan pengawasan manusia.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../02-fundamentals-nlp/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Fundamental NLP">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Fundamental NLP
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../04-text-preprocessing/" class="md-footer__link md-footer__link--next" aria-label="Next: Text Processing">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Text Processing
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

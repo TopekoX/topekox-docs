@@ -1,0 +1,3297 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../01-nlp/07-evaluasi-nlp-klasifikasi-text/">
+      
+      
+        <link rel="next" href="../09-deep-learning/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Word Embedding - Topekox Belajar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#word-embedding" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Topekox Belajar" class="md-header__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Topekox Belajar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Word Embedding
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Topekox Belajar" class="md-nav__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Topekox Belajar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disaster AI System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Disaster AI System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP Foundation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NLP Foundation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/01-python-untuk-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/02-fundamentals-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamental NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/03-regex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/04-text-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/05-text-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Representation & TF-IDF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/06-machine-learning-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/07-evaluasi-nlp-klasifikasi-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluasi NLP Klasifikasi Text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Word Embedding
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Word Embedding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-apa-itu-word-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Apa Itu Word Embedding?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Apa Itu Word Embedding?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-alur-word-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Alur Word Embedding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mengapa-word-embedding-dibutuhkan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Mengapa Word Embedding Dibutuhkan?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-perbedaan-representasi-teks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Perbedaan Representasi Teks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-memahami-vektor-dan-dimensi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Memahami Vektor dan Dimensi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Memahami Vektor dan Dimensi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-praktik-python-membuat-vektor-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Praktik Python: Membuat Vektor Sederhana
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-bagaimana-word-embedding-dipelajari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Bagaimana Word Embedding Dipelajari?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Bagaimana Word Embedding Dipelajari?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-konsep-utama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Konsep Utama
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-word2vec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Word2Vec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Word2Vec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-cbow-continuous-bag-of-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 CBOW (Continuous Bag of Words)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-skip-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Skip-Gram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-perbandingan-cbow-dan-skip-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Perbandingan CBOW dan Skip-Gram
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-implementasi-word2vec-dengan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Implementasi Word2Vec dengan Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Implementasi Word2Vec dengan Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-instalasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Instalasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-menyiapkan-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Menyiapkan Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-melatih-model-word2vec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Melatih Model Word2Vec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-mengambil-embedding-kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Mengambil Embedding Kata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-memeriksa-vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Memeriksa Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-mengukur-kemiripan-kata-dengan-cosine-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Mengukur Kemiripan Kata dengan Cosine Similarity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Mengukur Kemiripan Kata dengan Cosine Similarity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-praktik-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Praktik Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-mencari-kata-yang-mirip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Mencari Kata yang Mirip
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-keterbatasan-word2vec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Keterbatasan Word2Vec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Keterbatasan Word2Vec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-satu-kata-satu-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Satu Kata, Satu Embedding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-kata-di-luar-vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Kata di Luar Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-ketergantungan-pada-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Ketergantungan pada Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-dari-word2vec-ke-contextual-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Dari Word2Vec ke Contextual Embedding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-mengenal-fasttext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Mengenal FastText
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-hubungan-word-embedding-dengan-indobert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Hubungan Word Embedding dengan IndoBERT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Hubungan Word Embedding dengan IndoBERT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-mengambil-representasi-indobert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Mengambil Representasi IndoBERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-penerapan-untuk-penelitian-deteksi-permintaan-bantuan-darurat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Penerapan untuk Penelitian Deteksi Permintaan Bantuan Darurat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-latihan-mandiri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Latihan Mandiri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Latihan Mandiri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-vektor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Vektor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-word2vec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Word2Vec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-4-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 4 — Similarity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-5-analisis-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 5 — Analisis Parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-6-indobert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 6 — IndoBERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-RNN-LSTM-GRU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNN - LSTM - GRU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/11-attention-mechanism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attention Mechanism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/12-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/13-BERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBert
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IndoBert
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/14-IndoBERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/15-fine-tuningIndoBERT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/16-eksperimen-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eksperimen Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/17-dataset-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/18-data-annotation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Annotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/19-imbalanced-dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imbalanced Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/20-explainable-AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explainable AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Product
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/21-rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/22-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/23-jadikan-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jadikan Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beginner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Beginner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1: Nice to Meet You
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2: How Are You?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3: What Does She Look Like?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-apa-itu-word-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Apa Itu Word Embedding?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Apa Itu Word Embedding?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-alur-word-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Alur Word Embedding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mengapa-word-embedding-dibutuhkan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Mengapa Word Embedding Dibutuhkan?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-perbedaan-representasi-teks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Perbedaan Representasi Teks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-memahami-vektor-dan-dimensi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Memahami Vektor dan Dimensi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Memahami Vektor dan Dimensi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-praktik-python-membuat-vektor-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Praktik Python: Membuat Vektor Sederhana
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-bagaimana-word-embedding-dipelajari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Bagaimana Word Embedding Dipelajari?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Bagaimana Word Embedding Dipelajari?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-konsep-utama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Konsep Utama
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-word2vec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Word2Vec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Word2Vec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-cbow-continuous-bag-of-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 CBOW (Continuous Bag of Words)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-skip-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Skip-Gram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-perbandingan-cbow-dan-skip-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Perbandingan CBOW dan Skip-Gram
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-implementasi-word2vec-dengan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Implementasi Word2Vec dengan Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Implementasi Word2Vec dengan Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-instalasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Instalasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-menyiapkan-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Menyiapkan Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-melatih-model-word2vec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Melatih Model Word2Vec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-mengambil-embedding-kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Mengambil Embedding Kata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-memeriksa-vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Memeriksa Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-mengukur-kemiripan-kata-dengan-cosine-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Mengukur Kemiripan Kata dengan Cosine Similarity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Mengukur Kemiripan Kata dengan Cosine Similarity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-praktik-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Praktik Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-mencari-kata-yang-mirip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Mencari Kata yang Mirip
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-keterbatasan-word2vec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Keterbatasan Word2Vec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Keterbatasan Word2Vec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-satu-kata-satu-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Satu Kata, Satu Embedding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-kata-di-luar-vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Kata di Luar Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-ketergantungan-pada-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Ketergantungan pada Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-dari-word2vec-ke-contextual-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Dari Word2Vec ke Contextual Embedding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-mengenal-fasttext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Mengenal FastText
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-hubungan-word-embedding-dengan-indobert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Hubungan Word Embedding dengan IndoBERT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Hubungan Word Embedding dengan IndoBERT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-mengambil-representasi-indobert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Mengambil Representasi IndoBERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-penerapan-untuk-penelitian-deteksi-permintaan-bantuan-darurat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Penerapan untuk Penelitian Deteksi Permintaan Bantuan Darurat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-latihan-mandiri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Latihan Mandiri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Latihan Mandiri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-vektor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Vektor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-word2vec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Word2Vec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-4-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 4 — Similarity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-5-analisis-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 5 — Analisis Parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-6-indobert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 6 — IndoBERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Disaster AI System
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Deep Learning
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="word-embedding">Word Embedding</h1>
+<h2 id="1-tujuan-pembelajaran">1. Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, Anda diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan pengertian dan fungsi Word Embedding.</li>
+<li>Memahami perbedaan One-Hot Encoding, Bag of Words, TF-IDF, dan Word Embedding.</li>
+<li>Memahami konsep vektor, dimensi, dan kedekatan semantik kata.</li>
+<li>Memahami metode Word2Vec, CBOW, dan Skip-Gram.</li>
+<li>Membuat Word Embedding menggunakan Python.</li>
+<li>Mengukur kemiripan kata menggunakan Cosine Similarity.</li>
+<li>Memahami keterbatasan Word Embedding klasik dan hubungannya dengan BERT/IndoBERT.</li>
+</ol>
+<h2 id="2-apa-itu-word-embedding">2. Apa Itu Word Embedding?</h2>
+<p><strong>Word Embedding adalah teknik untuk merepresentasikan kata sebagai vektor numerik berdimensi tertentu sehingga pola hubungan antarkata dapat dipelajari oleh komputer.</strong></p>
+<p>Komputer tidak secara langsung memahami makna kata seperti manusia. Misalnya, teks berikut:</p>
+<div class="highlight"><pre><span></span><code>banjir
+bantuan
+korban
+sekolah
+</code></pre></div>
+<p>dapat direpresentasikan sebagai vektor angka.</p>
+<table>
+<thead>
+<tr>
+<th>Kata</th>
+<th>Representasi vektor (ilustrasi)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>banjir</td>
+<td><code>[0.21, -0.43, 0.82, ...]</code></td>
+</tr>
+<tr>
+<td>bantuan</td>
+<td><code>[0.35, 0.18, 0.71, ...]</code></td>
+</tr>
+<tr>
+<td>korban</td>
+<td><code>[0.29, -0.12, 0.65, ...]</code></td>
+</tr>
+<tr>
+<td>sekolah</td>
+<td><code>[-0.42, 0.76, -0.18, ...]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Angka tersebut hanya ilustrasi, bukan hasil pelatihan model nyata.</p>
+<p>Setiap kata direpresentasikan oleh vektor dengan jumlah dimensi tertentu. Contohnya, embedding 100 dimensi berarti satu kata direpresentasikan oleh 100 angka.</p>
+<h3 id="21-alur-word-embedding">2.1 Alur Word Embedding</h3>
+<div class="highlight"><pre><span></span><code>Teks
+"Korban banjir membutuhkan bantuan"
+        |
+        v
+Tokenisasi
+["Korban", "banjir", "membutuhkan", "bantuan"]
+        |
+        v
+Embedding
+Setiap token dipetakan ke vektor numerik
+        |
+        v
+Representasi numerik
+[0.21, -0.43, ...]
+</code></pre></div>
+<p>Vektor tersebut kemudian dapat digunakan oleh model Machine Learning atau Deep Learning untuk mempelajari pola dari teks.</p>
+<h2 id="3-mengapa-word-embedding-dibutuhkan">3. Mengapa Word Embedding Dibutuhkan?</h2>
+<p>Sebelum mempelajari Word Embedding, pahami keterbatasan representasi teks klasik.</p>
+<p>Contoh corpus:</p>
+<div class="highlight"><pre><span></span><code>Dokumen 1: korban membutuhkan bantuan
+Dokumen 2: korban memerlukan pertolongan
+Dokumen 3: siswa membaca buku
+</code></pre></div>
+<p>Secara makna, kata <em>bantuan</em> dan <em>pertolongan</em> memiliki hubungan yang dekat. Namun, Bag of Words dan TF-IDF tidak secara langsung mengetahui bahwa kedua kata tersebut mirip makna.</p>
+<p>Word Embedding dapat mempelajari hubungan tersebut dari pola kemunculan kata dalam data pelatihan.</p>
+<p><strong>Word Embedding tidak otomatis memahami makna seperti manusia.</strong> Kualitas representasinya bergantung pada data, metode, dan proses pelatihan.</p>
+<h2 id="4-perbedaan-representasi-teks">4. Perbedaan Representasi Teks</h2>
+<table>
+<thead>
+<tr>
+<th>Metode</th>
+<th>Karakteristik</th>
+<th>Keterbatasan utama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-Hot Encoding</td>
+<td>Satu posisi bernilai 1 untuk setiap kata</td>
+<td>Dimensi besar dan tidak merepresentasikan kemiripan makna</td>
+</tr>
+<tr>
+<td>Bag of Words</td>
+<td>Menghitung frekuensi kata</td>
+<td>Tidak memahami urutan kata dan hubungan semantik secara langsung</td>
+</tr>
+<tr>
+<td>TF-IDF</td>
+<td>Memberi bobot berdasarkan frekuensi dan kelangkaan kata</td>
+<td>Tidak secara langsung mempelajari kemiripan semantik</td>
+</tr>
+<tr>
+<td>Word2Vec</td>
+<td>Mempelajari vektor kata dari konteks</td>
+<td>Umumnya satu kata memiliki satu vektor, meskipun konteksnya berbeda</td>
+</tr>
+<tr>
+<td>Contextual Embedding</td>
+<td>Representasi dipengaruhi konteks kalimat</td>
+<td>Memerlukan model kontekstual yang lebih kompleks</td>
+</tr>
+</tbody>
+</table>
+<p>Contoh perbedaan:</p>
+<ul>
+<li><strong>TF-IDF:</strong> kata <em>bantuan</em> direpresentasikan berdasarkan bobotnya dalam dokumen.</li>
+<li><strong>Word2Vec:</strong> kata <em>bantuan</em> direpresentasikan berdasarkan pola konteks yang dipelajari selama pelatihan.</li>
+<li><strong>IndoBERT:</strong> representasi token dapat berubah berdasarkan konteks kalimat tempat token digunakan.</li>
+</ul>
+<h2 id="5-memahami-vektor-dan-dimensi">5. Memahami Vektor dan Dimensi</h2>
+<p>Vektor adalah kumpulan angka yang merepresentasikan sebuah objek. Dalam Word Embedding, objek tersebut berupa kata atau token.</p>
+<p>Contoh:</p>
+<div class="arithmatex">\[
+v_{\text{banjir}} = [0.2,\ 0.7,\ -0.4]
+\]</div>
+<p>Vektor tersebut mempunyai tiga dimensi.</p>
+<p>Setiap dimensi merupakan nilai yang dipelajari model. Pada embedding modern, dimensi-dimensi tersebut biasanya tidak memiliki arti sederhana yang dapat ditafsirkan secara terpisah.</p>
+<h3 id="51-praktik-python-membuat-vektor-sederhana">5.1 Praktik Python: Membuat Vektor Sederhana</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">embedding</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"banjir"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">]),</span>
+    <span class="s2">"bantuan"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">]),</span>
+    <span class="s2">"sekolah"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">vector</span> <span class="ow">in</span> <span class="n">embedding</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kata: </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Vektor: </span><span class="si">{</span><span class="n">vector</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dimensi: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Kata: banjir
+Vektor: [ 0.2  0.7 -0.4]
+Dimensi: 3
+
+Kata: bantuan
+Vektor: [ 0.3  0.6 -0.2]
+Dimensi: 3
+
+Kata: sekolah
+Vektor: [-0.5  0.1  0.8]
+Dimensi: 3
+</code></pre></div>
+<p>Vektor di atas dibuat secara manual untuk latihan. Dalam model Word2Vec, nilai vektor dipelajari dari data pelatihan.</p>
+<h2 id="6-bagaimana-word-embedding-dipelajari">6. Bagaimana Word Embedding Dipelajari?</h2>
+<p>Salah satu pendekatan yang populer adalah mempelajari hubungan kata melalui konteks kemunculannya.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Korban banjir membutuhkan bantuan
+Warga banjir membutuhkan bantuan
+Korban gempa membutuhkan bantuan
+</code></pre></div>
+<p>Kata <em>korban</em>, <em>banjir</em>, <em>gempa</em>, dan <em>bantuan</em> muncul dalam pola konteks tertentu. Model belajar mengenali pola statistik tersebut selama pelatihan.</p>
+<h3 id="61-konsep-utama">6.1 Konsep Utama</h3>
+<ul>
+<li><strong>Corpus:</strong> kumpulan teks untuk melatih model.</li>
+<li><strong>Vocabulary:</strong> kumpulan token yang dikenali model.</li>
+<li><strong>Context window:</strong> sejumlah token di sekitar kata target yang digunakan untuk belajar.</li>
+<li><strong>Embedding dimension:</strong> jumlah angka yang digunakan untuk merepresentasikan setiap kata.</li>
+<li><strong>Training:</strong> proses memperbarui parameter model agar tugas prediksi kata menjadi lebih baik.</li>
+</ul>
+<p>Contoh context window berukuran 2:</p>
+<div class="highlight"><pre><span></span><code>Kalimat:
+Korban banjir membutuhkan bantuan segera
+
+Target:
+membutuhkan
+
+Konteks:
+Korban, banjir, bantuan, segera
+</code></pre></div>
+<p>Dalam contoh tersebut, model menggunakan dua kata di sebelah kiri dan dua kata di sebelah kanan sebagai konteks.</p>
+<h2 id="7-word2vec">7. Word2Vec</h2>
+<p>Word2Vec adalah metode pembelajaran representasi kata yang diperkenalkan oleh Tomas Mikolov dan rekan-rekannya.</p>
+<p>Word2Vec memiliki dua arsitektur utama.</p>
+<h3 id="71-cbow-continuous-bag-of-words">7.1 CBOW (Continuous Bag of Words)</h3>
+<p>Model menggunakan kata-kata di sekitar suatu kata untuk memprediksi kata target.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Konteks: korban banjir ___ bantuan
+Target: membutuhkan
+</code></pre></div>
+<h3 id="72-skip-gram">7.2 Skip-Gram</h3>
+<p>Model menggunakan kata target untuk memprediksi kata-kata di sekitarnya.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Target: membutuhkan
+Konteks yang diprediksi: banjir, bantuan
+</code></pre></div>
+<p>Perbedaan keduanya terletak pada arah prediksi, bukan pada tujuan akhirnya. Keduanya berusaha mempelajari representasi kata dari konteks.</p>
+<h3 id="73-perbandingan-cbow-dan-skip-gram">7.3 Perbandingan CBOW dan Skip-Gram</h3>
+<table>
+<thead>
+<tr>
+<th>Aspek</th>
+<th>CBOW</th>
+<th>Skip-Gram</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>Kata konteks</td>
+<td>Kata target</td>
+</tr>
+<tr>
+<td>Prediksi</td>
+<td>Kata target</td>
+<td>Kata konteks</td>
+</tr>
+<tr>
+<td>Karakteristik umum</td>
+<td>Sering efisien untuk data besar</td>
+<td>Dapat bermanfaat untuk kata yang jarang muncul</td>
+</tr>
+<tr>
+<td>Tujuan</td>
+<td>Mempelajari embedding kata</td>
+<td>Mempelajari embedding kata</td>
+</tr>
+</tbody>
+</table>
+<p>Karakteristik tersebut bukan jaminan performa. Hasil aktual bergantung pada ukuran corpus, parameter, dan distribusi kata.</p>
+<h2 id="8-implementasi-word2vec-dengan-python">8. Implementasi Word2Vec dengan Python</h2>
+<p>Pada bagian ini, kita membangun Word Embedding menggunakan pustaka Gensim.</p>
+<h3 id="81-instalasi">8.1 Instalasi</h3>
+<p>Jalankan pada terminal atau Jupyter Notebook:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>gensim<span class="w"> </span>numpy
+</code></pre></div>
+<h3 id="82-menyiapkan-corpus">8.2 Menyiapkan Corpus</h3>
+<p>Untuk Word2Vec, teks umumnya ditokenisasi menjadi daftar token.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">"korban"</span><span class="p">,</span> <span class="s2">"banjir"</span><span class="p">,</span> <span class="s2">"membutuhkan"</span><span class="p">,</span> <span class="s2">"bantuan"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"warga"</span><span class="p">,</span> <span class="s2">"terdampak"</span><span class="p">,</span> <span class="s2">"banjir"</span><span class="p">,</span> <span class="s2">"membutuhkan"</span><span class="p">,</span> <span class="s2">"bantuan"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"korban"</span><span class="p">,</span> <span class="s2">"gempa"</span><span class="p">,</span> <span class="s2">"membutuhkan"</span><span class="p">,</span> <span class="s2">"pertolongan"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"tim"</span><span class="p">,</span> <span class="s2">"relawan"</span><span class="p">,</span> <span class="s2">"memberikan"</span><span class="p">,</span> <span class="s2">"bantuan"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"warga"</span><span class="p">,</span> <span class="s2">"mencari"</span><span class="p">,</span> <span class="s2">"tempat"</span><span class="p">,</span> <span class="s2">"pengungsian"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"siswa"</span><span class="p">,</span> <span class="s2">"belajar"</span><span class="p">,</span> <span class="s2">"di"</span><span class="p">,</span> <span class="s2">"sekolah"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"guru"</span><span class="p">,</span> <span class="s2">"mengajar"</span><span class="p">,</span> <span class="s2">"di"</span><span class="p">,</span> <span class="s2">"sekolah"</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['korban', 'banjir', 'membutuhkan', 'bantuan']
+['warga', 'terdampak', 'banjir', 'membutuhkan', 'bantuan']
+['korban', 'gempa', 'membutuhkan', 'pertolongan']
+['tim', 'relawan', 'memberikan', 'bantuan']
+['warga', 'mencari', 'tempat', 'pengungsian']
+['siswa', 'belajar', 'di', 'sekolah']
+['guru', 'mengajar', 'di', 'sekolah']
+</code></pre></div>
+<p>Corpus ini hanya untuk demonstrasi. Terlalu kecil untuk menghasilkan embedding yang andal untuk penelitian.</p>
+<h3 id="83-melatih-model-word2vec">8.3 Melatih Model Word2Vec</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span>
+    <span class="n">sentences</span><span class="o">=</span><span class="n">sentences</span><span class="p">,</span>
+    <span class="n">vector_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran vocabulary:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dimensi embedding:"</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Ukuran vocabulary: 20
+Dimensi embedding: 50
+</code></pre></div>
+<p>Jumlah vocabulary mengikuti kata unik yang ada dalam corpus. Dimensi embedding ditetapkan menjadi 50 melalui <code>vector_size=50</code>.</p>
+<p>Arti parameter:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Penjelasan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sentences</code></td>
+<td>Corpus yang telah ditokenisasi</td>
+</tr>
+<tr>
+<td><code>vector_size=50</code></td>
+<td>Setiap kata memiliki vektor 50 dimensi</td>
+</tr>
+<tr>
+<td><code>window=2</code></td>
+<td>Ukuran jendela konteks</td>
+</tr>
+<tr>
+<td><code>min_count=1</code></td>
+<td>Kata yang muncul minimal sekali dipertahankan</td>
+</tr>
+<tr>
+<td><code>sg=1</code></td>
+<td>Menggunakan Skip-Gram</td>
+</tr>
+<tr>
+<td><code>workers=1</code></td>
+<td>Menggunakan satu worker</td>
+</tr>
+<tr>
+<td><code>seed=42</code></td>
+<td>Membantu reproduksibilitas</td>
+</tr>
+<tr>
+<td><code>epochs=100</code></td>
+<td>Jumlah putaran pelatihan</td>
+</tr>
+</tbody>
+</table>
+<p>Untuk menggunakan CBOW, ubah <code>sg=1</code> menjadi <code>sg=0</code>.</p>
+<h3 id="84-mengambil-embedding-kata">8.4 Mengambil Embedding Kata</h3>
+<div class="highlight"><pre><span></span><code><span class="n">vector</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">"banjir"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vektor banjir:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dimensi:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">))</span>
+</code></pre></div>
+<p>Output menampilkan 50 angka yang dipelajari selama training. Nilai persisnya dapat bergantung pada lingkungan dan versi pustaka.</p>
+<p>Contoh bentuk output:</p>
+<div class="highlight"><pre><span></span><code>Vektor banjir:
+[ 0.012 ... -0.034 ...]
+
+Dimensi: 50
+</code></pre></div>
+<p>Tanda <code>...</code> menunjukkan bahwa sebagian nilai dihilangkan dari ilustrasi, bukan output literal Python.</p>
+<h3 id="85-memeriksa-vocabulary">8.5 Memeriksa Vocabulary</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</code></pre></div>
+<p>Perintah ini menampilkan kata-kata yang dikenali model beserta indeksnya dalam vocabulary.</p>
+<p>Jika kata tidak ada dalam vocabulary, pemanggilan seperti <code>model.wv["tsunami"]</code> akan menghasilkan <code>KeyError</code>. Untuk penggunaan nyata, model harus dilatih dengan corpus yang cukup representatif atau menggunakan pendekatan yang mampu menangani kata yang belum pernah dilihat.</p>
+<h2 id="9-mengukur-kemiripan-kata-dengan-cosine-similarity">9. Mengukur Kemiripan Kata dengan Cosine Similarity</h2>
+<p>Salah satu metode umum untuk membandingkan dua embedding adalah <strong>cosine similarity</strong>.</p>
+<div class="arithmatex">\[
+\operatorname{cos}(A,B) =
+\frac{A \cdot B}{\|A\|\|B\|}
+\]</div>
+<p>Nilainya secara matematis berada di antara -1 dan 1 untuk vektor nonnol.</p>
+<ul>
+<li>Mendekati 1: arah vektor serupa.</li>
+<li>Mendekati 0: vektor relatif tegak lurus.</li>
+<li>Mendekati -1: arah vektor berlawanan.</li>
+</ul>
+<p>Nilai ini bukan ukuran kebenaran makna kata secara mutlak.</p>
+<h3 id="91-praktik-python">9.1 Praktik Python</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="n">v_banjir</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">"banjir"</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">v_bantuan</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">"bantuan"</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">v_sekolah</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">"sekolah"</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">sim_banjir_bantuan</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span>
+    <span class="n">v_banjir</span><span class="p">,</span> <span class="n">v_bantuan</span>
+<span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">sim_banjir_sekolah</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span>
+    <span class="n">v_banjir</span><span class="p">,</span> <span class="n">v_sekolah</span>
+<span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Banjir - Bantuan:"</span><span class="p">,</span> <span class="n">sim_banjir_bantuan</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Banjir - Sekolah:"</span><span class="p">,</span> <span class="n">sim_banjir_sekolah</span><span class="p">)</span>
+</code></pre></div>
+<p>Hasil numeriknya bergantung pada embedding yang dipelajari. Jangan mengasumsikan bahwa kemiripan <code>banjir</code> dan <code>bantuan</code> pasti lebih tinggi daripada <code>banjir</code> dan <code>sekolah</code>, terutama karena corpus demonstrasi ini sangat kecil.</p>
+<h3 id="92-mencari-kata-yang-mirip">9.2 Mencari Kata yang Mirip</h3>
+<p>Gensim menyediakan fungsi untuk mencari kata terdekat:</p>
+<div class="highlight"><pre><span></span><code><span class="n">similar_words</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span>
+    <span class="s2">"banjir"</span><span class="p">,</span>
+    <span class="n">topn</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">similar_words</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<p>Output berbentuk:</p>
+<div class="highlight"><pre><span></span><code>kata_1: skor_kemiripan
+kata_2: skor_kemiripan
+kata_3: skor_kemiripan
+</code></pre></div>
+<p>Kata dan skornya berasal dari model yang benar-benar dilatih. Dengan corpus kecil, hasilnya belum layak ditafsirkan sebagai pengetahuan bahasa yang andal.</p>
+<h2 id="10-keterbatasan-word2vec">10. Keterbatasan Word2Vec</h2>
+<h3 id="101-satu-kata-satu-embedding">10.1 Satu Kata, Satu Embedding</h3>
+<p>Word2Vec klasik memberikan satu vektor untuk setiap kata dalam vocabulary.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Banjir melanda wilayah tersebut.
+Informasi itu membanjiri media sosial.
+</code></pre></div>
+<p>Kata <em>membanjiri</em> digunakan secara literal pada konteks pertama dan metaforis pada konteks kedua. Word2Vec klasik tidak menghasilkan embedding berbeda berdasarkan konteks kalimat tersebut.</p>
+<h3 id="102-kata-di-luar-vocabulary">10.2 Kata di Luar Vocabulary</h3>
+<p>Word2Vec umumnya tidak dapat menghasilkan embedding untuk kata yang tidak ada dalam vocabulary ketika training.</p>
+<p>Hal ini menjadi tantangan untuk media sosial, karena banyak kata informal, singkatan, salah ketik, dan variasi ejaan.</p>
+<h3 id="103-ketergantungan-pada-corpus">10.3 Ketergantungan pada Corpus</h3>
+<p>Embedding yang dilatih dengan corpus berita mungkin berbeda dari embedding yang dilatih dengan percakapan media sosial.</p>
+<p>Untuk penelitian, pemilihan data pelatihan dan evaluasi sangat penting.</p>
+<h2 id="11-dari-word2vec-ke-contextual-embedding">11. Dari Word2Vec ke Contextual Embedding</h2>
+<p>Perkembangan representasi teks dapat diringkas sebagai berikut:</p>
+<div class="highlight"><pre><span></span><code>TF-IDF
+Bobot kata berdasarkan dokumen
+        |
+        v
+Word2Vec / FastText
+Vektor kata yang dipelajari dari konteks
+        |
+        v
+Transformer / BERT
+Representasi yang dipengaruhi konteks kalimat
+        |
+        v
+IndoBERT
+Representasi kontekstual untuk bahasa Indonesia
+</code></pre></div>
+<p>Ini merupakan gambaran perkembangan pendekatan, bukan berarti TF-IDF harus selalu diganti Word2Vec atau Word2Vec harus selalu digunakan sebelum BERT. Untuk penelitian klasifikasi teks, TF-IDF dapat tetap menjadi baseline yang kuat dan berguna.</p>
+<h2 id="12-mengenal-fasttext">12. Mengenal FastText</h2>
+<p>FastText merupakan pendekatan embedding yang dikembangkan oleh Facebook AI Research. Salah satu kelebihannya adalah penggunaan informasi subkata (<em>subword</em>).</p>
+<p>Contoh kata:</p>
+<div class="highlight"><pre><span></span><code>membantu
+bantuan
+membutuhkan
+</code></pre></div>
+<p>FastText mempelajari representasi kata dengan memanfaatkan karakter n-gram. Hal ini dapat membantu menangani variasi morfologi dan kata yang tidak pernah muncul persis dalam vocabulary, meskipun bukan jaminan bahwa semua typo atau slang dapat ditangani dengan benar.</p>
+<p>FastText layak dipelajari setelah Word2Vec, khususnya jika Anda bekerja dengan teks bahasa Indonesia yang mempunyai banyak imbuhan dan variasi penulisan.</p>
+<h2 id="13-hubungan-word-embedding-dengan-indobert">13. Hubungan Word Embedding dengan IndoBERT</h2>
+<p>IndoBERT juga menggunakan embedding, tetapi arsitekturnya lebih kompleks daripada Word2Vec.</p>
+<p>Pada IndoBERT, teks dipecah menjadi token menggunakan tokenizer model. Token kemudian direpresentasikan melalui embedding dan diproses oleh lapisan Transformer sehingga representasinya dipengaruhi konteks.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Kalimat A:
+Korban membutuhkan bantuan.
+
+Kalimat B:
+Bantuan tersebut diberikan kepada korban.
+</code></pre></div>
+<p>Pada model kontekstual, representasi token dipengaruhi oleh kata-kata di sekitarnya. Tokenisasi IndoBERT juga menggunakan subword, sehingga satu kata dapat terdiri atas beberapa token.</p>
+<h3 id="131-mengambil-representasi-indobert">13.1 Mengambil Representasi IndoBERT</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModel</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">"indobenchmark/indobert-base-p1"</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">bert_model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"Korban banjir membutuhkan bantuan."</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="s2">"pt"</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">bert_model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Input IDs:"</span><span class="p">,</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">"input_ids"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Hidden state shape:"</span><span class="p">,</span> <span class="n">outputs</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+<p>Output <code>hidden state shape</code> berbentuk:</p>
+<div class="highlight"><pre><span></span><code>torch.Size([1, jumlah_token, hidden_size])
+</code></pre></div>
+<p>Untuk model IndoBERT base yang umum digunakan, <code>hidden_size</code> adalah 768. Jumlah token bergantung pada hasil tokenisasi, termasuk token khusus.</p>
+<p><code>last_hidden_state</code> berisi representasi kontekstual setiap token. Ini berbeda dari vektor statis Word2Vec.</p>
+<p>Kode ini memerlukan akses untuk mengunduh model pertama kali dan lingkungan dengan pustaka <code>torch</code> serta <code>transformers</code> yang kompatibel.</p>
+<p>Instalasi pustaka jika diperlukan:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>transformers
+</code></pre></div>
+<h2 id="14-penerapan-untuk-penelitian-deteksi-permintaan-bantuan-darurat">14. Penerapan untuk Penelitian Deteksi Permintaan Bantuan Darurat</h2>
+<p>Dalam penelitian, Word Embedding dapat digunakan untuk memahami pendekatan representasi teks sebelum membangun model IndoBERT.</p>
+<p>Contoh alur penelitian:</p>
+<div class="highlight"><pre><span></span><code>Tweet Bahasa Indonesia
+        |
+        v
+Pembersihan teks yang sesuai
+        |
+        v
+Dataset berlabel
+        |
+        v
+Baseline TF-IDF + SVM
+        |
+        v
+Eksperimen Word2Vec / FastText
+        |
+        v
+Fine-tuning IndoBERT
+        |
+        v
+Evaluasi dan perbandingan
+</code></pre></div>
+<p>Anda tidak wajib memakai Word2Vec sebagai model utama. Word2Vec lebih tepat dipelajari untuk memahami evolusi representasi kata dan menjadi dasar konseptual sebelum contextual embedding.</p>
+<p>Untuk penelitian yang baik, bandingkan model dengan pembagian data yang konsisten, metrik yang sesuai, dan pencegahan data leakage. Pada deteksi permintaan bantuan darurat, perhatikan khususnya <strong>recall kelas Emergency</strong> dan <strong>F1-score</strong>.</p>
+<h2 id="15-latihan-mandiri">15. Latihan Mandiri</h2>
+<p>Kerjakan latihan berikut secara berurutan.</p>
+<h3 id="latihan-1-vektor">Latihan 1 — Vektor</h3>
+<p>Buat tiga vektor kata secara manual dan periksa dimensinya.</p>
+<h3 id="latihan-2-corpus">Latihan 2 — Corpus</h3>
+<p>Buat minimal 20 kalimat berbahasa Indonesia yang berkaitan dengan bencana.</p>
+<h3 id="latihan-3-word2vec">Latihan 3 — Word2Vec</h3>
+<p>Latih model CBOW dan Skip-Gram dengan corpus yang sama.</p>
+<h3 id="latihan-4-similarity">Latihan 4 — Similarity</h3>
+<p>Bandingkan cosine similarity beberapa pasangan kata.</p>
+<h3 id="latihan-5-analisis-parameter">Latihan 5 — Analisis Parameter</h3>
+<p>Ubah ukuran <code>window</code> dan dimensi embedding, lalu amati perubahan hasil.</p>
+<h3 id="latihan-6-indobert">Latihan 6 — IndoBERT</h3>
+<p>Ambil <code>last_hidden_state</code> IndoBERT dan periksa dimensi output-nya.</p>
+<h2 id="16-ringkasan">16. Ringkasan</h2>
+<p>Hal-hal terpenting yang perlu diingat:</p>
+<ul>
+<li>Word Embedding merepresentasikan kata sebagai vektor numerik.</li>
+<li>Word2Vec mempelajari vektor kata melalui konteks, dengan arsitektur CBOW dan Skip-Gram.</li>
+<li>Cosine Similarity dapat digunakan untuk membandingkan arah vektor.</li>
+<li>Word2Vec klasik menggunakan embedding statis, sedangkan BERT menghasilkan representasi kontekstual.</li>
+<li>FastText memanfaatkan informasi subkata untuk membantu merepresentasikan variasi kata.</li>
+<li>Dalam penelitian, TF-IDF + SVM tetap berguna sebagai baseline untuk dibandingkan dengan IndoBERT.</li>
+</ul>
+<p><strong>Tahap berikutnya dalam roadmap NLP:</strong> pelajari dasar Deep Learning dan PyTorch, khususnya tensor, embedding layer, loss function, optimizer, dan training loop. Setelah itu, lanjutkan ke RNN/LSTM secara konseptual sebelum mendalami Attention dan Transformer.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../01-nlp/07-evaluasi-nlp-klasifikasi-text/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Evaluasi NLP Klasifikasi Text">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Evaluasi NLP Klasifikasi Text
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../09-deep-learning/" class="md-footer__link md-footer__link--next" aria-label="Next: Deep Learning untuk NLP">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Deep Learning untuk NLP
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

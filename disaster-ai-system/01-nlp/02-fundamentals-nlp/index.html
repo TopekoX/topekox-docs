@@ -1,0 +1,3926 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../01-python-untuk-nlp/">
+      
+      
+        <link rel="next" href="../03-regex/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Fundamental NLP - Topekox Belajar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamental-nlp-natural-language-processing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Topekox Belajar" class="md-header__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Topekox Belajar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fundamental NLP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Topekox Belajar" class="md-nav__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Topekox Belajar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disaster AI System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Disaster AI System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP Foundation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NLP Foundation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-python-untuk-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamental NLP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamental NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-apa-itu-natural-language-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Apa Itu Natural Language Processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-nlp-dalam-penelitian-ini" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. NLP dalam Penelitian Ini
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Text
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Document
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sentence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Sentence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Token
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-mengapa-token-penting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Mengapa Token Penting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-word-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Word Tokenization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-subword-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Subword Tokenization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Corpus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-dataset-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Dataset NLP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-feature-dan-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Feature dan Label
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-text-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Text Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-binary-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Binary Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-multi-class-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Multi-Class Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-nlp-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. NLP Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-nlp-klasik-vs-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. NLP Klasik vs Transformer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. NLP Klasik vs Transformer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nlp-klasik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NLP Klasik
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-mengapa-tidak-langsung-menggunakan-indobert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Mengapa Tidak Langsung Menggunakan IndoBERT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-nlp-dan-konteks-bahasa-indonesia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. NLP dan Konteks Bahasa Indonesia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-konteks-lebih-penting-daripada-kata-saja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Konteks Lebih Penting daripada Kata Saja
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-contoh-sederhana-pipeline-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Contoh Sederhana Pipeline Penelitian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-istilah-yang-wajib-dikuasai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Istilah yang Wajib Dikuasai
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="23. Istilah yang Wajib Dikuasai">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sentence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sentence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tokenization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Label
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binary-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binary Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nlp-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NLP Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-latihan-1-analisis-teks-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Latihan 1 — Analisis Teks Sederhana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-latihan-2-kelompokkan-tweet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Latihan 2 — Kelompokkan Tweet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-latihan-3-buat-dataset-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Latihan 3 — Buat Dataset Sederhana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-latihan-4-tokenisasi-sederhana-dengan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Latihan 4 — Tokenisasi Sederhana dengan Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-latihan-5-buat-nlp-pipeline-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Latihan 5 — Buat NLP Pipeline Sederhana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-mini-project-text-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Mini Project — Text Analyzer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-checkpoint-fundamental-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Checkpoint Fundamental NLP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="30. Checkpoint Fundamental NLP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#konsep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Konsep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penelitian
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praktik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Praktik
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-hubungan-fundamental-nlp-dengan-roadmap-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Hubungan Fundamental NLP dengan Roadmap Penelitian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-regex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-text-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-text-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Representation & TF-IDF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-machine-learning-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-evaluasi-nlp-klasifikasi-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluasi NLP Klasifikasi Text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/08-word-embedding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Word Embedding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/09-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-deeplearning/10-RNN-LSTM-GRU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNN - LSTM - GRU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/11-attention-mechanism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attention Mechanism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/12-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/13-BERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBert
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IndoBert
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/14-IndoBERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/15-fine-tuningIndoBERT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/16-eksperimen-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eksperimen Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/17-dataset-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/18-data-annotation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Annotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/19-imbalanced-dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imbalanced Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/20-explainable-AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explainable AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Product
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/21-rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/22-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/23-jadikan-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jadikan Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beginner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Beginner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1: Nice to Meet You
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2: How Are You?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3: What Does She Look Like?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-apa-itu-natural-language-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Apa Itu Natural Language Processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-nlp-dalam-penelitian-ini" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. NLP dalam Penelitian Ini
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Text
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Document
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sentence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Sentence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Token
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-mengapa-token-penting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Mengapa Token Penting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-word-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Word Tokenization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-subword-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Subword Tokenization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Corpus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-dataset-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Dataset NLP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-feature-dan-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Feature dan Label
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-text-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Text Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-binary-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Binary Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-multi-class-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Multi-Class Classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-nlp-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. NLP Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-nlp-klasik-vs-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. NLP Klasik vs Transformer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. NLP Klasik vs Transformer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nlp-klasik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NLP Klasik
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-mengapa-tidak-langsung-menggunakan-indobert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Mengapa Tidak Langsung Menggunakan IndoBERT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-nlp-dan-konteks-bahasa-indonesia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. NLP dan Konteks Bahasa Indonesia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-konteks-lebih-penting-daripada-kata-saja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Konteks Lebih Penting daripada Kata Saja
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-contoh-sederhana-pipeline-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Contoh Sederhana Pipeline Penelitian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-istilah-yang-wajib-dikuasai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Istilah yang Wajib Dikuasai
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="23. Istilah yang Wajib Dikuasai">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sentence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sentence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tokenization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Label
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binary-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binary Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nlp-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NLP Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-latihan-1-analisis-teks-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Latihan 1 — Analisis Teks Sederhana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-latihan-2-kelompokkan-tweet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Latihan 2 — Kelompokkan Tweet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-latihan-3-buat-dataset-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Latihan 3 — Buat Dataset Sederhana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-latihan-4-tokenisasi-sederhana-dengan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Latihan 4 — Tokenisasi Sederhana dengan Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-latihan-5-buat-nlp-pipeline-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Latihan 5 — Buat NLP Pipeline Sederhana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-mini-project-text-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Mini Project — Text Analyzer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-checkpoint-fundamental-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Checkpoint Fundamental NLP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="30. Checkpoint Fundamental NLP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#konsep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Konsep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penelitian
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praktik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Praktik
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-hubungan-fundamental-nlp-dengan-roadmap-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Hubungan Fundamental NLP dengan Roadmap Penelitian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Disaster AI System
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../01-python-untuk-nlp/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    NLP Foundation
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamental-nlp-natural-language-processing">Fundamental NLP (Natural Language Processing)</h1>
+<h2 id="tujuan-pembelajaran">Tujuan Pembelajaran</h2>
+<p>Setelah menyelesaikan materi ini, Anda diharapkan mampu:</p>
+<ul>
+<li>Menjelaskan apa itu Natural Language Processing (NLP).</li>
+<li>Memahami hubungan antara teks, dokumen, kalimat, token, dan vocabulary.</li>
+<li>Memahami konsep corpus dan dataset NLP.</li>
+<li>Memahami mengapa teks perlu diubah menjadi representasi yang dapat diproses komputer.</li>
+<li>Memahami gambaran umum pipeline NLP.</li>
+<li>Menjelaskan hubungan Fundamental NLP dengan penelitian deteksi tweet permintaan bantuan darurat.</li>
+<li>Memahami konsep dasar yang akan digunakan pada tahap Text Preprocessing, TF-IDF, Machine Learning, Transformer, dan IndoBERT.</li>
+</ul>
+<p>Materi ini sengaja tidak membahas seluruh cabang NLP secara mendalam. Fokusnya adalah konsep yang benar-benar diperlukan sebagai fondasi penelitian.</p>
+<h2 id="1-apa-itu-natural-language-processing">1. Apa Itu Natural Language Processing</h2>
+<p>Natural Language Processing atau NLP adalah bidang dalam Artificial Intelligence (AI) yang mempelajari bagaimana komputer dapat memproses, memahami, menganalisis, dan menghasilkan bahasa manusia.</p>
+<p>Bahasa manusia memiliki karakteristik yang kompleks. Satu kata dapat memiliki makna berbeda tergantung konteks, manusia dapat menggunakan singkatan, typo, bahasa informal, emoji, dan susunan kalimat yang beragam.</p>
+<p>Contoh teks:</p>
+<div class="highlight"><pre><span></span><code>Tolong bantu kami, rumah sudah terendam banjir.
+</code></pre></div>
+<p>Manusia dapat memahami bahwa kalimat tersebut kemungkinan merupakan permintaan bantuan.</p>
+<p>Komputer tidak memahami kalimat tersebut dengan cara yang sama seperti manusia. Teks perlu melalui beberapa proses agar dapat direpresentasikan dalam bentuk yang dapat dipelajari oleh model Machine Learning atau Deep Learning.</p>
+<p>Secara sederhana:</p>
+<div class="highlight"><pre><span></span><code>Bahasa Manusia
+      ↓
+     NLP
+      ↓
+Representasi yang dapat diproses komputer
+      ↓
+Machine Learning / Deep Learning
+      ↓
+Prediksi / Analisis
+</code></pre></div>
+<h2 id="2-nlp-dalam-penelitian-ini">2. NLP dalam Penelitian Ini</h2>
+<p>Penelitian yang akan dikembangkan adalah:</p>
+<div class="highlight"><pre><span></span><code>Deteksi Tweet Permintaan Bantuan Darurat
+pada Saat Bencana Menggunakan IndoBERT
+</code></pre></div>
+<p>Contoh tweet:</p>
+<div class="highlight"><pre><span></span><code>Tolong bantu kami, rumah sudah terendam banjir.
+</code></pre></div>
+<p>Tujuan model adalah menentukan apakah tweet tersebut merupakan permintaan bantuan darurat.</p>
+<p>Contoh sederhana:</p>
+<div class="highlight"><pre><span></span><code>Input:
+"Tolong bantu kami, rumah sudah terendam banjir."
+
+Output:
+Emergency
+</code></pre></div>
+<p>Sedangkan:</p>
+<div class="highlight"><pre><span></span><code>Input:
+"Hujan deras terjadi sejak pagi di wilayah Palu."
+
+Output:
+Non-Emergency
+</code></pre></div>
+<p>Secara umum, masalah ini termasuk:</p>
+<div class="highlight"><pre><span></span><code>NLP
+ ↓
+Text Classification
+ ↓
+Binary Classification
+</code></pre></div>
+<p>Jika menggunakan dua kelas:</p>
+<div class="highlight"><pre><span></span><code>0 = Non-Emergency
+1 = Emergency
+</code></pre></div>
+<h2 id="3-text">3. Text</h2>
+<p>Text atau teks adalah data berupa bahasa yang digunakan sebagai input dalam sistem NLP.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Tolong bantu kami.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Banjir mulai memasuki rumah warga.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Jalan utama terputus akibat longsor.
+</code></pre></div>
+<p>Dalam penelitian media sosial, teks dapat berasal dari:</p>
+<ul>
+<li>Tweet</li>
+<li>Postingan media sosial</li>
+<li>Komentar</li>
+<li>Berita</li>
+<li>Laporan masyarakat</li>
+<li>Pesan atau dokumen lainnya</li>
+</ul>
+<p>Dalam penelitian ini, sumber utama yang digunakan adalah tweet atau teks pendek dari media sosial.</p>
+<h2 id="4-document">4. Document</h2>
+<p>Dalam NLP, sebuah document adalah satu unit teks yang diperlakukan sebagai satu data.</p>
+<p>Document tidak harus berupa dokumen panjang seperti file PDF atau Microsoft Word.</p>
+<p>Satu tweet juga dapat dianggap sebagai satu document.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami, rumah sudah terendam banjir."
+</code></pre></div>
+<p>Dapat dianggap sebagai:</p>
+<div class="highlight"><pre><span></span><code>1 Document
+</code></pre></div>
+<p>Jika terdapat 5.000 tweet:</p>
+<div class="highlight"><pre><span></span><code>Tweet 1 → Document 1
+Tweet 2 → Document 2
+Tweet 3 → Document 3
+...
+Tweet 5000 → Document 5000
+</code></pre></div>
+<p>Dengan demikian, dataset klasifikasi teks dapat dipandang sebagai kumpulan document.</p>
+<h2 id="5-sentence">5. Sentence</h2>
+<p>Sentence atau kalimat adalah rangkaian kata yang membentuk suatu struktur bahasa.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami."
+</code></pre></div>
+<p>merupakan satu kalimat.</p>
+<p>Sebuah document dapat terdiri dari satu atau beberapa kalimat.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>"Hujan turun sejak pagi. Air mulai masuk ke rumah warga."
+</code></pre></div>
+<p>Document tersebut terdiri dari dua kalimat.</p>
+<p>Dalam tweet, sebagian besar data relatif pendek, tetapi sebuah tweet tetap dapat berisi lebih dari satu kalimat.</p>
+<h2 id="6-token">6. Token</h2>
+<p>Token adalah unit teks yang dihasilkan ketika teks dipecah menjadi bagian-bagian yang lebih kecil.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Tolong bantu kami
+</code></pre></div>
+<p>dapat dipecah menjadi:</p>
+<div class="highlight"><pre><span></span><code>["Tolong", "bantu", "kami"]
+</code></pre></div>
+<p>Masing-masing bagian tersebut disebut token.</p>
+<p>Secara sederhana:</p>
+<div class="highlight"><pre><span></span><code>Text
+ ↓
+Tokenization
+ ↓
+Tokens
+</code></pre></div>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami karena banjir"
+</code></pre></div>
+<p>menjadi:</p>
+<div class="highlight"><pre><span></span><code>[
+    "Tolong",
+    "bantu",
+    "kami",
+    "karena",
+    "banjir"
+]
+</code></pre></div>
+<h2 id="7-mengapa-token-penting">7. Mengapa Token Penting</h2>
+<p>Token merupakan konsep yang sangat penting dalam NLP karena sebagian besar algoritma NLP bekerja dengan unit-unit teks yang telah dipisahkan.</p>
+<p>Misalnya:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami"
+</code></pre></div>
+<p>menjadi:</p>
+<div class="highlight"><pre><span></span><code>["Tolong", "bantu", "kami"]
+</code></pre></div>
+<p>Setelah itu token dapat diproses lebih lanjut.</p>
+<p>Contohnya:</p>
+<div class="highlight"><pre><span></span><code>Text
+ ↓
+Tokenization
+ ↓
+["tolong", "bantu", "kami"]
+ ↓
+Numerical Representation
+ ↓
+Model
+</code></pre></div>
+<p>Konsep token juga sangat penting ketika nanti menggunakan Transformer dan IndoBERT.</p>
+<p>Namun, perlu dipahami bahwa tokenisasi pada model modern seperti BERT tidak selalu sama dengan tokenisasi berdasarkan kata.</p>
+<p>BERT menggunakan pendekatan subword tokenization.</p>
+<h2 id="8-word-tokenization">8. Word Tokenization</h2>
+<p>Word tokenization memecah teks berdasarkan kata.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>"Saya membutuhkan bantuan"
+</code></pre></div>
+<p>menjadi:</p>
+<div class="highlight"><pre><span></span><code>["Saya", "membutuhkan", "bantuan"]
+</code></pre></div>
+<p>Pendekatan ini cukup mudah dipahami dan berguna untuk mempelajari dasar NLP.</p>
+<p>Dalam Python, salah satu pendekatan paling sederhana adalah:</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Saya membutuhkan bantuan"</span>
+
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>['Saya', 'membutuhkan', 'bantuan']
+</code></pre></div>
+<p>Namun, <code>split()</code> masih sangat sederhana dan belum menangani berbagai karakter khusus, punctuation, emoji, URL, atau struktur bahasa secara baik.</p>
+<p>Karena itu, pada tahap berikutnya kita akan mempelajari tokenizer yang lebih sesuai untuk NLP.</p>
+<h2 id="9-subword-tokenization">9. Subword Tokenization</h2>
+<p>Model Transformer seperti BERT menggunakan pendekatan subword tokenization.</p>
+<p>Konsepnya adalah sebuah kata dapat dipecah menjadi bagian-bagian yang lebih kecil apabila diperlukan.</p>
+<p>Contoh ilustrasi:</p>
+<div class="highlight"><pre><span></span><code>kata
+ ↓
+subword
+</code></pre></div>
+<p>Misalnya sebuah kata yang tidak terdapat sebagai token utuh dapat direpresentasikan menggunakan beberapa subword.</p>
+<p>Konsep ini membantu model menangani:</p>
+<ul>
+<li>Kata yang jarang muncul</li>
+<li>Kata baru</li>
+<li>Kata turunan</li>
+<li>Variasi kata</li>
+<li>Out-of-vocabulary words</li>
+</ul>
+<p>Dalam IndoBERT, proses tokenisasi akan dilakukan oleh tokenizer yang sesuai dengan model.</p>
+<p>Contoh penggunaan:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="s2">"indobenchmark/indobert-base-p1"</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Kemudian:</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Tolong bantu kami karena banjir."</span>
+
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</code></pre></div>
+<p>Hasil tokenisasi bergantung pada tokenizer dan vocabulary model.</p>
+<p>Hal penting yang perlu dipahami sekarang adalah:</p>
+<blockquote>
+<p>Token pada NLP klasik dan token pada Transformer tidak selalu berarti hal yang sama.</p>
+</blockquote>
+<h2 id="10-vocabulary">10. Vocabulary</h2>
+<p>Vocabulary adalah kumpulan token yang dikenal oleh suatu sistem atau model.</p>
+<p>Misalnya kita memiliki dataset:</p>
+<div class="highlight"><pre><span></span><code>Tolong bantu kami
+Banjir melanda rumah
+Kami membutuhkan bantuan
+</code></pre></div>
+<p>Vocabulary sederhananya dapat berupa:</p>
+<div class="highlight"><pre><span></span><code>[
+    "tolong",
+    "bantu",
+    "kami",
+    "banjir",
+    "melanda",
+    "rumah",
+    "membutuhkan",
+    "bantuan"
+]
+</code></pre></div>
+<p>Vocabulary dapat dianggap sebagai daftar unit bahasa yang diketahui oleh sistem.</p>
+<p>Dalam model Transformer seperti IndoBERT, vocabulary sudah dibangun sebagai bagian dari tokenizer dan model yang digunakan.</p>
+<h2 id="11-corpus">11. Corpus</h2>
+<p>Corpus adalah kumpulan teks yang digunakan untuk analisis atau pengembangan sistem NLP.</p>
+<p>Contoh corpus sederhana:</p>
+<div class="highlight"><pre><span></span><code>Document 1:
+"Tolong bantu kami."
+
+Document 2:
+"Rumah warga terendam banjir."
+
+Document 3:
+"Jalan utama terputus."
+
+Document 4:
+"Hujan deras terjadi sejak pagi."
+</code></pre></div>
+<p>Keempat document tersebut dapat menjadi sebuah corpus.</p>
+<p>Secara sederhana:</p>
+<div class="highlight"><pre><span></span><code>Corpus
+ ├── Document 1
+ ├── Document 2
+ ├── Document 3
+ └── Document 4
+</code></pre></div>
+<p>Dalam penelitian Anda, kumpulan tweet yang telah dikumpulkan dapat diperlakukan sebagai corpus penelitian.</p>
+<h2 id="12-dataset-nlp">12. Dataset NLP</h2>
+<p>Dataset adalah kumpulan data yang digunakan untuk proses Machine Learning.</p>
+<p>Pada penelitian klasifikasi teks, dataset biasanya memiliki minimal dua komponen:</p>
+<div class="highlight"><pre><span></span><code>text
+label
+</code></pre></div>
+<p>Contoh:</p>
+<table>
+<thead>
+<tr>
+<th>text</th>
+<th style="text-align: right;">label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tolong bantu kami, rumah terendam banjir</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Jalan utama terputus akibat longsor</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Hujan deras terjadi sejak pagi</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Kondisi cuaca hari ini cukup cerah</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p>Keterangan:</p>
+<div class="highlight"><pre><span></span><code>1 = Emergency
+0 = Non-Emergency
+</code></pre></div>
+<p>Dataset inilah yang nantinya digunakan untuk melatih model.</p>
+<h2 id="13-feature-dan-label">13. Feature dan Label</h2>
+<p>Dalam Machine Learning, kita sering mengenal:</p>
+<div class="highlight"><pre><span></span><code>X = Features
+y = Target / Label
+</code></pre></div>
+<p>Dalam klasifikasi teks:</p>
+<div class="highlight"><pre><span></span><code>X = text
+y = label
+</code></pre></div>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>X:
+"Tolong bantu kami, rumah terendam banjir"
+
+y:
+1
+</code></pre></div>
+<p>Namun teks mentah belum dapat langsung digunakan oleh sebagian besar algoritma Machine Learning klasik.</p>
+<p>Karena itu:</p>
+<div class="highlight"><pre><span></span><code>Text
+ ↓
+Text Representation
+ ↓
+Numerical Features
+ ↓
+Machine Learning Model
+</code></pre></div>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Tweet
+ ↓
+TF-IDF
+ ↓
+Feature Matrix
+ ↓
+SVM
+ ↓
+Prediction
+</code></pre></div>
+<p>Untuk Transformer:</p>
+<div class="highlight"><pre><span></span><code>Tweet
+ ↓
+Tokenizer
+ ↓
+Input IDs + Attention Mask
+ ↓
+IndoBERT
+ ↓
+Prediction
+</code></pre></div>
+<h2 id="14-text-classification">14. Text Classification</h2>
+<p>Text Classification adalah proses mengelompokkan teks ke dalam kategori tertentu.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>Email
+ ↓
+Spam / Not Spam
+</code></pre></div>
+<p>Contoh lainnya:</p>
+<div class="highlight"><pre><span></span><code>Review
+ ↓
+Positive / Negative
+</code></pre></div>
+<p>Untuk penelitian Anda:</p>
+<div class="highlight"><pre><span></span><code>Tweet
+ ↓
+Emergency / Non-Emergency
+</code></pre></div>
+<p>Dengan demikian:</p>
+<div class="highlight"><pre><span></span><code>Deteksi Tweet Permintaan Bantuan Darurat
+=
+Text Classification
+</code></pre></div>
+<h2 id="15-binary-classification">15. Binary Classification</h2>
+<p>Jika hanya terdapat dua kelas, masalah tersebut disebut binary classification.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>0 = Non-Emergency
+1 = Emergency
+</code></pre></div>
+<p>Model menerima:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami, rumah sudah terendam banjir."
+</code></pre></div>
+<p>dan menghasilkan prediksi:</p>
+<div class="highlight"><pre><span></span><code>Emergency
+</code></pre></div>
+<p>Jika model memberikan probabilitas:</p>
+<div class="highlight"><pre><span></span><code>Emergency     : 0.94
+Non-Emergency : 0.06
+</code></pre></div>
+<p>maka prediksi akhirnya adalah:</p>
+<div class="highlight"><pre><span></span><code>Emergency
+</code></pre></div>
+<h2 id="16-multi-class-classification">16. Multi-Class Classification</h2>
+<p>Jika kategori lebih dari dua, masalah dapat menjadi multi-class classification.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>0 = Informational
+1 = Emergency
+2 = Infrastructure Damage
+3 = Evacuation
+</code></pre></div>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>"Jembatan utama putus akibat banjir."
+</code></pre></div>
+<p>dapat dikategorikan sebagai:</p>
+<div class="highlight"><pre><span></span><code>Infrastructure Damage
+</code></pre></div>
+<p>Untuk tahap awal penelitian, binary classification lebih sederhana dan lebih mudah dikontrol.</p>
+<p>Setelah pipeline dasar berhasil, klasifikasi dapat dikembangkan menjadi beberapa kategori apabila dataset dan tujuan penelitian mendukungnya.</p>
+<h2 id="17-nlp-pipeline">17. NLP Pipeline</h2>
+<p>NLP pipeline adalah rangkaian proses yang dilakukan terhadap teks dari input hingga menghasilkan output.</p>
+<p>Untuk Machine Learning klasik:</p>
+<div class="highlight"><pre><span></span><code>Raw Text
+    ↓
+Cleaning
+    ↓
+Tokenization
+    ↓
+Normalization
+    ↓
+Feature Extraction
+    ↓
+Machine Learning
+    ↓
+Prediction
+</code></pre></div>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>"TOLONG!!! rumah kami kebanjiran 😭"
+                ↓
+             Cleaning
+                ↓
+  "tolong rumah kami kebanjiran"
+                ↓
+           Tokenization
+                ↓
+["tolong", "rumah", "kami", "kebanjiran"]
+                ↓
+              TF-IDF
+                ↓
+               SVM
+                ↓
+           "Emergency"
+</code></pre></div>
+<p>Untuk IndoBERT, pipeline akan berbeda:</p>
+<div class="highlight"><pre><span></span><code>Raw Text
+    ↓
+Minimal / Task-Specific Preprocessing
+    ↓
+IndoBERT Tokenizer
+    ↓
+Input IDs
+    ↓
+Attention Mask
+    ↓
+IndoBERT
+    ↓
+Classification Head
+    ↓
+Prediction
+</code></pre></div>
+<p>Perbedaan ini sangat penting.</p>
+<p>Jangan menganggap preprocessing untuk TF-IDF harus diterapkan persis sama kepada IndoBERT.</p>
+<h2 id="18-nlp-klasik-vs-transformer">18. NLP Klasik vs Transformer</h2>
+<p>Kita dapat membandingkan dua pendekatan.</p>
+<h3 id="nlp-klasik">NLP Klasik</h3>
+<div class="highlight"><pre><span></span><code>Text
+ ↓
+Cleaning
+ ↓
+Tokenization
+ ↓
+Stopword / Stemming
+ ↓
+TF-IDF
+ ↓
+SVM
+ ↓
+Prediction
+</code></pre></div>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>TF-IDF + SVM
+</code></pre></div>
+<h3 id="transformer">Transformer</h3>
+<div class="highlight"><pre><span></span><code>Text
+ ↓
+Tokenizer
+ ↓
+Input IDs
+ ↓
+Attention Mask
+ ↓
+Transformer
+ ↓
+Classification Head
+ ↓
+Prediction
+</code></pre></div>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>IndoBERT
+</code></pre></div>
+<p>Perbedaan ini akan menjadi dasar eksperimen penelitian Anda.</p>
+<h2 id="19-mengapa-tidak-langsung-menggunakan-indobert">19. Mengapa Tidak Langsung Menggunakan IndoBERT</h2>
+<p>Pertanyaan penting:</p>
+<blockquote>
+<p>Jika IndoBERT lebih modern, mengapa perlu belajar TF-IDF dan Machine Learning klasik?</p>
+</blockquote>
+<p>Karena dalam penelitian ilmiah, model utama sebaiknya memiliki baseline atau pembanding.</p>
+<p>Misalnya:</p>
+<div class="highlight"><pre><span></span><code>Baseline 1:
+TF-IDF + Logistic Regression
+
+Baseline 2:
+TF-IDF + SVM
+
+Model utama:
+IndoBERT
+</code></pre></div>
+<p>Kemudian hasil dibandingkan:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">Accuracy</th>
+<th style="text-align: right;">Precision</th>
+<th style="text-align: right;">Recall</th>
+<th style="text-align: right;">F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TF-IDF + Logistic Regression</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+</tr>
+<tr>
+<td>TF-IDF + SVM</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+</tr>
+<tr>
+<td>IndoBERT</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+<td style="text-align: right;">...</td>
+</tr>
+</tbody>
+</table>
+<p>Dengan demikian, penelitian tidak hanya mengatakan:</p>
+<blockquote>
+<p>"IndoBERT dapat digunakan untuk klasifikasi tweet."</p>
+</blockquote>
+<p>Tetapi dapat menjawab:</p>
+<blockquote>
+<p>"Apakah IndoBERT memberikan performa yang lebih baik dibandingkan metode Machine Learning berbasis TF-IDF?"</p>
+</blockquote>
+<h2 id="20-nlp-dan-konteks-bahasa-indonesia">20. NLP dan Konteks Bahasa Indonesia</h2>
+<p>Bahasa Indonesia memiliki karakteristik yang perlu diperhatikan dalam NLP.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>bantu
+membantu
+membantukan
+dibantu
+membutuhkan bantuan
+</code></pre></div>
+<p>Ada hubungan morfologis dan konteks yang tidak selalu dapat ditangkap hanya dengan melihat kata secara terpisah.</p>
+<p>Selain itu, media sosial memiliki karakteristik tambahan:</p>
+<div class="highlight"><pre><span></span><code>tolonggg
+bgt
+gk
+ga
+nggak
+RT
+@username
+#banjir
+😭
+!!!
+</code></pre></div>
+<p>Karena penelitian menggunakan tweet, masalah seperti ini akan muncul dalam dataset.</p>
+<p>Karena itu, tahap berikutnya setelah Fundamental NLP adalah:</p>
+<div class="highlight"><pre><span></span><code>Text Preprocessing
+</code></pre></div>
+<h2 id="21-konteks-lebih-penting-daripada-kata-saja">21. Konteks Lebih Penting daripada Kata Saja</h2>
+<p>Salah satu alasan NLP modern berkembang menuju model contextual language representation adalah karena makna kata dapat bergantung pada konteks.</p>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code>"Air sungai naik."
+</code></pre></div>
+<p>dan:</p>
+<div class="highlight"><pre><span></span><code>"Air minum naik harganya."
+</code></pre></div>
+<p>Kata yang sama dapat muncul dalam konteks berbeda.</p>
+<p>Pada NLP klasik seperti Bag of Words dan TF-IDF, representasi kata cenderung tidak memahami konteks secara mendalam.</p>
+<p>Model Transformer seperti BERT menggunakan konteks dua arah untuk membentuk representasi yang lebih kontekstual.</p>
+<p>Konsep inilah yang nantinya akan membawa kita menuju:</p>
+<div class="highlight"><pre><span></span><code>Word Embedding
+      ↓
+Contextual Embedding
+      ↓
+  Attention
+      ↓
+ Transformer
+      ↓
+    BERT
+      ↓
+  IndoBERT
+</code></pre></div>
+<h2 id="22-contoh-sederhana-pipeline-penelitian">22. Contoh Sederhana Pipeline Penelitian</h2>
+<p>Bayangkan terdapat tweet:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami!!! Air sudah masuk rumah 😭"
+</code></pre></div>
+<p>Pada tahap penelitian, prosesnya secara konseptual:</p>
+<div class="highlight"><pre><span></span><code>Tweet
+ ↓
+Data Collection
+ ↓
+Annotation
+ ↓
+Preprocessing
+ ↓
+Tokenization
+ ↓
+Representation
+ ↓
+Classification
+ ↓
+Evaluation
+</code></pre></div>
+<p>Untuk baseline:</p>
+<div class="highlight"><pre><span></span><code>Tweet
+ ↓
+Preprocessing
+ ↓
+TF-IDF
+ ↓
+SVM
+ ↓
+Emergency / Non-Emergency
+</code></pre></div>
+<p>Untuk model utama:</p>
+<div class="highlight"><pre><span></span><code>Tweet
+ ↓
+Tokenizer
+ ↓
+IndoBERT
+ ↓
+Classification Head
+ ↓
+Emergency / Non-Emergency
+</code></pre></div>
+<h2 id="23-istilah-yang-wajib-dikuasai">23. Istilah yang Wajib Dikuasai</h2>
+<p>Sebelum melanjutkan ke Text Preprocessing, pastikan Anda memahami istilah berikut.</p>
+<h3 id="text">Text</h3>
+<p>Data berupa bahasa manusia.</p>
+<h3 id="document">Document</h3>
+<p>Satu unit teks yang diproses sebagai satu data.</p>
+<h3 id="sentence">Sentence</h3>
+<p>Kalimat yang terdapat dalam document.</p>
+<h3 id="token">Token</h3>
+<p>Unit teks hasil proses tokenization.</p>
+<h3 id="tokenization">Tokenization</h3>
+<p>Proses memecah teks menjadi token.</p>
+<h3 id="vocabulary">Vocabulary</h3>
+<p>Kumpulan token yang diketahui oleh sistem atau model.</p>
+<h3 id="corpus">Corpus</h3>
+<p>Kumpulan document atau teks.</p>
+<h3 id="dataset">Dataset</h3>
+<p>Kumpulan data yang digunakan untuk proses Machine Learning.</p>
+<h3 id="feature">Feature</h3>
+<p>Informasi yang digunakan model sebagai input.</p>
+<h3 id="label">Label</h3>
+<p>Target atau kelas yang ingin diprediksi.</p>
+<h3 id="text-classification">Text Classification</h3>
+<p>Proses mengelompokkan teks ke kategori tertentu.</p>
+<h3 id="binary-classification">Binary Classification</h3>
+<p>Klasifikasi dengan dua kelas.</p>
+<h3 id="nlp-pipeline">NLP Pipeline</h3>
+<p>Rangkaian proses dari teks mentah sampai menghasilkan output.</p>
+<h2 id="24-latihan-1-analisis-teks-sederhana">24. Latihan 1 — Analisis Teks Sederhana</h2>
+<p>Gunakan teks:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami, rumah sudah terendam banjir."
+</code></pre></div>
+<p>Tentukan:</p>
+<ol>
+<li>Berapa document?</li>
+<li>Berapa sentence?</li>
+<li>Apa saja tokennya?</li>
+<li>Apa vocabulary-nya?</li>
+<li>Apa kemungkinan labelnya jika digunakan pada penelitian?</li>
+</ol>
+<p>Jawaban yang diharapkan secara konseptual:</p>
+<div class="highlight"><pre><span></span><code>Document:
+1
+
+Sentence:
+1
+
+Tokens:
+Tolong
+bantu
+kami
+rumah
+sudah
+terendam
+banjir
+
+Label:
+Emergency
+</code></pre></div>
+<p>Perhatikan bahwa vocabulary pada satu document sederhana dapat sama dengan kumpulan token unik document tersebut. Pada dataset sebenarnya, vocabulary dibangun dari kumpulan banyak document dan bergantung pada metode tokenisasi.</p>
+<h2 id="25-latihan-2-kelompokkan-tweet">25. Latihan 2 — Kelompokkan Tweet</h2>
+<p>Tentukan apakah tweet berikut termasuk Emergency atau Non-Emergency.</p>
+<div class="highlight"><pre><span></span><code>1. "Tolong bantu warga di sini, air sudah masuk rumah."
+
+2. "Hujan deras turun sejak pagi."
+
+3. "Kami membutuhkan evakuasi segera."
+
+4. "Pemerintah mengimbau warga tetap waspada."
+
+5. "Jembatan desa kami putus, mohon bantuan."
+</code></pre></div>
+<p>Contoh label:</p>
+<div class="highlight"><pre><span></span><code>1 → Emergency
+2 → Non-Emergency
+3 → Emergency
+4 → Non-Emergency
+5 → Emergency
+</code></pre></div>
+<p>Perhatikan bahwa beberapa kasus dapat bersifat ambigu. Dalam penelitian nyata, aturan anotasi harus dibuat terlebih dahulu agar proses labeling konsisten.</p>
+<h2 id="26-latihan-3-buat-dataset-sederhana">26. Latihan 3 — Buat Dataset Sederhana</h2>
+<p>Buat DataFrame:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"text"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Tolong bantu kami, rumah terendam banjir"</span><span class="p">,</span>
+        <span class="s2">"Hujan deras sejak pagi"</span><span class="p">,</span>
+        <span class="s2">"Kami membutuhkan evakuasi segera"</span><span class="p">,</span>
+        <span class="s2">"Cuaca hari ini cukup cerah"</span><span class="p">,</span>
+        <span class="s2">"Jalan desa kami terputus, mohon bantuan"</span>
+    <span class="p">],</span>
+    <span class="s2">"label"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">1</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+<p>Target pemahaman:</p>
+<div class="highlight"><pre><span></span><code>text
+ ↓
+X
+
+label
+ ↓
+y
+</code></pre></div>
+<h2 id="27-latihan-4-tokenisasi-sederhana-dengan-python">27. Latihan 4 — Tokenisasi Sederhana dengan Python</h2>
+<p>Gunakan:</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Tolong bantu kami karena rumah terendam banjir"</span>
+
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</code></pre></div>
+<p>Coba ubah teks menjadi:</p>
+<div class="highlight"><pre><span></span><code>"TOLONG BANTU KAMI!!!"
+</code></pre></div>
+<p>Kemudian amati hasil:</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</code></pre></div>
+<p>Apakah hasilnya sudah ideal?</p>
+<p>Jawabannya belum.</p>
+<p>Masalah seperti punctuation akan menjadi pembahasan pada materi Text Preprocessing.</p>
+<h2 id="28-latihan-5-buat-nlp-pipeline-sederhana">28. Latihan 5 — Buat NLP Pipeline Sederhana</h2>
+<p>Buat program dengan alur:</p>
+<div class="highlight"><pre><span></span><code>Input Text
+    ↓
+Lowercase
+    ↓
+Split Token
+    ↓
+Hitung Jumlah Token
+    ↓
+Tampilkan Token
+</code></pre></div>
+<p>Contoh:</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Tolong bantu kami karena rumah terendam banjir"</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Text:"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tokens:"</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah token:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+</code></pre></div>
+<p>Tujuan latihan bukan membuat sistem NLP lengkap, tetapi memahami bahwa teks melewati beberapa tahap sebelum dianalisis.</p>
+<h2 id="29-mini-project-text-analyzer">29. Mini Project — Text Analyzer</h2>
+<p>Buat program sederhana yang menerima sebuah teks dan menampilkan:</p>
+<div class="highlight"><pre><span></span><code>Original Text
+Clean Text
+Jumlah Karakter
+Jumlah Kata
+Jumlah Token
+Daftar Token
+Vocabulary
+</code></pre></div>
+<p>Contoh input:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami, rumah sudah terendam banjir."
+</code></pre></div>
+<p>Contoh output konseptual:</p>
+<div class="highlight"><pre><span></span><code>Original Text:
+Tolong bantu kami, rumah sudah terendam banjir.
+
+Tokens:
+['tolong', 'bantu', 'kami', 'rumah', 'sudah', 'terendam', 'banjir']
+
+Jumlah Token:
+7
+
+Vocabulary:
+['tolong', 'bantu', 'kami', 'rumah', 'sudah', 'terendam', 'banjir']
+</code></pre></div>
+<p>Mini project ini akan menjadi dasar sebelum masuk ke preprocessing yang lebih serius.</p>
+<h2 id="30-checkpoint-fundamental-nlp">30. Checkpoint Fundamental NLP</h2>
+<p>Sebelum melanjutkan, pastikan Anda dapat menjawab pertanyaan berikut tanpa melihat materi.</p>
+<h3 id="konsep">Konsep</h3>
+<ol>
+<li>Apa itu NLP?</li>
+<li>Apa perbedaan document dan sentence?</li>
+<li>Apa itu token?</li>
+<li>Apa itu tokenization?</li>
+<li>Apa itu vocabulary?</li>
+<li>Apa itu corpus?</li>
+<li>Apa perbedaan corpus dan dataset?</li>
+<li>Apa itu feature?</li>
+<li>Apa itu label?</li>
+<li>Apa itu text classification?</li>
+</ol>
+<h3 id="penelitian">Penelitian</h3>
+<ol>
+<li>Mengapa penelitian Anda termasuk text classification?</li>
+<li>Apa label yang digunakan?</li>
+<li>Mengapa tweet harus direpresentasikan dalam bentuk yang dapat diproses model?</li>
+<li>Apa perbedaan pipeline TF-IDF + SVM dengan IndoBERT?</li>
+<li>Mengapa baseline penting dalam penelitian?</li>
+</ol>
+<h3 id="praktik">Praktik</h3>
+<p>Anda seharusnya sudah mampu:</p>
+<div class="highlight"><pre><span></span><code>Text
+ ↓
+Tokenization sederhana
+ ↓
+Tokens
+ ↓
+Vocabulary
+</code></pre></div>
+<p>dan memahami:</p>
+<div class="highlight"><pre><span></span><code>Text
+ ↓
+Representation
+ ↓
+Model
+ ↓
+Prediction
+</code></pre></div>
+<h2 id="31-hubungan-fundamental-nlp-dengan-roadmap-penelitian">31. Hubungan Fundamental NLP dengan Roadmap Penelitian</h2>
+<p>Setelah Fundamental NLP, perjalanan Anda akan menjadi:</p>
+<div class="highlight"><pre><span></span><code>Fundamental NLP
+      ↓
+Text Preprocessing
+      ↓
+ Bag of Words
+      ↓
+    TF-IDF
+      ↓
+Machine Learning
+      ↓
+  Evaluation
+      ↓
+Word Embedding
+      ↓
+   PyTorch
+      ↓
+  RNN / LSTM
+      ↓
+  Attention
+      ↓
+  Transformer
+      ↓
+    BERT
+      ↓
+   IndoBERT
+      ↓
+ Fine-Tuning
+      ↓
+Eksperimen Penelitian
+      ↓
+   FastAPI
+      ↓
+  Dashboard
+</code></pre></div>
+<p>Fundamental NLP adalah fondasi untuk memahami semua tahap tersebut.</p>
+<h2 id="32-ringkasan">32. Ringkasan</h2>
+<p>Hal terpenting yang harus Anda bawa dari materi ini adalah:</p>
+<div class="highlight"><pre><span></span><code>Text
+ ↓
+Document / Sentence
+ ↓
+Token
+ ↓
+Vocabulary
+ ↓
+Representation
+ ↓
+Model
+ ↓
+Prediction
+</code></pre></div>
+<p>Untuk penelitian Anda:</p>
+<div class="highlight"><pre><span></span><code>Tweet
+ ↓
+Text Classification
+ ↓
+Emergency / Non-Emergency
+</code></pre></div>
+<p>Kemudian terdapat dua jalur utama:</p>
+<div class="highlight"><pre><span></span><code>Jalur Baseline:
+
+Tweet
+ ↓
+Preprocessing
+ ↓
+TF-IDF
+ ↓
+SVM
+ ↓
+Prediction
+</code></pre></div>
+<p>dan:</p>
+<div class="highlight"><pre><span></span><code>Jalur Model Utama:
+
+Tweet
+ ↓
+Tokenizer
+ ↓
+IndoBERT
+ ↓
+Fine-Tuning
+ ↓
+Prediction
+</code></pre></div>
+<p>Dengan memahami Fundamental NLP ini, Anda belum menjadi ahli NLP, dan memang belum perlu. Tujuan tahap ini adalah memastikan Anda memahami bahasa dan konsep dasar yang akan digunakan ketika mulai memproses dataset nyata.</p>
+<p>Tahap berikutnya adalah <strong>Text Preprocessing</strong>, yang akan menjadi bagian lebih praktis dan sangat relevan dengan karakteristik tweet: URL, mention, hashtag, emoji, slang, typo, repeated characters, stopword, stemming, dan normalisasi bahasa Indonesia.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../01-python-untuk-nlp/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Python untuk NLP">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Python untuk NLP
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../03-regex/" class="md-footer__link md-footer__link--next" aria-label="Next: Regex">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Regex
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

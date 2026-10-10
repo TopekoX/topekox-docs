@@ -1,0 +1,4370 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../08-word-embedding/">
+      
+      
+        <link rel="next" href="../10-RNN-LSTM-GRU/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Deep Learning untuk NLP - Topekox Belajar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deep-learning-untuk-nlp-dari-neural-network-hingga-rnn-lstm-dan-gru" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Topekox Belajar" class="md-header__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Topekox Belajar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deep Learning untuk NLP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Topekox Belajar" class="md-nav__button md-logo" aria-label="Topekox Belajar" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Topekox Belajar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disaster AI System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Disaster AI System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP Foundation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NLP Foundation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/01-python-untuk-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/02-fundamentals-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamental NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/03-regex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/04-text-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/05-text-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Representation & TF-IDF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/06-machine-learning-nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-nlp/07-evaluasi-nlp-klasifikasi-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluasi NLP Klasifikasi Text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-word-embedding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Word Embedding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning untuk NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prasyarat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prasyarat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peta-materi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Peta Materi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-pengantar-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Pengantar Deep Learning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Pengantar Deep Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-apa-itu-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Apa itu Deep Learning?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-machine-learning-klasik-vs-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Machine Learning klasik vs Deep Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-contoh-penerapan-pada-penelitian-kebencanaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Contoh penerapan pada penelitian kebencanaan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-neural-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Neural Network
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Neural Network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-neuron-buatan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Neuron buatan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-contoh-perhitungan-dengan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Contoh perhitungan dengan Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-fungsi-aktivasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Fungsi aktivasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-lapisan-neural-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lapisan Neural Network
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Lapisan Neural Network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-jenis-lapisan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Jenis lapisan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-istilah-penting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Istilah penting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-forward-propagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Forward Propagation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-loss-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Loss Function
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Loss Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mean-squared-error-mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Mean Squared Error (MSE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-binary-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Binary Cross-Entropy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Cross-Entropy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-backpropagation-dan-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Backpropagation dan Optimizer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Backpropagation dan Optimizer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-backpropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Backpropagation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Gradient descent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-optimizer-yang-umum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Optimizer yang umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-overfitting-underfitting-dan-regularisasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Overfitting, Underfitting, dan Regularisasi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Overfitting, Underfitting, dan Regularisasi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-underfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Underfitting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Overfitting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-teknik-pengendalian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Teknik pengendalian
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pengenalan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pengenalan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Pengenalan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-instalasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Instalasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-tensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Tensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-automatic-differentiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Automatic differentiation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-membangun-neural-network-sederhana-dengan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Membangun Neural Network Sederhana dengan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Membangun Neural Network Sederhana dengan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-memahami-bagian-kode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Memahami bagian kode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-embedding-untuk-teks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Embedding untuk Teks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Embedding untuk Teks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-mengapa-embedding-diperlukan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Mengapa embedding diperlukan?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-nnembedding-di-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 nn.Embedding di PyTorch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-embedding-vs-tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Embedding vs TF-IDF
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-sequence-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Sequence Learning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-recurrent-neural-network-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Recurrent Neural Network (RNN)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Recurrent Neural Network (RNN)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-konsep-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Konsep RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-keterbatasan-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Keterbatasan RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-vanishing-gradient-dan-exploding-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Vanishing Gradient dan Exploding Gradient
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Vanishing Gradient dan Exploding Gradient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-vanishing-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Vanishing gradient
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-exploding-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Exploding gradient
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-long-short-term-memory-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Long Short-Term Memory (LSTM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Long Short-Term Memory (LSTM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-apa-itu-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Apa itu LSTM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-intuisi-contoh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Intuisi contoh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-lstm-di-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 LSTM di PyTorch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-gated-recurrent-unit-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Gated Recurrent Unit (GRU)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Gated Recurrent Unit (GRU)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-apa-itu-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Apa itu GRU?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-gru-di-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 GRU di PyTorch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-perbandingan-rnn-lstm-dan-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Perbandingan RNN, LSTM, dan GRU
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-mini-project-klasifikasi-teks-dengan-embedding-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Mini Project: Klasifikasi Teks dengan Embedding + LSTM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Mini Project: Klasifikasi Teks dengan Embedding + LSTM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-data-contoh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Data contoh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-representasi-token-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Representasi token sederhana
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-model-konseptual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Model konseptual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-praktik-training-yang-baik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Praktik Training yang Baik
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Praktik Training yang Baik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-pembagian-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Pembagian data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-catat-eksperimen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Catat eksperimen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-jangan-hanya-mengandalkan-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Jangan hanya mengandalkan accuracy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-hubungan-deep-learning-dengan-attention-dan-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Hubungan Deep Learning dengan Attention dan Transformer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-checklist-penguasaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Checklist Penguasaan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-latihan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Latihan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20. Latihan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-konsep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Konsep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-eksperimen-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — Eksperimen PyTorch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-analisis-untuk-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Analisis untuk NLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-RNN-LSTM-GRU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNN - LSTM - GRU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/11-attention-mechanism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attention Mechanism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/12-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-transformer/13-BERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBert
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IndoBert
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/14-IndoBERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/15-fine-tuningIndoBERT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning IndoBERT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/16-eksperimen-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eksperimen Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-indobert/17-dataset-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/18-data-annotation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Annotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/19-imbalanced-dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imbalanced Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-research/20-explainable-AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explainable AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Product
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/21-rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/22-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-product/23-jadikan-penelitian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jadikan Penelitian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beginner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Beginner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1: Nice to Meet You
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2: How Are You?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/beginner/leasson-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3: What Does She Look Like?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tujuan-pembelajaran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tujuan Pembelajaran
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prasyarat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prasyarat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peta-materi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Peta Materi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-pengantar-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Pengantar Deep Learning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Pengantar Deep Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-apa-itu-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Apa itu Deep Learning?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-machine-learning-klasik-vs-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Machine Learning klasik vs Deep Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-contoh-penerapan-pada-penelitian-kebencanaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Contoh penerapan pada penelitian kebencanaan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-neural-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Neural Network
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Neural Network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-neuron-buatan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Neuron buatan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-contoh-perhitungan-dengan-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Contoh perhitungan dengan Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-fungsi-aktivasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Fungsi aktivasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-lapisan-neural-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lapisan Neural Network
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Lapisan Neural Network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-jenis-lapisan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Jenis lapisan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-istilah-penting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Istilah penting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-forward-propagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Forward Propagation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-loss-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Loss Function
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Loss Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mean-squared-error-mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Mean Squared Error (MSE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-binary-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Binary Cross-Entropy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-cross-entropy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Cross-Entropy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-backpropagation-dan-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Backpropagation dan Optimizer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Backpropagation dan Optimizer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-backpropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Backpropagation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Gradient descent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-optimizer-yang-umum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Optimizer yang umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-overfitting-underfitting-dan-regularisasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Overfitting, Underfitting, dan Regularisasi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Overfitting, Underfitting, dan Regularisasi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-underfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Underfitting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Overfitting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-teknik-pengendalian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Teknik pengendalian
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pengenalan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pengenalan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Pengenalan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-instalasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Instalasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-tensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Tensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-automatic-differentiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Automatic differentiation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-membangun-neural-network-sederhana-dengan-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Membangun Neural Network Sederhana dengan PyTorch
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Membangun Neural Network Sederhana dengan PyTorch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-memahami-bagian-kode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Memahami bagian kode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-embedding-untuk-teks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Embedding untuk Teks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Embedding untuk Teks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-mengapa-embedding-diperlukan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Mengapa embedding diperlukan?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-nnembedding-di-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 nn.Embedding di PyTorch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-embedding-vs-tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Embedding vs TF-IDF
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-sequence-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Sequence Learning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-recurrent-neural-network-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Recurrent Neural Network (RNN)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Recurrent Neural Network (RNN)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-konsep-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Konsep RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-keterbatasan-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Keterbatasan RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-vanishing-gradient-dan-exploding-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Vanishing Gradient dan Exploding Gradient
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Vanishing Gradient dan Exploding Gradient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-vanishing-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Vanishing gradient
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-exploding-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Exploding gradient
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-long-short-term-memory-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Long Short-Term Memory (LSTM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Long Short-Term Memory (LSTM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-apa-itu-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Apa itu LSTM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-intuisi-contoh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Intuisi contoh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-lstm-di-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 LSTM di PyTorch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-gated-recurrent-unit-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Gated Recurrent Unit (GRU)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Gated Recurrent Unit (GRU)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-apa-itu-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Apa itu GRU?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-gru-di-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 GRU di PyTorch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-perbandingan-rnn-lstm-dan-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Perbandingan RNN, LSTM, dan GRU
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-mini-project-klasifikasi-teks-dengan-embedding-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Mini Project: Klasifikasi Teks dengan Embedding + LSTM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Mini Project: Klasifikasi Teks dengan Embedding + LSTM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-data-contoh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Data contoh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-representasi-token-sederhana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Representasi token sederhana
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-model-konseptual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Model konseptual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-praktik-training-yang-baik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Praktik Training yang Baik
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Praktik Training yang Baik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-pembagian-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Pembagian data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-catat-eksperimen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Catat eksperimen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-jangan-hanya-mengandalkan-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Jangan hanya mengandalkan accuracy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-hubungan-deep-learning-dengan-attention-dan-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Hubungan Deep Learning dengan Attention dan Transformer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-checklist-penguasaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Checklist Penguasaan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-latihan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Latihan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20. Latihan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#latihan-1-konsep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 1 — Konsep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-2-eksperimen-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 2 — Eksperimen PyTorch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latihan-3-analisis-untuk-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Latihan 3 — Analisis untuk NLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-ringkasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Ringkasan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Disaster AI System
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../08-word-embedding/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Deep Learning
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="deep-learning-untuk-nlp-dari-neural-network-hingga-rnn-lstm-dan-gru">Deep Learning untuk NLP: Dari Neural Network hingga RNN, LSTM, dan GRU</h1>
+<h2 id="tujuan-pembelajaran">Tujuan Pembelajaran</h2>
+<p>Materi ini merupakan bagian dari roadmap belajar Natural Language Processing (NLP), setelah mempelajari Fundamental NLP, Text Preprocessing, Text Representation, Machine Learning untuk NLP, dan Evaluasi NLP.</p>
+<p>Setelah menyelesaikan materi ini, Anda diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan perbedaan Machine Learning klasik dan Deep Learning.</li>
+<li>Memahami neuron, bobot, bias, fungsi aktivasi, loss function, dan optimizer.</li>
+<li>Memahami forward propagation dan backpropagation secara konseptual.</li>
+<li>Menggunakan tensor dan PyTorch untuk membangun neural network sederhana.</li>
+<li>Memahami embedding sebagai representasi numerik untuk token.</li>
+<li>Menjelaskan konsep sequence, RNN, LSTM, dan GRU.</li>
+<li>Melatih model sederhana dan membaca output serta metriknya.</li>
+<li>Memahami keterbatasan RNN/LSTM sebagai bekal mempelajari Attention, Transformer, BERT, dan IndoBERT.</li>
+</ol>
+<blockquote>
+<p><strong>Catatan:</strong> Materi ini berfokus pada konsep Deep Learning yang diperlukan untuk memahami perkembangan NLP modern. Anda tidak harus menjadi ahli Deep Learning sebelum mempelajari Transformer atau melakukan fine-tuning IndoBERT.</p>
+</blockquote>
+<h2 id="prasyarat">Prasyarat</h2>
+<p>Sebaiknya Anda sudah memahami:</p>
+<ul>
+<li>Variabel, fungsi, loop, list, dan dictionary Python.</li>
+<li>NumPy dan Pandas.</li>
+<li>Konsep fitur (<code>X</code>) dan target (<code>y</code>).</li>
+<li><code>train_test_split</code>, klasifikasi, dan evaluasi model.</li>
+<li>Dasar vektor dan matriks.</li>
+<li>Konsep dasar text preprocessing dan TF-IDF.</li>
+</ul>
+<h2 id="peta-materi">Peta Materi</h2>
+<ol>
+<li>Pengantar Deep Learning</li>
+<li>Neural Network dan neuron buatan</li>
+<li>Weight, bias, dan fungsi aktivasi</li>
+<li>Forward propagation</li>
+<li>Loss function</li>
+<li>Backpropagation dan optimizer</li>
+<li>Overfitting, underfitting, dan regularisasi</li>
+<li>Pengenalan PyTorch dan tensor</li>
+<li>Neural network dengan PyTorch</li>
+<li>Embedding untuk teks</li>
+<li>Sequence learning</li>
+<li>Recurrent Neural Network (RNN)</li>
+<li>Vanishing gradient</li>
+<li>Long Short-Term Memory (LSTM)</li>
+<li>Gated Recurrent Unit (GRU)</li>
+<li>Eksperimen klasifikasi teks sederhana</li>
+<li>Evaluasi dan analisis hasil</li>
+<li>Hubungan Deep Learning dengan Attention dan Transformer</li>
+<li>Checklist penguasaan dan latihan</li>
+</ol>
+<h2 id="1-pengantar-deep-learning">1. Pengantar Deep Learning</h2>
+<h3 id="11-apa-itu-deep-learning">1.1 Apa itu Deep Learning?</h3>
+<p>Deep Learning adalah bagian dari Machine Learning yang menggunakan neural network dengan beberapa lapisan untuk mempelajari pola dari data. Model mempelajari parameter dari contoh data melalui proses training.</p>
+<p>Dalam NLP, Deep Learning dapat digunakan untuk:</p>
+<ul>
+<li>Klasifikasi teks.</li>
+<li>Analisis sentimen.</li>
+<li>Deteksi spam.</li>
+<li>Named Entity Recognition (NER).</li>
+<li>Pemodelan bahasa.</li>
+<li>Klasifikasi permintaan bantuan darurat dari teks media sosial.</li>
+</ul>
+<p>Contoh alur klasifikasi teks:</p>
+<div class="highlight"><pre><span></span><code>Teks
+  ↓
+Representasi numerik
+  ↓
+Neural Network
+  ↓
+Probabilitas kelas
+  ↓
+Label prediksi
+</code></pre></div>
+<h3 id="12-machine-learning-klasik-vs-deep-learning">1.2 Machine Learning klasik vs Deep Learning</h3>
+<table>
+<thead>
+<tr>
+<th>Aspek</th>
+<th>ML klasik untuk teks</th>
+<th>Deep Learning untuk teks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Representasi umum</td>
+<td>Bag of Words atau TF-IDF</td>
+<td>Embedding yang dapat dipelajari atau embedding pralatih</td>
+</tr>
+<tr>
+<td>Fitur</td>
+<td>Sering direkayasa atau ditentukan melalui vectorizer</td>
+<td>Dapat dipelajari bersama parameter model</td>
+</tr>
+<tr>
+<td>Contoh model</td>
+<td>Logistic Regression, Naive Bayes, SVM</td>
+<td>MLP, RNN, LSTM, GRU, Transformer</td>
+</tr>
+<tr>
+<td>Kebutuhan komputasi</td>
+<td>Umumnya lebih ringan</td>
+<td>Dapat lebih tinggi</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Dapat bekerja baik pada dataset kecil hingga menengah</td>
+<td>Model kompleks sering membutuhkan data/komputasi lebih besar</td>
+</tr>
+<tr>
+<td>Interpretasi</td>
+<td>Beberapa model relatif mudah dianalisis</td>
+<td>Penjelasan keputusan dapat lebih menantang</td>
+</tr>
+</tbody>
+</table>
+<p>Deep Learning tidak selalu lebih baik. Untuk penelitian, model Deep Learning harus dibandingkan dengan baseline yang wajar, misalnya TF-IDF + Logistic Regression atau TF-IDF + SVM.</p>
+<h3 id="13-contoh-penerapan-pada-penelitian-kebencanaan">1.3 Contoh penerapan pada penelitian kebencanaan</h3>
+<p>Misalnya, sistem menerima teks:</p>
+<blockquote>
+<p>"Tolong bantu kami, rumah sudah terendam banjir."</p>
+</blockquote>
+<p>Model klasifikasi dapat menghasilkan:</p>
+<div class="highlight"><pre><span></span><code>Prediksi: Emergency
+Probabilitas model: 0.91
+</code></pre></div>
+<p>Angka probabilitas di atas hanya contoh ilustratif, bukan hasil eksperimen nyata. Prediksi model juga bukan pengganti verifikasi manusia dalam keputusan tanggap darurat.</p>
+<h2 id="2-neural-network">2. Neural Network</h2>
+<h3 id="21-neuron-buatan">2.1 Neuron buatan</h3>
+<p>Neuron buatan menerima sejumlah input, mengalikannya dengan bobot, menambahkan bias, lalu menerapkan fungsi aktivasi.</p>
+<p>Rumus:</p>
+<div class="arithmatex">\[
+z = \sum_{i=1}^{n} w_i x_i + b
+\]</div>
+<div class="arithmatex">\[
+a = f(z)
+\]</div>
+<p>Keterangan:</p>
+<ul>
+<li><span class="arithmatex">\(x_i\)</span>: input ke-<span class="arithmatex">\(i\)</span>.</li>
+<li><span class="arithmatex">\(w_i\)</span>: bobot untuk input ke-<span class="arithmatex">\(i\)</span>.</li>
+<li><span class="arithmatex">\(b\)</span>: bias.</li>
+<li><span class="arithmatex">\(z\)</span>: nilai sebelum aktivasi.</li>
+<li><span class="arithmatex">\(f\)</span>: fungsi aktivasi.</li>
+<li><span class="arithmatex">\(a\)</span>: keluaran neuron.</li>
+</ul>
+<p>Bobot dan bias adalah parameter yang dipelajari selama training.</p>
+<h3 id="22-contoh-perhitungan-dengan-python">2.2 Contoh perhitungan dengan Python</h3>
+<p>Kode berikut menghitung satu neuron sederhana tanpa library Deep Learning.</p>
+<div class="highlight"><pre><span></span><code><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span>
+<span class="n">w1</span><span class="p">,</span> <span class="n">w2</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1</span> <span class="o">*</span> <span class="n">w1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x2</span> <span class="o">*</span> <span class="n">w2</span><span class="p">)</span> <span class="o">+</span> <span class="n">bias</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Nilai z: </span><span class="si">{</span><span class="n">z</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Nilai z: 0.58
+</code></pre></div>
+<p>Nilai <code>z</code> tersebut belum melewati fungsi aktivasi.</p>
+<h3 id="23-fungsi-aktivasi">2.3 Fungsi aktivasi</h3>
+<p>Fungsi aktivasi menambahkan sifat non-linear agar jaringan dapat mempelajari pola yang lebih kompleks.</p>
+<table>
+<thead>
+<tr>
+<th>Fungsi</th>
+<th>Bentuk sederhana</th>
+<th>Kegunaan umum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sigmoid</td>
+<td>Menghasilkan nilai antara 0 dan 1</td>
+<td>Output klasifikasi biner tertentu</td>
+</tr>
+<tr>
+<td>Tanh</td>
+<td>Menghasilkan nilai antara -1 dan 1</td>
+<td>Ditemukan pada beberapa arsitektur recurrent</td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td><span class="arithmatex">\(\max(0,z)\)</span></td>
+<td>Umum pada hidden layer</td>
+</tr>
+<tr>
+<td>Softmax</td>
+<td>Mengubah skor menjadi distribusi probabilitas</td>
+<td>Output klasifikasi multikelas</td>
+</tr>
+</tbody>
+</table>
+<p>Contoh implementasi:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="n">relu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="n">sigmoid</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ReLU:"</span><span class="p">,</span> <span class="n">relu</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sigmoid:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>ReLU: [0. 0. 2.]
+Sigmoid: [0.119 0.5   0.881]
+</code></pre></div>
+<p>Untuk klasifikasi biner, sigmoid sering digunakan pada output satu neuron. Untuk klasifikasi multikelas dengan label yang saling eksklusif, model biasanya menghasilkan logits untuk setiap kelas dan menggunakan cross-entropy loss; probabilitas dapat diperoleh dengan softmax.</p>
+<h2 id="3-lapisan-neural-network">3. Lapisan Neural Network</h2>
+<h3 id="31-jenis-lapisan">3.1 Jenis lapisan</h3>
+<p>Jaringan neural sederhana dapat terdiri dari:</p>
+<div class="highlight"><pre><span></span><code>Input Layer
+    ↓
+Hidden Layer
+    ↓
+Output Layer
+</code></pre></div>
+<ul>
+<li><strong>Input layer:</strong> menerima fitur.</li>
+<li><strong>Hidden layer:</strong> mempelajari kombinasi pola.</li>
+<li><strong>Output layer:</strong> menghasilkan skor atau prediksi.</li>
+</ul>
+<p>Dalam NLP, input bisa berupa vektor TF-IDF atau representasi embedding.</p>
+<h3 id="32-istilah-penting">3.2 Istilah penting</h3>
+<ul>
+<li><strong>Parameter:</strong> bobot dan bias yang dipelajari model.</li>
+<li><strong>Hyperparameter:</strong> pengaturan training seperti learning rate, batch size, jumlah epoch, dan jumlah hidden unit.</li>
+<li><strong>Epoch:</strong> satu kali model melewati seluruh data training.</li>
+<li><strong>Batch:</strong> sebagian data yang diproses dalam satu langkah.</li>
+<li><strong>Step/iteration:</strong> satu pembaruan parameter, biasanya setelah satu batch diproses.</li>
+</ul>
+<h2 id="4-forward-propagation">4. Forward Propagation</h2>
+<p>Forward propagation adalah proses mengalirkan input melalui jaringan untuk menghasilkan prediksi.</p>
+<div class="highlight"><pre><span></span><code>Input
+  ↓
+Linear transformation
+  ↓
+Activation
+  ↓
+Hidden layer
+  ↓
+Output logits
+  ↓
+Loss
+</code></pre></div>
+<p>Pada satu lapisan linear:</p>
+<div class="arithmatex">\[
+z = Wx + b
+\]</div>
+<p>Kemudian:</p>
+<div class="arithmatex">\[
+a = f(z)
+\]</div>
+<p>Proses ini dilakukan dari input sampai output. Pada tahap ini, model belum memperbarui bobot.</p>
+<h2 id="5-loss-function">5. Loss Function</h2>
+<p>Loss function mengukur seberapa jauh prediksi model dari target yang benar. Training berusaha mengurangi loss.</p>
+<h3 id="51-mean-squared-error-mse">5.1 Mean Squared Error (MSE)</h3>
+<p>MSE lazim digunakan pada regresi:</p>
+<div class="arithmatex">\[
+MSE = \frac{1}{N}\sum_{i=1}^{N}(y_i-\hat{y}_i)^2
+\]</div>
+<h3 id="52-binary-cross-entropy">5.2 Binary Cross-Entropy</h3>
+<p>Binary cross-entropy digunakan untuk klasifikasi biner dengan probabilitas prediksi. Dalam PyTorch, <code>BCEWithLogitsLoss</code> lebih disarankan ketika model mengeluarkan logits karena menggabungkan sigmoid dan loss secara numerik stabil.</p>
+<h3 id="53-cross-entropy">5.3 Cross-Entropy</h3>
+<p>Untuk klasifikasi multikelas dengan satu kelas benar per contoh, PyTorch menyediakan <code>CrossEntropyLoss</code>. Fungsi ini menerima <strong>logits</strong>, bukan probabilitas softmax yang sudah dihitung.</p>
+<p>Contoh konseptual:</p>
+<div class="highlight"><pre><span></span><code>Label sebenarnya: Emergency
+Prediksi model:   [Non-Emergency: 0.20, Emergency: 0.80]
+</code></pre></div>
+<p>Prediksi dengan probabilitas tinggi pada kelas yang benar akan menghasilkan loss yang relatif lebih kecil daripada prediksi yang sangat yakin pada kelas yang salah.</p>
+<h2 id="6-backpropagation-dan-optimizer">6. Backpropagation dan Optimizer</h2>
+<h3 id="61-backpropagation">6.1 Backpropagation</h3>
+<p>Backpropagation menghitung gradien loss terhadap parameter menggunakan aturan rantai (chain rule). Gradien menunjukkan bagaimana parameter berkontribusi terhadap perubahan loss.</p>
+<p>Alur training:</p>
+<div class="highlight"><pre><span></span><code>Input dan label
+      ↓
+Forward propagation
+      ↓
+Hitung loss
+      ↓
+Backpropagation (hitung gradien)
+      ↓
+Optimizer memperbarui parameter
+      ↓
+Ulangi untuk batch berikutnya
+</code></pre></div>
+<h3 id="62-gradient-descent">6.2 Gradient descent</h3>
+<p>Secara sederhana, pembaruan parameter dapat ditulis:</p>
+<div class="arithmatex">\[
+\theta_{t+1} = \theta_t - \eta \nabla_\theta L
+\]</div>
+<p>Keterangan:</p>
+<ul>
+<li><span class="arithmatex">\(\theta\)</span>: parameter model.</li>
+<li><span class="arithmatex">\(\eta\)</span>: learning rate.</li>
+<li><span class="arithmatex">\(\nabla_\theta L\)</span>: gradien loss terhadap parameter.</li>
+</ul>
+<p>Learning rate mengatur ukuran langkah pembaruan. Jika terlalu besar, training dapat tidak stabil; jika terlalu kecil, training dapat berjalan lambat.</p>
+<h3 id="63-optimizer-yang-umum">6.3 Optimizer yang umum</h3>
+<ul>
+<li><strong>SGD:</strong> stochastic gradient descent.</li>
+<li><strong>Adam:</strong> optimizer adaptif yang umum digunakan.</li>
+<li><strong>AdamW:</strong> variasi Adam dengan weight decay yang dipisahkan dari pembaruan gradien; umum pada training Transformer.</li>
+</ul>
+<p>Untuk latihan awal, gunakan Adam. Saat masuk IndoBERT, Anda akan sering menemukan AdamW.</p>
+<h2 id="7-overfitting-underfitting-dan-regularisasi">7. Overfitting, Underfitting, dan Regularisasi</h2>
+<h3 id="71-underfitting">7.1 Underfitting</h3>
+<p>Model terlalu sederhana atau belum belajar cukup baik sehingga performa training dan validasi sama-sama buruk.</p>
+<h3 id="72-overfitting">7.2 Overfitting</h3>
+<p>Model sangat baik pada data training, tetapi performanya menurun pada data yang belum pernah dilihat.</p>
+<p>Contoh ilustratif:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Training accuracy</th>
+<th style="text-align: right;">Validation accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">0.68</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.88</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">0.76</td>
+</tr>
+</tbody>
+</table>
+<p>Tabel tersebut hanya ilustrasi. Pola ini dapat mengindikasikan overfitting ketika performa training terus meningkat tetapi performa validasi menurun.</p>
+<h3 id="73-teknik-pengendalian">7.3 Teknik pengendalian</h3>
+<ul>
+<li><strong>Early stopping:</strong> menghentikan training ketika metrik validasi tidak lagi membaik.</li>
+<li><strong>Dropout:</strong> menonaktifkan sebagian unit secara acak selama training.</li>
+<li><strong>Weight decay:</strong> memberi penalti pada besarnya parameter.</li>
+<li><strong>Data augmentation:</strong> membuat variasi data yang tetap mempertahankan label, jika sesuai dengan tugas.</li>
+<li><strong>Data yang representatif:</strong> memastikan data validasi/test mencerminkan kondisi penggunaan.</li>
+<li><strong>Split yang benar:</strong> hindari kebocoran data antara training dan test.</li>
+</ul>
+<p>Dalam penelitian, jangan memilih model berdasarkan hasil test berulang kali. Gunakan validation set untuk pemilihan model dan simpan test set untuk evaluasi akhir.</p>
+<h2 id="8-pengenalan-pytorch">8. Pengenalan PyTorch</h2>
+<h3 id="81-instalasi">8.1 Instalasi</h3>
+<p>Ikuti instruksi instalasi resmi PyTorch yang sesuai dengan sistem operasi dan dukungan CPU/GPU Anda. Untuk lingkungan Python yang sudah aktif, instalasi CPU sederhana dapat dilakukan dengan:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>torch
+</code></pre></div>
+<p>Untuk GPU, periksa panduan resmi PyTorch agar versi paket cocok dengan lingkungan CUDA yang digunakan.</p>
+<h3 id="82-tensor">8.2 Tensor</h3>
+<p>Tensor adalah struktur data utama PyTorch, mirip array NumPy tetapi mendukung automatic differentiation dan komputasi GPU.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shape:"</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah seluruh elemen:"</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>tensor([[1., 2.],
+        [3., 4.]])
+Shape: torch.Size([2, 2])
+Jumlah seluruh elemen: 10.0
+</code></pre></div>
+<h3 id="83-automatic-differentiation">8.3 Automatic differentiation</h3>
+<p>PyTorch dapat menghitung gradien secara otomatis.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Loss:"</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Gradien:"</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Loss: 9.0
+Gradien: -6.0
+</code></pre></div>
+<p>Penjelasan: <span class="arithmatex">\(L=(w-5)^2\)</span>, sehingga turunannya terhadap <span class="arithmatex">\(w\)</span> adalah <span class="arithmatex">\(2(w-5)\)</span>. Saat <span class="arithmatex">\(w=2\)</span>, gradiennya adalah <span class="arithmatex">\(-6\)</span>.</p>
+<h2 id="9-membangun-neural-network-sederhana-dengan-pytorch">9. Membangun Neural Network Sederhana dengan PyTorch</h2>
+<p>Contoh berikut melatih neural network untuk mempelajari pola XOR. XOR adalah masalah mainan yang tidak dapat diselesaikan dengan satu pemisah linear, sehingga berguna untuk memperlihatkan manfaat hidden layer non-linear.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Empat kombinasi input XOR</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+<span class="p">])</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span>
+<span class="p">])</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCEWithLogitsLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">(</span><span class="n">probabilities</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">int</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Probabilitas:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probabilities</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediksi:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Label aktual:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">int</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</code></pre></div>
+<p>Output yang diharapkan setelah training:</p>
+<div class="highlight"><pre><span></span><code>Probabilitas:
+tensor([[mendekati 0],
+        [mendekati 1],
+        [mendekati 1],
+        [mendekati 0]])
+
+Prediksi:
+[0, 1, 1, 0]
+Label aktual:
+[0, 1, 1, 0]
+</code></pre></div>
+<p>Nilai probabilitas persis dapat sedikit berbeda bergantung pada versi perangkat lunak dan lingkungan. Tujuan latihan ini adalah memahami komponen model, loss, gradien, dan optimizer—bukan menggunakan XOR sebagai benchmark penelitian.</p>
+<h3 id="91-memahami-bagian-kode">9.1 Memahami bagian kode</h3>
+<ul>
+<li><code>nn.Linear(2, 8)</code>: mengubah dua fitur menjadi delapan unit.</li>
+<li><code>nn.ReLU()</code>: fungsi aktivasi non-linear.</li>
+<li><code>nn.Linear(8, 1)</code>: menghasilkan satu logit.</li>
+<li><code>BCEWithLogitsLoss()</code>: menghitung loss klasifikasi biner dari logits.</li>
+<li><code>optimizer.zero_grad()</code>: menghapus gradien dari langkah sebelumnya.</li>
+<li><code>loss.backward()</code>: menghitung gradien.</li>
+<li><code>optimizer.step()</code>: memperbarui parameter.</li>
+<li><code>torch.no_grad()</code>: menonaktifkan pencatatan gradien saat inferensi.</li>
+</ul>
+<h2 id="10-embedding-untuk-teks">10. Embedding untuk Teks</h2>
+<h3 id="101-mengapa-embedding-diperlukan">10.1 Mengapa embedding diperlukan?</h3>
+<p>Model neural network membutuhkan input numerik. Untuk teks, setiap token dapat diwakili oleh vektor.</p>
+<p>Berbeda dari one-hot encoding yang sangat jarang (sparse) dan berdimensi sebesar vocabulary, embedding memetakan token ke vektor berdimensi lebih kecil yang nilainya dapat dipelajari.</p>
+<p>Contoh konseptual:</p>
+<div class="highlight"><pre><span></span><code>"banjir"     → [ 0.12, -0.31, 0.77, ...]
+"bantuan"    → [-0.08,  0.62, 0.15, ...]
+</code></pre></div>
+<p>Angka di atas hanya ilustrasi, bukan embedding hasil model nyata.</p>
+<h3 id="102-nnembedding-di-pytorch">10.2 <code>nn.Embedding</code> di PyTorch</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
+
+<span class="c1"># Misalnya vocabulary terdiri dari 6 token</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">num_embeddings</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># ID token untuk satu contoh</span>
+<span class="n">token_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="n">vectors</span> <span class="o">=</span> <span class="n">embedding</span><span class="p">(</span><span class="n">token_ids</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shape token IDs:"</span><span class="p">,</span> <span class="n">token_ids</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shape embedding:"</span><span class="p">,</span> <span class="n">vectors</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Shape token IDs: torch.Size([3])
+Shape embedding: torch.Size([3, 4])
+</code></pre></div>
+<p>Penjelasan:</p>
+<ul>
+<li>Ada 3 token pada input.</li>
+<li>Setiap token dipetakan ke vektor berdimensi 4.</li>
+<li>Nilai embedding diinisialisasi dan dipelajari selama training, kecuali Anda menggunakan embedding pralatih atau membekukan parameternya.</li>
+</ul>
+<h3 id="103-embedding-vs-tf-idf">10.3 Embedding vs TF-IDF</h3>
+<table>
+<thead>
+<tr>
+<th>Aspek</th>
+<th>TF-IDF</th>
+<th>Embedding yang dipelajari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Representasi</td>
+<td>Bobot kata dalam dokumen/korpus</td>
+<td>Vektor padat untuk token</td>
+</tr>
+<tr>
+<td>Konteks</td>
+<td>Umumnya tidak menangkap konteks urutan secara langsung</td>
+<td>Bergantung arsitektur; embedding dasar sendiri belum tentu kontekstual</td>
+</tr>
+<tr>
+<td>Dimensi</td>
+<td>Umumnya terkait ukuran vocabulary</td>
+<td>Dimensi embedding ditentukan</td>
+</tr>
+<tr>
+<td>Pembelajaran</td>
+<td>Statistik korpus</td>
+<td>Parameter dapat dipelajari dari tugas atau pralatih</td>
+</tr>
+<tr>
+<td>Contoh</td>
+<td>TF-IDF + SVM</td>
+<td>Embedding + LSTM atau Transformer</td>
+</tr>
+</tbody>
+</table>
+<p>Perlu dibedakan: embedding Word2Vec biasanya memiliki satu vektor tetap per kata, sedangkan representasi kontekstual BERT berubah menurut konteks kalimat.</p>
+<h2 id="11-sequence-learning">11. Sequence Learning</h2>
+<p>Bahasa merupakan urutan token. Urutan dapat memengaruhi makna.</p>
+<p>Bandingkan:</p>
+<ul>
+<li>"Petugas menolong warga."</li>
+<li>"Warga menolong petugas."</li>
+</ul>
+<p>Kata-katanya mirip, tetapi peran subjek dan objek berbeda.</p>
+<p>Representasi bag-of-words mengabaikan urutan token. Model sequence seperti RNN, LSTM, dan GRU dirancang untuk memproses urutan.</p>
+<p>Contoh sequence token:</p>
+<div class="highlight"><pre><span></span><code>"Tolong bantu kami"
+       ↓
+["Tolong", "bantu", "kami"]
+       ↓
+[token_id_1, token_id_2, token_id_3]
+       ↓
+[embedding_1, embedding_2, embedding_3]
+</code></pre></div>
+<h2 id="12-recurrent-neural-network-rnn">12. Recurrent Neural Network (RNN)</h2>
+<h3 id="121-konsep-rnn">12.1 Konsep RNN</h3>
+<p>RNN memproses urutan token langkah demi langkah dan membawa hidden state dari satu langkah ke langkah berikutnya.</p>
+<p>Secara konseptual:</p>
+<div class="arithmatex">\[
+h_t = f(W_x x_t + W_h h_{t-1} + b)
+\]</div>
+<p>Keterangan:</p>
+<ul>
+<li><span class="arithmatex">\(x_t\)</span>: representasi token pada waktu ke-<span class="arithmatex">\(t\)</span>.</li>
+<li><span class="arithmatex">\(h_{t-1}\)</span>: hidden state sebelumnya.</li>
+<li><span class="arithmatex">\(h_t\)</span>: hidden state baru.</li>
+<li><span class="arithmatex">\(W_x, W_h\)</span>: bobot yang dipelajari.</li>
+<li><span class="arithmatex">\(f\)</span>: fungsi aktivasi.</li>
+</ul>
+<p>Alur:</p>
+<div class="highlight"><pre><span></span><code>Token 1 → RNN → hidden state 1
+                      ↓
+Token 2 → RNN → hidden state 2
+                      ↓
+Token 3 → RNN → hidden state 3
+                      ↓
+                  Prediksi
+</code></pre></div>
+<p>Bobot yang sama digunakan pada langkah-langkah sequence. Hidden state berfungsi membawa sebagian informasi dari token sebelumnya.</p>
+<h3 id="122-keterbatasan-rnn">12.2 Keterbatasan RNN</h3>
+<ul>
+<li>Pemrosesan sequence bersifat berurutan sehingga sulit diparalelkan sepenuhnya sepanjang waktu.</li>
+<li>Informasi dari token yang jauh dapat sulit dipertahankan.</li>
+<li>Training sequence panjang dapat mengalami vanishing gradient atau exploding gradient.</li>
+</ul>
+<p>Keterbatasan ini menjadi salah satu motivasi pengembangan LSTM, GRU, dan kemudian Transformer.</p>
+<h2 id="13-vanishing-gradient-dan-exploding-gradient">13. Vanishing Gradient dan Exploding Gradient</h2>
+<h3 id="131-vanishing-gradient">13.1 Vanishing gradient</h3>
+<p>Gradien menjadi sangat kecil saat dipropagasikan melalui banyak langkah. Akibatnya, parameter yang berkaitan dengan informasi lama mungkin diperbarui sangat sedikit.</p>
+<p>Dampak potensial:</p>
+<ul>
+<li>Sulit mempelajari ketergantungan jangka panjang.</li>
+<li>Informasi dari bagian awal sequence sulit dimanfaatkan.</li>
+</ul>
+<h3 id="132-exploding-gradient">13.2 Exploding gradient</h3>
+<p>Gradien menjadi sangat besar sehingga pembaruan parameter tidak stabil.</p>
+<p>Salah satu teknik yang dapat membantu adalah gradient clipping. PyTorch menyediakan <code>torch.nn.utils.clip_grad_norm_</code>, tetapi teknik ini tidak menghilangkan seluruh masalah pembelajaran sequence.</p>
+<h2 id="14-long-short-term-memory-lstm">14. Long Short-Term Memory (LSTM)</h2>
+<h3 id="141-apa-itu-lstm">14.1 Apa itu LSTM?</h3>
+<p>LSTM adalah jenis RNN yang menggunakan mekanisme gerbang (gates) dan cell state untuk membantu mengatur informasi yang dipertahankan atau dibuang.</p>
+<p>Tiga gerbang utama:</p>
+<ul>
+<li><strong>Forget gate:</strong> menentukan informasi yang dipertahankan dari cell state sebelumnya.</li>
+<li><strong>Input gate:</strong> mengatur informasi baru yang ditambahkan.</li>
+<li><strong>Output gate:</strong> mengatur informasi yang digunakan untuk hidden state saat ini.</li>
+</ul>
+<p>Diagram konseptual:</p>
+<div class="highlight"><pre><span></span><code>Input token ───────────────┐
+                           ↓
+Hidden state sebelumnya → LSTM
+Cell state sebelumnya  → LSTM
+                           ↓
+             Hidden state dan cell state baru
+</code></pre></div>
+<h3 id="142-intuisi-contoh">14.2 Intuisi contoh</h3>
+<p>Kalimat:</p>
+<blockquote>
+<p>"Air naik dengan cepat. Warga membutuhkan perahu untuk evakuasi."</p>
+</blockquote>
+<p>Model ideal perlu mempertahankan informasi dari bagian awal kalimat untuk membantu memahami kebutuhan evakuasi di bagian berikutnya. LSTM dirancang agar informasi penting dapat dipertahankan lebih baik daripada RNN sederhana, meskipun tidak menjamin seluruh konteks selalu diingat.</p>
+<h3 id="143-lstm-di-pytorch">14.3 LSTM di PyTorch</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
+
+<span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span>
+    <span class="n">input_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">hidden_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">num_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Batch 2, sequence length 5, embedding dimension 8</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="n">h_n</span><span class="p">,</span> <span class="n">c_n</span><span class="p">)</span> <span class="o">=</span> <span class="n">lstm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Input:"</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Output seluruh timestep:"</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Hidden state akhir:"</span><span class="p">,</span> <span class="n">h_n</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Cell state akhir:"</span><span class="p">,</span> <span class="n">c_n</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Input: torch.Size([2, 5, 8])
+Output seluruh timestep: torch.Size([2, 5, 16])
+Hidden state akhir: torch.Size([1, 2, 16])
+Cell state akhir: torch.Size([1, 2, 16])
+</code></pre></div>
+<p>Penjelasan:</p>
+<ul>
+<li><code>batch_first=True</code> berarti bentuk input adalah <code>(batch, sequence, feature)</code>.</li>
+<li><code>input_size=8</code> berarti setiap token memiliki vektor 8 dimensi.</li>
+<li><code>hidden_size=16</code> berarti hidden state berdimensi 16.</li>
+<li><code>output</code> menyimpan hidden state pada seluruh timestep.</li>
+<li><code>h_n</code> adalah hidden state akhir tiap layer.</li>
+<li><code>c_n</code> adalah cell state akhir tiap layer.</li>
+</ul>
+<h2 id="15-gated-recurrent-unit-gru">15. Gated Recurrent Unit (GRU)</h2>
+<h3 id="151-apa-itu-gru">15.1 Apa itu GRU?</h3>
+<p>GRU juga merupakan varian RNN yang menggunakan gerbang untuk mengatur aliran informasi. Dibandingkan LSTM, GRU menggabungkan mekanisme tertentu dan tidak memiliki cell state terpisah.</p>
+<p>Secara umum, GRU memiliki:</p>
+<ul>
+<li><strong>Update gate:</strong> mengatur seberapa banyak informasi sebelumnya dipertahankan.</li>
+<li><strong>Reset gate:</strong> mengatur bagaimana informasi sebelumnya digunakan saat membentuk kandidat state baru.</li>
+</ul>
+<h3 id="152-gru-di-pytorch">15.2 GRU di PyTorch</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
+
+<span class="n">gru</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span>
+    <span class="n">input_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">hidden_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">num_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">output</span><span class="p">,</span> <span class="n">h_n</span> <span class="o">=</span> <span class="n">gru</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Input:"</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Output seluruh timestep:"</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Hidden state akhir:"</span><span class="p">,</span> <span class="n">h_n</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Input: torch.Size([2, 5, 8])
+Output seluruh timestep: torch.Size([2, 5, 16])
+Hidden state akhir: torch.Size([1, 2, 16])
+</code></pre></div>
+<h3 id="153-perbandingan-rnn-lstm-dan-gru">15.3 Perbandingan RNN, LSTM, dan GRU</h3>
+<table>
+<thead>
+<tr>
+<th>Aspek</th>
+<th>RNN sederhana</th>
+<th>LSTM</th>
+<th>GRU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mekanisme gerbang</td>
+<td>Tidak memiliki gerbang LSTM/GRU</td>
+<td>Forget, input, output gates</td>
+<td>Reset dan update gates</td>
+</tr>
+<tr>
+<td>State</td>
+<td>Hidden state</td>
+<td>Hidden state + cell state</td>
+<td>Hidden state</td>
+</tr>
+<tr>
+<td>Ketergantungan panjang</td>
+<td>Sering sulit pada sequence panjang</td>
+<td>Dirancang membantu mengatasi masalah ini</td>
+<td>Dirancang membantu mengatasi masalah ini</td>
+</tr>
+<tr>
+<td>Kompleksitas</td>
+<td>Paling sederhana</td>
+<td>Lebih banyak parameter</td>
+<td>Sering lebih sederhana daripada LSTM</td>
+</tr>
+<tr>
+<td>Pilihan terbaik</td>
+<td>Berguna untuk memahami konsep</td>
+<td>Berguna untuk sequence learning</td>
+<td>Alternatif yang efisien untuk diuji</td>
+</tr>
+</tbody>
+</table>
+<p>Tidak ada model yang selalu terbaik. Performa perlu diuji pada dataset, preprocessing, dan pengaturan eksperimen yang sama.</p>
+<h2 id="16-mini-project-klasifikasi-teks-dengan-embedding-lstm">16. Mini Project: Klasifikasi Teks dengan Embedding + LSTM</h2>
+<p>Bagian ini memperlihatkan bentuk pipeline, bukan benchmark penelitian. Data sangat kecil di bawah hanya untuk demonstrasi sintaks. Model tidak akan memiliki kemampuan generalisasi yang dapat diandalkan dari contoh ini.</p>
+<h3 id="161-data-contoh">16.1 Data contoh</h3>
+<div class="highlight"><pre><span></span><code><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"tolong butuh bantuan"</span><span class="p">,</span>
+    <span class="s2">"rumah terendam banjir"</span><span class="p">,</span>
+    <span class="s2">"mohon kirim perahu"</span><span class="p">,</span>
+    <span class="s2">"saya sedang makan"</span><span class="p">,</span>
+    <span class="s2">"film itu sangat bagus"</span><span class="p">,</span>
+    <span class="s2">"besok saya pergi bekerja"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+<p>Dalam contoh ini:</p>
+<ul>
+<li><code>1</code> = emergency.</li>
+<li><code>0</code> = non-emergency.</li>
+</ul>
+<p>Dalam penelitian sungguhan, definisi kelas dan aturan anotasi harus dirumuskan secara eksplisit. Frasa yang menyebut bencana belum tentu merupakan permintaan bantuan darurat.</p>
+<h3 id="162-representasi-token-sederhana">16.2 Representasi token sederhana</h3>
+<p>Untuk memudahkan demonstrasi, contoh ini menggunakan pemisahan berdasarkan spasi dan vocabulary buatan sendiri. Untuk eksperimen yang benar, vocabulary hanya boleh dibangun dari data training dan pipeline harus menangani token tak dikenal serta padding dengan benar.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">tokens_per_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">]</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"&lt;PAD&gt;"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"&lt;UNK&gt;"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">token</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">tokens_per_text</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">row</span><span class="p">)):</span>
+    <span class="n">vocab</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah token unik termasuk token khusus:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Contoh vocabulary:"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">8</span><span class="p">])</span>
+</code></pre></div>
+<p>Output: jumlah vocabulary mengikuti teks contoh yang diberikan. Entri awalnya akan dimulai dari <code>('&lt;PAD&gt;', 0)</code> dan <code>('&lt;UNK&gt;', 1)</code>.</p>
+<h3 id="163-model-konseptual">16.3 Model konseptual</h3>
+<p>Arsitektur yang akan dibuat:</p>
+<div class="highlight"><pre><span></span><code>Token IDs
+   ↓
+Embedding
+   ↓
+LSTM
+   ↓
+Linear layer
+   ↓
+Logit
+   ↓
+Binary classification
+</code></pre></div>
+<p>Untuk mengubah teks menjadi token ID, mem-padding sequence, membuat <code>Dataset</code>/<code>DataLoader</code>, dan melatih model secara benar, diperlukan pemisahan training/validation/test. Jangan menilai model dari data yang sama dengan data training.</p>
+<blockquote>
+<p><strong>Latihan lanjutan:</strong> implementasikan pipeline ini setelah Anda memahami <code>Dataset</code>, <code>DataLoader</code>, padding sequence, masking, dan evaluasi klasifikasi. Untuk penelitian IndoBERT, Anda nantinya akan menggunakan tokenizer bawaan model alih-alih vocabulary berbasis spasi.</p>
+</blockquote>
+<h2 id="17-praktik-training-yang-baik">17. Praktik Training yang Baik</h2>
+<h3 id="171-pembagian-data">17.1 Pembagian data</h3>
+<p>Pisahkan data menjadi:</p>
+<ul>
+<li><strong>Training set:</strong> memperbarui parameter model.</li>
+<li><strong>Validation set:</strong> memilih hyperparameter dan memantau overfitting.</li>
+<li><strong>Test set:</strong> evaluasi akhir pada data yang tidak digunakan saat pengembangan.</li>
+</ul>
+<p>Untuk data media sosial, pertimbangkan duplikasi tweet, retweet, kemiripan teks, serta pemisahan berdasarkan waktu atau kejadian bencana jika relevan. Pembagian acak biasa dapat menghasilkan estimasi yang terlalu optimistis jika teks serupa bocor ke beberapa subset.</p>
+<h3 id="172-catat-eksperimen">17.2 Catat eksperimen</h3>
+<p>Minimal catat:</p>
+<ul>
+<li>Nama model dan konfigurasi.</li>
+<li>Seed random.</li>
+<li>Dataset dan aturan split.</li>
+<li>Jumlah contoh setiap kelas.</li>
+<li>Optimizer dan learning rate.</li>
+<li>Batch size dan epoch.</li>
+<li>Training loss dan validation loss.</li>
+<li>Precision, recall, F1, dan confusion matrix.</li>
+<li>Waktu training serta perangkat yang digunakan.</li>
+</ul>
+<h3 id="173-jangan-hanya-mengandalkan-accuracy">17.3 Jangan hanya mengandalkan accuracy</h3>
+<p>Dalam deteksi permintaan bantuan darurat, false negative perlu diperhatikan: laporan yang sebenarnya darurat tetapi diprediksi bukan darurat. Evaluasi recall kelas emergency dan precision kelas emergency bersama metrik lain. Pilihan ambang keputusan juga dapat memengaruhi trade-off tersebut.</p>
+<h2 id="18-hubungan-deep-learning-dengan-attention-dan-transformer">18. Hubungan Deep Learning dengan Attention dan Transformer</h2>
+<p>RNN, LSTM, dan GRU memproses token secara berurutan. Transformer menggunakan attention untuk menghubungkan representasi token dengan token lain dalam sequence tanpa harus melewati state recurrent satu per satu.</p>
+<p>Perkembangan konsep:</p>
+<div class="highlight"><pre><span></span><code>Bag of Words / TF-IDF
+        ↓
+Word Embedding
+        ↓
+RNN → LSTM / GRU
+        ↓
+Attention Mechanism
+        ↓
+Transformer
+        ↓
+BERT
+        ↓
+IndoBERT
+</code></pre></div>
+<p>Anda tidak harus menguasai semua variasi RNN sebelum mempelajari Transformer. Fokuskan pemahaman pada:</p>
+<ol>
+<li>Mengapa teks perlu direpresentasikan sebagai angka.</li>
+<li>Bagaimana neural network mempelajari parameter.</li>
+<li>Mengapa urutan token penting.</li>
+<li>Apa keterbatasan RNN untuk konteks panjang.</li>
+<li>Mengapa attention membantu membangun representasi kontekstual.</li>
+</ol>
+<h2 id="19-checklist-penguasaan">19. Checklist Penguasaan</h2>
+<p>Gunakan daftar berikut untuk menilai kesiapan Anda.</p>
+<ul>
+<li>[ ] Dapat menjelaskan neuron, weight, bias, dan activation function.</li>
+<li>[ ] Dapat membedakan parameter dan hyperparameter.</li>
+<li>[ ] Memahami forward propagation dan backpropagation.</li>
+<li>[ ] Dapat menjelaskan loss function dan optimizer.</li>
+<li>[ ] Dapat menggunakan tensor PyTorch.</li>
+<li>[ ] Dapat membangun dan melatih neural network sederhana.</li>
+<li>[ ] Memahami perbedaan embedding dan TF-IDF.</li>
+<li>[ ] Dapat menjelaskan sequence dan hidden state.</li>
+<li>[ ] Dapat membandingkan RNN, LSTM, dan GRU.</li>
+<li>[ ] Memahami vanishing gradient secara konseptual.</li>
+<li>[ ] Memahami overfitting dan penggunaan validation set.</li>
+<li>[ ] Siap melanjutkan ke Attention Mechanism dan Transformer.</li>
+</ul>
+<h2 id="20-latihan">20. Latihan</h2>
+<h3 id="latihan-1-konsep">Latihan 1 — Konsep</h3>
+<p>Jawab dengan kata-kata sendiri:</p>
+<ol>
+<li>Apa perbedaan Machine Learning klasik dan Deep Learning?</li>
+<li>Apa fungsi weight dan bias?</li>
+<li>Apa perbedaan parameter dan hyperparameter?</li>
+<li>Mengapa loss perlu dihitung?</li>
+<li>Apa fungsi backpropagation?</li>
+<li>Mengapa learning rate penting?</li>
+<li>Apa perbedaan training set, validation set, dan test set?</li>
+<li>Mengapa embedding berbeda dari TF-IDF?</li>
+<li>Apa fungsi hidden state pada RNN?</li>
+<li>Apa perbedaan utama LSTM dan GRU?</li>
+</ol>
+<h3 id="latihan-2-eksperimen-pytorch">Latihan 2 — Eksperimen PyTorch</h3>
+<p>Ubah contoh XOR di bagian 9:</p>
+<ol>
+<li>Ubah learning rate dari <code>0.03</code> menjadi <code>0.01</code>.</li>
+<li>Ubah hidden unit dari <code>8</code> menjadi <code>16</code>.</li>
+<li>Bandingkan hasil prediksi dan loss.</li>
+<li>Jalankan eksperimen beberapa kali dengan seed berbeda.</li>
+<li>Catat apakah hasilnya konsisten.</li>
+</ol>
+<p>Jangan menyimpulkan bahwa satu konfigurasi lebih baik hanya dari satu kali percobaan kecil.</p>
+<h3 id="latihan-3-analisis-untuk-nlp">Latihan 3 — Analisis untuk NLP</h3>
+<p>Ambil 20 kalimat bahasa Indonesia dan jelaskan:</p>
+<ol>
+<li>Bagaimana teks diubah menjadi token.</li>
+<li>Bagaimana token diubah menjadi ID.</li>
+<li>Bagaimana embedding menghasilkan vektor.</li>
+<li>Bagaimana LSTM memproses sequence.</li>
+<li>Bagaimana layer output menghasilkan prediksi kelas.</li>
+</ol>
+<p>Gunakan data sintetis atau dataset yang izinnya sesuai. Jangan menganggap contoh kecil ini cukup untuk menyimpulkan performa sistem darurat di dunia nyata.</p>
+<h2 id="21-ringkasan">21. Ringkasan</h2>
+<p>Deep Learning mempelajari pola melalui neural network dan parameter yang diperbarui berdasarkan loss. PyTorch membantu membangun model, menghitung gradien, dan menjalankan training. Dalam NLP, embedding mengubah token menjadi vektor; RNN, LSTM, dan GRU memproses urutan token dengan mekanisme recurrent.</p>
+<p>Untuk mencapai IndoBERT, urutan belajar yang disarankan adalah:</p>
+<div class="highlight"><pre><span></span><code>Neural Network
+    ↓
+PyTorch
+    ↓
+Embedding
+    ↓
+RNN / LSTM / GRU
+    ↓
+Attention Mechanism
+    ↓
+Transformer
+    ↓
+BERT
+    ↓
+IndoBERT Fine-Tuning
+</code></pre></div>
+<p>Tahap berikutnya setelah materi ini adalah <strong>Attention Mechanism</strong>, lalu <strong>Transformer</strong>. Ketika memulai penelitian, bandingkan model Deep Learning dengan baseline TF-IDF + Logistic Regression/SVM dan lakukan evaluasi pada data uji yang benar-benar terpisah.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../08-word-embedding/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Word Embedding">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Word Embedding
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../10-RNN-LSTM-GRU/" class="md-footer__link md-footer__link--next" aria-label="Next: RNN - LSTM - GRU">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                RNN - LSTM - GRU
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
