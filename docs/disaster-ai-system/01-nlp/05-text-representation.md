@@ -1,4 +1,4 @@
-# Text Representation dalam NLP (Natural Language Processing)
+# Text Representation & TF-IDF dalam NLP (Natural Language Processing)
 
 ## 1. Tujuan Pembelajaran
 
