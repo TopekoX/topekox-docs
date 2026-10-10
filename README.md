@@ -242,6 +242,7 @@ markdown_extensions:
 - [Material Theme](https://squidfunk.github.io/mkdocs-material/)
 - [Markdown Guide](https://www.markdownguide.org/)
 - [Python Markdown Extensions](https://python-markdown.github.io/)
+- [Material Theme Admonitions (notification)](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)
 
 ## 📋 Checklist untuk Dokumentasi Baru
 

@@ -1,4 +1,4 @@
-site_name: Topekox Docs
+site_name: Topekox Belajar
 
 theme:
   name: material
@@ -40,9 +40,43 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.details
 
 nav:
   - Home: index.md
+
+  - Disaster AI System:
+    - "Intro": disaster-ai-system/index.md
+    - NLP Foundation:
+      - "Python untuk NLP": disaster-ai-system/01-nlp/01-python-untuk-nlp.md
+      - "Fundamental NLP": disaster-ai-system/01-nlp/02-fundamentals-nlp.md
+      - "Regex": disaster-ai-system/01-nlp/03-regex.md
+      - "Text Processing": disaster-ai-system/01-nlp/04-text-preprocessing.md
+      - "Text Representation & TF-IDF": disaster-ai-system/01-nlp/05-text-representation.md
+      - "Machine Learning untuk NLP": disaster-ai-system/01-nlp/06-machine-learning-nlp.md
+      - "Evaluasi NLP Klasifikasi Text": disaster-ai-system/01-nlp/07-evaluasi-nlp-klasifikasi-text.md
+    - Deep Learning:  
+      - "Word Embedding": disaster-ai-system/02-deeplearning/08-word-embedding.md
+      - "Deep Learning untuk NLP": disaster-ai-system/02-deeplearning/09-deep-learning.md
+      - "RNN - LSTM - GRU": disaster-ai-system/02-deeplearning/10-RNN-LSTM-GRU.md
+    - Transformer:
+      - "Attention Mechanism": disaster-ai-system/03-transformer/11-attention-mechanism.md
+      - "Transformer": disaster-ai-system/03-transformer/12-transformer.md
+      - "BERT": disaster-ai-system/03-transformer/13-BERT.md
+    - IndoBert:
+      - "IndoBERT": disaster-ai-system/04-indobert/14-IndoBERT.md
+      - "Fine-Tuning IndoBERT": disaster-ai-system/04-indobert/15-fine-tuningIndoBERT.md
+      - "Eksperimen Penelitian": disaster-ai-system/04-indobert/16-eksperimen-penelitian.md
+      - "Dataset Penelitian": disaster-ai-system/04-indobert/17-dataset-penelitian.md
+    - Research:
+      - "Data Annotation": disaster-ai-system/05-research/18-data-annotation.md
+      - "Imbalanced Dataset": disaster-ai-system/05-research/19-imbalanced-dataset.md
+      - "Explainable AI": disaster-ai-system/05-research/20-explainable-AI.md
+    - Product:
+      - "REST API": disaster-ai-system/06-product/21-rest-api.md
+      - "Dashboard": disaster-ai-system/06-product/22-dashboard.md
+      - "Jadikan Penelitian": disaster-ai-system/06-product/23-jadikan-penelitian.md
+
   - English:
     - Beginner:
       - "Lesson 1: Nice to Meet You": english/beginner/leasson-1.md

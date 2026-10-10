@@ -1025,5 +1025,5 @@ Hal utama yang perlu diingat:
 10. **Nice to meet you.** → ungkapan ketika bertemu seseorang.
 11. **See you / Goodbye** → ungkapan perpisahan.
 
-!!! note "💡 TIP" 
+??? tip "💡 TIP" 
      **Target latihan:** Kamu sebaiknya mampu melakukan percakapan sederhana untuk memperkenalkan diri, menanyakan nama orang lain, mengeja nama, dan mengucapkan salam perpisahan.
