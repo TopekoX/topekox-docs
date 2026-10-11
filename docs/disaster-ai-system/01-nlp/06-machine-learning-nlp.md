@@ -60,7 +60,7 @@ Pelatihan Model
 Prediksi pada Data Test
         |
         v
-Evaluasi
+    Evaluasi
 ```
 
 **Catatan:** untuk menghindari data leakage, vectorizer harus dipelajari hanya dari data latih. Cara yang aman adalah menggunakan `Pipeline` dari scikit-learn, yang akan dibahas kemudian.
@@ -736,7 +736,7 @@ Teks Berlabel
     ↓
 Pemisahan Data
     ↓
-TF-IDF
+ TF-IDF
     ↓
 Model Klasifikasi
     ↓

@@ -628,6 +628,7 @@ documents = [
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(documents)
 
+print("Vocabulary:", vectorizer.get_feature_names_out())
 print("Shape:", X.shape)
 print("Jumlah nilai non-zero:", X.nnz)
 print("Jumlah seluruh elemen:", X.shape[0] * X.shape[1])
@@ -636,14 +637,15 @@ print("Jumlah seluruh elemen:", X.shape[0] * X.shape[1])
 Output:
 
 ```text
-Shape: (3, 8)
-Jumlah nilai non-zero: 8
-Jumlah seluruh elemen: 24
+Vocabulary: ['bantu' 'banjir' 'bantuan' 'butuh' 'cerah' 'hari' 'ini' 'kami' 'tolong' 'cuaca']
+Shape: (3, 10)
+Jumlah nilai non-zero: 10
+Jumlah seluruh elemen: 30
 ```
 
-Artinya terdapat 3 document dan 8 fitur, atau 24 posisi dalam matriks padat. Hanya 8 posisi yang memiliki nilai non-zero. Jumlah persis fitur dan non-zero mengikuti corpus dan tokenisasi pada contoh.
+Artinya, terdapat 3 dokumen dan 10 fitur, sehingga matriks padat memiliki total 30 elemen (3 × 10). Dari 30 elemen tersebut, 10 elemen memiliki nilai non-zero, sedangkan 20 elemen lainnya bernilai nol.
 
-Gunakan `X.toarray()` untuk melihat matriks kecil saat belajar. Untuk dataset besar, hindari mengubah seluruh sparse matrix menjadi array padat karena bisa membutuhkan banyak memori.
+Gunakan `X.toarray()` untuk melihat isi matriks kecil saat belajar. Namun, untuk dataset berukuran besar, hindari mengubah seluruh sparse matrix menjadi array padat karena dapat membutuhkan banyak memori.
 
 ## 12. Preprocessing Sebelum Text Representation
 
@@ -798,7 +800,7 @@ Train / Validation / Test split
  │ TF-IDF + SVM          │
  └───────────────────────┘
        ↓
-Evaluasi
+   Evaluasi
        ↓
 Bandingkan dengan IndoBERT
 ```

@@ -65,7 +65,7 @@ nav:
       - "BERT": disaster-ai-system/03-transformer/13-BERT.md
     - IndoBert:
       - "IndoBERT": disaster-ai-system/04-indobert/14-IndoBERT.md
-      - "Fine-Tuning IndoBERT": disaster-ai-system/04-indobert/15-fine-tuningIndoBERT.md
+      - "Fine-Tuning IndoBERT": disaster-ai-system/04-indobert/15-fine-tuning-IndoBERT.md
       - "Eksperimen Penelitian": disaster-ai-system/04-indobert/16-eksperimen-penelitian.md
       - "Dataset Penelitian": disaster-ai-system/04-indobert/17-dataset-penelitian.md
     - Research:
